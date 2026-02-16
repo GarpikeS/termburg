@@ -1,5 +1,6 @@
 import { Phone, MapPin, Train, Mail, Clock, Navigation } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
+import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Container from '@/components/ui/Container';
 import { contactInfo } from '@/data/contacts';
@@ -37,15 +38,10 @@ const socialLinks = [
 export default function ContactsPage() {
   return (
     <PageLayout title="Контакты" description="Контактная информация термального комплекса Термбург. Адрес, телефон, email и схема проезда.">
-      {/* Hero */}
-      <section className="relative section-padding bg-gradient-to-b from-surface-warm to-background overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <Container>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary text-center">
-            Контакты
-          </h1>
-        </Container>
-      </section>
+      <PageHero
+        title="Контакты"
+        backgroundImage="/images/complex/barrels.webp"
+      />
 
       {/* Contact info + map */}
       <Section>

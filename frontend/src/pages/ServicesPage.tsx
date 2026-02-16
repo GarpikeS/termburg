@@ -1,5 +1,6 @@
 import { CheckCircle, Clock, Sparkles, Waves, GraduationCap } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
+import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import TicketButton from '@/components/ui/TicketButton';
@@ -33,16 +34,11 @@ function ServiceCard({ service }: { service: ServiceItem }) {
 export default function ServicesPage() {
   return (
     <PageLayout title="Услуги" description="Полный перечень услуг термального комплекса Термбург.">
-      {/* Hero */}
-      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">Услуги</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-            Широкий спектр услуг для вашего здоровья, красоты и расслабления
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        title="Услуги"
+        subtitle="Широкий спектр услуг для вашего здоровья, красоты и расслабления"
+        backgroundImage="/images/complex/herbal.webp"
+      />
 
       {/* Included services */}
       <Section
@@ -101,9 +97,19 @@ export default function ServicesPage() {
         subtitle="Обучение плаванию для детей и взрослых в термальном бассейне"
         warm
       >
-        <div className="mb-6 flex items-center gap-2 text-info">
-          <GraduationCap className="h-5 w-5" />
-          <span className="text-sm font-medium">Сертифицированные тренеры с опытом от 5 лет</span>
+        <div className="mb-6">
+          <div className="mb-4 overflow-hidden rounded-xl">
+            <img
+              src="/images/promo/swimming.jpg"
+              alt="Школа плавания в Термбурге"
+              className="w-full h-48 object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="flex items-center gap-2 text-info">
+            <GraduationCap className="h-5 w-5" />
+            <span className="text-sm font-medium">Сертифицированные тренеры с опытом от 5 лет</span>
+          </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {swimmingSchool.map((service) => (

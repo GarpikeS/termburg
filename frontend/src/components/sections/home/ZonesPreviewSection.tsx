@@ -6,9 +6,9 @@ import Badge from '@/components/ui/Badge';
 import { thermalZones } from '@/data/thermalZones';
 
 const zoneImages: Record<number, string> = {
-  1: '/images/complex/pool.webp',
-  2: '/images/complex/herbal.webp',
-  3: '/images/complex/barrels.webp',
+  1: '/images/complex/barrels.webp',
+  2: '/images/complex/gallery6.webp',
+  3: '/images/complex/gallery8.webp',
   4: '/images/complex/sauna.webp',
 };
 

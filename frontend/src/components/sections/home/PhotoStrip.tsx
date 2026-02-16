@@ -1,6 +1,6 @@
 const photos = [
   { src: '/images/complex/gallery5.webp', alt: 'Травяная парная с тёплым освещением' },
-  { src: '/images/complex/pool.webp', alt: 'Бассейн с водопадом' },
+  { src: '/images/complex/herbal.webp', alt: 'Травяная парная' },
   { src: '/images/complex/gallery4.webp', alt: 'Парная с каменкой и травами' },
   { src: '/images/complex/barrels.webp', alt: 'Бани-бочки на террасе' },
   { src: '/images/complex/gallery8.webp', alt: 'Парная с вениками' },

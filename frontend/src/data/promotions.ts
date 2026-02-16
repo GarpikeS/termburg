@@ -6,6 +6,7 @@ export interface Promotion {
   discount?: number;
   validUntil?: string;
   badge: string;
+  banner?: string;
 }
 
 export const promotions: Promotion[] = [
@@ -16,6 +17,7 @@ export const promotions: Promotion[] = [
     conditions: 'При предъявлении пенсионного удостоверения',
     discount: 30,
     badge: 'Для пенсионеров',
+    banner: '/images/promo/retiree.jpg',
   },
   {
     id: 2,
@@ -24,6 +26,7 @@ export const promotions: Promotion[] = [
     conditions: 'При предъявлении студенческого билета',
     discount: 20,
     badge: 'Студентам',
+    banner: '/images/promo/student.jpg',
   },
   {
     id: 3,
@@ -31,6 +34,7 @@ export const promotions: Promotion[] = [
     description: 'Бесплатное посещение в день рождения и 3 дня после',
     conditions: 'При предъявлении паспорта',
     badge: 'Именинникам',
+    banner: '/images/promo/birthday.jpg',
   },
   {
     id: 4,
@@ -38,6 +42,7 @@ export const promotions: Promotion[] = [
     description: 'Бесплатный капучино или латте при заказе любой SPA-процедуры',
     conditions: 'Автоматически',
     badge: 'SPA',
+    banner: '/images/promo/coffee.jpg',
   },
   {
     id: 5,

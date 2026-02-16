@@ -1,9 +1,9 @@
 import { Thermometer, ShieldCheck, ListChecks } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
+import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
-import Container from '@/components/ui/Container';
 import { thermalZones } from '@/data/thermalZones';
 
 const visitRules = [
@@ -18,13 +18,10 @@ const visitRules = [
 export default function AboutPage() {
   return (
     <PageLayout title="О Термбурге" description="Узнайте больше о термальном комплексе Термбург в Москве.">
-      {/* Hero */}
-      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">О Термбурге</h1>
-        </Container>
-      </section>
+      <PageHero
+        title="О Термбурге"
+        backgroundImage="/images/complex/gallery5.webp"
+      />
 
       {/* Intro */}
       <Section>
@@ -49,21 +46,31 @@ export default function AboutPage() {
       >
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {thermalZones.map((zone) => (
-            <Card key={zone.id} className="flex flex-col">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-lg font-bold text-text-primary">{zone.name}</h3>
-                <div className="flex items-center gap-1 text-accent">
-                  <Thermometer className="h-4 w-4" />
-                  <span className="text-sm font-medium">{zone.temperature}</span>
-                </div>
+            <Card key={zone.id} className="flex flex-col p-0 overflow-hidden">
+              <div className="h-32 overflow-hidden">
+                <img
+                  src={zone.image}
+                  alt={zone.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
-              <p className="mb-4 flex-1 text-sm text-text-secondary">{zone.description}</p>
-              <div className="flex flex-wrap gap-1">
-                {zone.features.map((feature) => (
-                  <Badge key={feature} variant="default" className="text-xs">
-                    {feature}
-                  </Badge>
-                ))}
+              <div className="p-5 flex flex-col flex-1">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="text-lg font-bold text-text-primary">{zone.name}</h3>
+                  <div className="flex items-center gap-1 text-accent">
+                    <Thermometer className="h-4 w-4" />
+                    <span className="text-sm font-medium">{zone.temperature}</span>
+                  </div>
+                </div>
+                <p className="mb-4 flex-1 text-sm text-text-secondary">{zone.description}</p>
+                <div className="flex flex-wrap gap-1">
+                  {zone.features.map((feature) => (
+                    <Badge key={feature} variant="default" className="text-xs">
+                      {feature}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </Card>
           ))}

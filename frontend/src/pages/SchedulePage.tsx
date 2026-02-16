@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Clock, Timer, User } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
+import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -49,16 +50,11 @@ export default function SchedulePage() {
 
   return (
     <PageLayout title="Расписание" description="Расписание мероприятий термального комплекса Термбург.">
-      {/* Hero */}
-      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">Расписание мероприятий</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
-            Ежедневные парения, медитации, мастер-классы и оздоровительные программы
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        title="Расписание мероприятий"
+        subtitle="Ежедневные парения, медитации, мастер-классы и оздоровительные программы"
+        backgroundImage="/images/complex/gallery8.webp"
+      />
 
       <Section>
         {/* Day filters */}

@@ -1,5 +1,6 @@
 import { Coffee, GlassWater, UtensilsCrossed, Cake } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
+import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
@@ -36,19 +37,11 @@ const categories = Object.entries(cafeMenu) as [string, MenuItem[]][];
 export default function CafePage() {
   return (
     <PageLayout title="Кафетерий" description="Кафетерий термального комплекса Термбург — меню, напитки и закуски.">
-      {/* Hero */}
-      <section className="relative section-padding bg-gradient-to-b from-surface-warm to-background overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <Container>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary text-center">
-            Кафетерий
-          </h1>
-          <p className="mt-4 text-lg text-text-secondary text-center max-w-3xl mx-auto">
-            Уютный кафетерий Термбурга — идеальное место для отдыха между процедурами.
-            Натуральные напитки, лёгкие закуски и домашние десерты.
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        title="Кафетерий"
+        subtitle="Уютный кафетерий Термбурга — идеальное место для отдыха между процедурами. Натуральные напитки, лёгкие закуски и домашние десерты."
+        backgroundImage="/images/promo/coffee.jpg"
+      />
 
       {/* Menu sections */}
       {categories.map(([key, items], index) => {

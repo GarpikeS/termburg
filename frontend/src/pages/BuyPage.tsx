@@ -1,5 +1,6 @@
-import { Gift, Ticket, Package } from 'lucide-react';
+import { Ticket, Package } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
+import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import TicketButton from '@/components/ui/TicketButton';
@@ -23,14 +24,17 @@ const certificates = [
   {
     value: '3 000 ₽',
     description: 'Идеально для первого знакомства с Термбургом.',
+    image: '/images/certificates/standard.jpg',
   },
   {
     value: '5 000 ₽',
     description: 'Комплексное посещение с дополнительными процедурами.',
+    image: '/images/certificates/birthday.jpg',
   },
   {
     value: '10 000 ₽',
     description: 'Премиальный подарок с полным набором SPA-услуг.',
+    image: '/images/certificates/valentine.jpg',
   },
 ];
 
@@ -50,18 +54,11 @@ const giftBoxes = [
 export default function BuyPage() {
   return (
     <PageLayout title="Купить онлайн" description="Купить билет, подарочный сертификат или бокс в термальный комплекс Термбург.">
-      {/* Hero */}
-      <section className="relative section-padding bg-gradient-to-b from-surface-warm to-background overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-        <Container>
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary text-center">
-            Купить онлайн
-          </h1>
-          <p className="mt-4 text-lg text-text-secondary text-center max-w-2xl mx-auto">
-            Билеты, подарочные сертификаты и боксы — всё можно приобрести не выходя из дома
-          </p>
-        </Container>
-      </section>
+      <PageHero
+        title="Купить онлайн"
+        subtitle="Билеты, подарочные сертификаты и боксы — всё можно приобрести не выходя из дома"
+        backgroundImage="/images/complex/gallery6.webp"
+      />
 
       {/* Билеты */}
       <Section title="Билеты">
@@ -91,14 +88,21 @@ export default function BuyPage() {
       <Section title="Подарочные сертификаты" warm>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificates.map((cert) => (
-            <Card key={cert.value} className="flex flex-col items-center text-center p-8">
-              <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-5">
-                <Gift className="w-7 h-7 text-accent" />
+            <Card key={cert.value} className="flex flex-col items-center text-center p-0 overflow-hidden">
+              <div className="w-full h-40 overflow-hidden">
+                <img
+                  src={cert.image}
+                  alt={`Сертификат на ${cert.value}`}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
-              <Badge variant="gold">{cert.value}</Badge>
-              <p className="mt-4 text-text-secondary">{cert.description}</p>
-              <div className="mt-6">
-                <TicketButton href="#">Купить сертификат</TicketButton>
+              <div className="p-8 flex flex-col items-center">
+                <Badge variant="gold">{cert.value}</Badge>
+                <p className="mt-4 text-text-secondary">{cert.description}</p>
+                <div className="mt-6">
+                  <TicketButton href="#">Купить сертификат</TicketButton>
+                </div>
               </div>
             </Card>
           ))}

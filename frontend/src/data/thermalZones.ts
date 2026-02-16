@@ -14,7 +14,7 @@ export const thermalZones: ThermalZone[] = [
     description: 'Классические термальные купели с различной температурой воды.',
     temperature: '36-42°C',
     features: ['Термальные купели', 'Гидромассаж', 'Ароматерапия'],
-    image: '/images/zones/zone-1.jpg',
+    image: '/images/complex/pool.webp',
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ export const thermalZones: ThermalZone[] = [
     description: 'Турецкая парильня с мягким паром и мраморными лежаками.',
     temperature: '45-50°C',
     features: ['Мраморные лежаки', 'Мыльный массаж', 'Пилинг'],
-    image: '/images/zones/zone-2.jpg',
+    image: '/images/complex/gallery6.webp',
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ export const thermalZones: ThermalZone[] = [
     description: 'Деревянные купели с горячей водой по японской традиции.',
     temperature: '40-45°C',
     features: ['Кедровые купели', 'Травяные настои', 'Медитация'],
-    image: '/images/zones/zone-3.jpg',
+    image: '/images/complex/barrels.webp',
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ export const thermalZones: ThermalZone[] = [
     description: 'Мягкий глубокий прогрев инфракрасными лучами.',
     temperature: '50-60°C',
     features: ['Глубокий прогрев', 'Детоксикация', 'Расслабление'],
-    image: '/images/zones/zone-4.jpg',
+    image: '/images/complex/sauna.webp',
   },
   {
     id: 5,
@@ -46,7 +46,7 @@ export const thermalZones: ThermalZone[] = [
     description: 'Комната с микроклиматом соляных шахт.',
     temperature: '20-22°C',
     features: ['Галотерапия', 'Оздоровление дыхания', 'Релаксация'],
-    image: '/images/zones/zone-5.jpg',
+    image: '/images/complex/gallery5.webp',
   },
   {
     id: 6,
@@ -54,7 +54,7 @@ export const thermalZones: ThermalZone[] = [
     description: 'Ароматная сауна с настоями целебных трав.',
     temperature: '60-70°C',
     features: ['Фитотерапия', 'Ароматерапия', 'Иммунитет'],
-    image: '/images/zones/zone-6.jpg',
+    image: '/images/complex/herbal.webp',
   },
   {
     id: 7,
@@ -62,7 +62,7 @@ export const thermalZones: ThermalZone[] = [
     description: 'Просторный бассейн с термальной водой.',
     temperature: '28-30°C',
     features: ['Термальная вода', 'Гидромассажные зоны', 'Водопад'],
-    image: '/images/zones/zone-7.jpg',
+    image: '/images/complex/pool.webp',
   },
   {
     id: 8,
@@ -70,6 +70,6 @@ export const thermalZones: ThermalZone[] = [
     description: 'Контрастная купель для закаливания.',
     temperature: '4-6°C',
     features: ['Закаливание', 'Контрастные процедуры', 'Бодрость'],
-    image: '/images/zones/zone-8.jpg',
+    image: '/images/complex/gallery4.webp',
   },
 ];
