@@ -131,23 +131,22 @@ export default function TermlinyPage() {
     >
       {/* Hero */}
       <section className="relative overflow-hidden">
-        {/* Hero image */}
         <div className="relative">
           <img
             src="/images/termliny/hero.webp?v=2"
             alt="Семья духов-хранителей Термбурга в сказочной бане"
-            className="w-full h-[300px] md:h-[450px] lg:h-[550px] object-cover"
+            className="w-full object-contain"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 pb-8 md:pb-12">
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 pb-6 md:pb-10">
             <Container>
               <div className="text-center">
                 <img
                   src="/images/termliny-logo-dark.svg"
                   alt="Термлины"
-                  className="h-16 md:h-24 mx-auto mb-4"
+                  className="h-14 md:h-20 mx-auto mb-3"
                 />
-                <p className="text-base md:text-lg text-text-secondary max-w-2xl mx-auto">
+                <p className="text-sm md:text-base text-text-secondary max-w-2xl mx-auto drop-shadow-lg">
                   Каждая баня и сауна Термбурга находится под покровительством своего
                   духа-хранителя. Познакомьтесь с ними — и ваш визит станет ещё более
                   особенным.

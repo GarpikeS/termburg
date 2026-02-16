@@ -7,6 +7,7 @@ import SchedulePreviewSection from '@/components/sections/home/SchedulePreviewSe
 import PricingPreviewSection from '@/components/sections/home/PricingPreviewSection';
 import ContactsPreviewSection from '@/components/sections/home/ContactsPreviewSection';
 import TermlinyTeaser from '@/components/sections/home/TermlinyTeaser';
+import Section from '@/components/ui/Section';
 
 export default function HomePage() {
   return (
@@ -15,8 +16,12 @@ export default function HomePage() {
       <AdvantagesSection />
       <ZonesPreviewSection />
       <PromotionsCarousel />
-      <TermlinyTeaser />
-      <SchedulePreviewSection />
+      <Section>
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+          <TermlinyTeaser />
+          <SchedulePreviewSection />
+        </div>
+      </Section>
       <PricingPreviewSection />
       <ContactsPreviewSection />
     </PageLayout>

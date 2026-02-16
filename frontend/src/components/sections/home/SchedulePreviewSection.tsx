@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import Section from '@/components/ui/Section';
 import Badge from '@/components/ui/Badge';
 import { scheduleEvents, type ScheduleEvent } from '@/data/schedule';
 
@@ -14,15 +13,14 @@ const typeBadge: Record<
 };
 
 export default function SchedulePreviewSection() {
-  const previewEvents = scheduleEvents.slice(0, 4);
+  const previewEvents = scheduleEvents.slice(0, 5);
 
   return (
-    <Section
-      warm
-      title="Расписание мероприятий"
-      subtitle="Ежедневные программы для здоровья и отдыха"
-    >
-      <div className="max-w-2xl mx-auto space-y-3">
+    <div>
+      <h3 className="font-heading text-2xl font-bold text-text-primary mb-4">
+        Расписание мероприятий
+      </h3>
+      <div className="space-y-3">
         {previewEvents.map((event) => {
           const badge = typeBadge[event.type];
           return (
@@ -36,9 +34,9 @@ export default function SchedulePreviewSection() {
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-medium text-text-primary truncate">
+                <h4 className="font-medium text-text-primary truncate">
                   {event.name}
-                </h3>
+                </h4>
                 <p className="text-sm text-text-secondary">{event.duration}</p>
               </div>
               <Badge variant={badge.variant} className="flex-shrink-0">
@@ -49,7 +47,7 @@ export default function SchedulePreviewSection() {
         })}
       </div>
 
-      <div className="mt-8 text-center">
+      <div className="mt-5 text-center">
         <Link
           to="/schedule"
           className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-light transition-colors"
@@ -58,6 +56,6 @@ export default function SchedulePreviewSection() {
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
-    </Section>
+    </div>
   );
 }
