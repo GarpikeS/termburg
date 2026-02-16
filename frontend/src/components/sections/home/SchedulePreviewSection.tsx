@@ -17,7 +17,7 @@ export default function SchedulePreviewSection() {
 
   return (
     <div>
-      <h3 className="font-heading text-2xl font-bold text-text-primary mb-4">
+      <h3 className="font-heading text-2xl font-bold text-white mb-4">
         Расписание мероприятий
       </h3>
       <div className="space-y-3">
@@ -26,7 +26,7 @@ export default function SchedulePreviewSection() {
           return (
             <div
               key={event.id}
-              className="flex items-center gap-4 bg-surface rounded-xl p-4 border border-border/50"
+              className="flex items-center gap-4 bg-white/5 rounded-xl p-4 border border-white/10"
             >
               <div className="min-w-[60px] text-center">
                 <span className="font-heading text-lg font-bold text-primary">
@@ -34,10 +34,10 @@ export default function SchedulePreviewSection() {
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="font-medium text-text-primary truncate">
+                <h4 className="font-medium text-white truncate">
                   {event.name}
                 </h4>
-                <p className="text-sm text-text-secondary">{event.duration}</p>
+                <p className="text-sm text-white/60">{event.duration}</p>
               </div>
               <Badge variant={badge.variant} className="flex-shrink-0">
                 {badge.label}

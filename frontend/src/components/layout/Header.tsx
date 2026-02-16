@@ -32,15 +32,15 @@ export default function Header() {
 
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
     `text-sm font-medium transition-colors duration-200 hover:text-primary ${
-      isActive ? 'text-primary' : 'text-text-primary/80'
+      isActive ? 'text-primary' : 'text-white/70'
     }`;
 
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-background/95 backdrop-blur-md shadow-lg shadow-black/20'
-          : 'bg-background/80 backdrop-blur-sm'
+          ? 'bg-dark-surface/95 backdrop-blur-md shadow-lg shadow-black/30'
+          : 'bg-dark-surface/80 backdrop-blur-sm'
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -50,8 +50,7 @@ export default function Header() {
             <img
               src="/images/termliny-symbol.svg"
               alt=""
-              className="h-6 w-6 md:h-7 md:w-7"
-              style={{ filter: 'brightness(0.8) sepia(1) hue-rotate(-10deg)' }}
+              className="h-6 w-6 md:h-7 md:w-7 opacity-80"
             />
             <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary md:text-2xl">
               ТЕРМБУРГ
@@ -86,7 +85,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-text-primary transition-colors hover:bg-surface lg:hidden"
+            className="inline-flex items-center justify-center rounded-md p-2 text-white/70 transition-colors hover:bg-white/10 lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
           >
@@ -105,7 +104,7 @@ export default function Header() {
 
       {/* Mobile Slide-in Menu */}
       <div
-        className={`fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 transform bg-surface shadow-xl shadow-black/30 transition-transform duration-300 ease-in-out md:top-20 md:h-[calc(100vh-5rem)] lg:hidden ${
+        className={`fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 transform bg-dark-surface shadow-xl shadow-black/30 transition-transform duration-300 ease-in-out md:top-20 md:h-[calc(100vh-5rem)] lg:hidden ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -119,7 +118,7 @@ export default function Header() {
                 `rounded-lg px-4 py-3 text-sm font-medium transition-colors duration-200 ${
                   isActive
                     ? 'bg-primary/15 text-primary'
-                    : 'text-text-primary hover:bg-surface-warm'
+                    : 'text-white/70 hover:bg-white/5'
                 }`
               }
               onClick={closeMobileMenu}
@@ -128,7 +127,7 @@ export default function Header() {
             </NavLink>
           ))}
 
-          <div className="mt-4 border-t border-border pt-4">
+          <div className="mt-4 border-t border-dark-border pt-4">
             <button
               type="button"
               onClick={() => {

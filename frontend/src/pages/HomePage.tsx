@@ -21,7 +21,7 @@ export default function HomePage() {
       <PhotoStrip />
       <div className="gold-separator" />
       <PromotionsCarousel />
-      <Section warm separator>
+      <Section dark ornament separator>
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <TermlinyTeaser />
           <SchedulePreviewSection />
