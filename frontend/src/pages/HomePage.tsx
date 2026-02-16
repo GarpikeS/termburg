@@ -2,6 +2,7 @@ import PageLayout from '@/components/layout/PageLayout';
 import HeroSection from '@/components/sections/home/HeroSection';
 import AdvantagesSection from '@/components/sections/home/AdvantagesSection';
 import ZonesPreviewSection from '@/components/sections/home/ZonesPreviewSection';
+import PhotoStrip from '@/components/sections/home/PhotoStrip';
 import PromotionsCarousel from '@/components/sections/home/PromotionsCarousel';
 import SchedulePreviewSection from '@/components/sections/home/SchedulePreviewSection';
 import PricingPreviewSection from '@/components/sections/home/PricingPreviewSection';
@@ -15,6 +16,7 @@ export default function HomePage() {
       <HeroSection />
       <AdvantagesSection />
       <ZonesPreviewSection />
+      <PhotoStrip />
       <PromotionsCarousel />
       <Section warm>
         <div className="grid md:grid-cols-2 gap-8 items-start">

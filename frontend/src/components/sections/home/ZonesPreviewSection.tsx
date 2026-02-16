@@ -5,12 +5,12 @@ import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { thermalZones } from '@/data/thermalZones';
 
-const zoneGradients = [
-  'from-primary/20 to-primary-light/10',
-  'from-accent/20 to-warm-gold/10',
-  'from-primary-light/20 to-info/10',
-  'from-warm-gold/20 to-accent/10',
-];
+const zoneImages: Record<number, string> = {
+  1: '/images/complex/pool.webp',
+  2: '/images/complex/herbal.webp',
+  3: '/images/complex/barrels.webp',
+  4: '/images/complex/sauna.webp',
+};
 
 export default function ZonesPreviewSection() {
   const previewZones = thermalZones.slice(0, 4);
@@ -22,12 +22,19 @@ export default function ZonesPreviewSection() {
       subtitle="Путешествие по термальным традициям разных стран"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {previewZones.map((zone, index) => (
+        {previewZones.map((zone) => (
           <Card key={zone.id} className="p-0 overflow-hidden">
-            <div
-              className={`h-44 bg-gradient-to-br ${zoneGradients[index % zoneGradients.length]} flex items-end p-4`}
-            >
-              <Badge>{zone.temperature}</Badge>
+            <div className="relative h-44 overflow-hidden">
+              <img
+                src={zoneImages[zone.id]}
+                alt={zone.name}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute bottom-3 left-3">
+                <Badge>{zone.temperature}</Badge>
+              </div>
             </div>
             <div className="p-5">
               <h3 className="font-heading text-lg font-semibold text-text-primary mb-2">

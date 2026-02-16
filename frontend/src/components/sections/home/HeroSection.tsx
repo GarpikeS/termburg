@@ -3,12 +3,16 @@ import Container from '@/components/ui/Container';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-background via-surface to-surface-warm overflow-hidden">
-      {/* Decorative background elements */}
+    <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+      {/* Background photo */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-20 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
+        <img
+          src="/images/complex/pool.webp"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-background/70 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/60" />
       </div>
 
       {/* Decorative gold line */}
