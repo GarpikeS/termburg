@@ -138,9 +138,10 @@ export default function BuyPage() {
       </Section>
 
       {/* Примечание */}
-      <section className="py-8 bg-surface-warm">
+      <section className="relative bg-dark-surface ornament-pattern py-8">
+        <div className="gold-separator absolute top-0 left-0 right-0" />
         <Container>
-          <p className="text-center text-text-secondary text-sm">
+          <p className="text-center text-white/70 text-sm">
             После оплаты вы получите электронный билет на указанный email
           </p>
         </Container>

@@ -8,6 +8,9 @@ import { promotions } from '@/data/promotions';
 export default function PromotionsCarousel() {
   return (
     <Section
+      dark
+      ornament
+      separator
       title="Акции и скидки"
       subtitle="Выгодные предложения для наших гостей"
     >
@@ -15,18 +18,19 @@ export default function PromotionsCarousel() {
         {promotions.map((promo) => (
           <Card
             key={promo.id}
+            dark
             className="min-w-[280px] max-w-[320px] flex-shrink-0 snap-start flex flex-col"
           >
             <Badge variant="gold" className="self-start mb-3">
               {promo.badge}
             </Badge>
-            <h3 className="font-heading text-lg font-semibold text-text-primary mb-2">
+            <h3 className="font-heading text-lg font-semibold text-white mb-2">
               {promo.title}
             </h3>
-            <p className="text-sm text-text-secondary leading-relaxed flex-1">
+            <p className="text-sm text-white/70 leading-relaxed flex-1">
               {promo.description}
             </p>
-            <p className="text-xs text-text-secondary mt-3 pt-3 border-t border-border">
+            <p className="text-xs text-white/50 mt-3 pt-3 border-t border-white/10">
               {promo.conditions}
             </p>
           </Card>

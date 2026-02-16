@@ -14,11 +14,14 @@ export default function HomePage() {
   return (
     <PageLayout description="Термбург — термальный комплекс в самом сердце Москвы. Бани, сауны, парения и SPA-процедуры.">
       <HeroSection />
+      <div className="gold-separator" />
       <AdvantagesSection />
       <ZonesPreviewSection />
+      <div className="gold-separator" />
       <PhotoStrip />
+      <div className="gold-separator" />
       <PromotionsCarousel />
-      <Section warm>
+      <Section warm separator>
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <TermlinyTeaser />
           <SchedulePreviewSection />

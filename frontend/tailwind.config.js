@@ -26,6 +26,9 @@ export default {
         info: '#6AABDA',
         'warm-gold': '#D9CBA1',
         border: '#E0D9C8',
+        'dark-surface': '#1E1A2E',
+        'dark-surface-warm': '#2A2438',
+        'dark-border': '#3C3558',
       },
       fontFamily: {
         heading: ['"Ikra Slab"', 'Georgia', 'serif'],

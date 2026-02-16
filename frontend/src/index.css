@@ -54,6 +54,26 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Ornamental background pattern */
+.ornament-pattern {
+  position: relative;
+}
+.ornament-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 15 L45 15 L37 22 L40 32 L30 26 L20 32 L23 22 L15 15 L25 15 Z' fill='%23BA9B4F' fill-opacity='0.5'/%3E%3Ccircle cx='30' cy='45' r='6' fill='none' stroke='%23BA9B4F' stroke-opacity='0.3' stroke-width='1'/%3E%3Ccircle cx='30' cy='45' r='2' fill='%23BA9B4F' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+/* Gold separator line */
+.gold-separator {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #BA9B4F 30%, #D9CBA1 50%, #BA9B4F 70%, transparent 100%);
+}
+
 /* Infinite scroll animation for photo strip */
 @keyframes scroll {
   0% { transform: translateX(0); }

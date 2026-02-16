@@ -5,14 +5,18 @@ import { twMerge } from 'tailwind-merge';
 interface CardProps {
   children: ReactNode;
   className?: string;
+  dark?: boolean;
 }
 
-export default function Card({ children, className }: CardProps) {
+export default function Card({ children, className, dark = false }: CardProps) {
   return (
     <div
       className={twMerge(
         clsx(
-          'bg-surface rounded-2xl border border-border/50 hover:border-border transition-all duration-300 p-6',
+          'rounded-2xl transition-all duration-300 p-6',
+          dark
+            ? 'bg-white/5 border border-white/10 hover:border-white/20'
+            : 'bg-surface border border-border/50 hover:border-border',
           className,
         ),
       )}

@@ -132,12 +132,13 @@ export default function PricingPage() {
       </Section>
 
       {/* CTA */}
-      <section className="bg-surface-warm py-16 text-center">
+      <section className="relative bg-dark-surface ornament-pattern py-16 text-center">
+        <div className="gold-separator absolute top-0 left-0 right-0" />
         <Container>
-          <h2 className="mb-4 font-heading text-2xl font-bold text-text-primary md:text-3xl">
+          <h2 className="mb-4 font-heading text-2xl font-bold text-white md:text-3xl">
             Готовы к отдыху?
           </h2>
-          <p className="mx-auto mb-8 max-w-xl text-text-secondary">
+          <p className="mx-auto mb-8 max-w-xl text-white/70">
             Забронируйте посещение онлайн и получите гарантированное место в удобное для вас время.
           </p>
           <TicketButton onClick={openBooking}>Забронировать посещение</TicketButton>

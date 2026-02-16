@@ -74,14 +74,15 @@ export default function PromotionsPage() {
       </Section>
 
       {/* CTA */}
-      <section className="bg-surface-warm py-16 text-center">
+      <section className="relative bg-dark-surface ornament-pattern py-16 text-center">
+        <div className="gold-separator absolute top-0 left-0 right-0" />
         <Container>
           <div className="mx-auto max-w-xl">
             <Gift className="mx-auto mb-4 h-12 w-12 text-accent" />
-            <h2 className="mb-4 font-heading text-2xl font-bold text-text-primary md:text-3xl">
+            <h2 className="mb-4 font-heading text-2xl font-bold text-white md:text-3xl">
               Воспользуйтесь предложениями
             </h2>
-            <p className="mb-8 text-text-secondary">
+            <p className="mb-8 text-white/70">
               Забронируйте посещение и сообщите администратору об акции при оплате. Акции не суммируются.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

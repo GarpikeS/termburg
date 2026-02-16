@@ -10,19 +10,22 @@ export default function PricingPreviewSection() {
 
   return (
     <Section
+      dark
+      ornament
+      separator
       title="Стоимость посещения"
       subtitle="Гибкая система тарифов на каждый день"
     >
       <div className="max-w-3xl mx-auto">
         {/* Large price callout */}
         <div className="text-center mb-10">
-          <p className="text-text-secondary text-sm uppercase tracking-wider mb-2">
+          <p className="text-white/60 text-sm uppercase tracking-wider mb-2">
             Будни от
           </p>
           <p className="font-heading text-5xl md:text-6xl font-bold text-primary">
             1800₽
           </p>
-          <p className="text-text-secondary mt-2">за взрослого</p>
+          <p className="text-white/60 mt-2">за взрослого</p>
         </div>
 
         {/* Weekday prices grid */}
@@ -30,16 +33,16 @@ export default function PricingPreviewSection() {
           {weekdayPricing.map((slot) => (
             <div
               key={slot.id}
-              className="bg-surface rounded-xl p-4 text-center border border-border/50"
+              className="bg-white/5 rounded-xl p-4 text-center border border-white/10"
             >
-              <p className="font-heading font-semibold text-text-primary mb-1">
+              <p className="font-heading font-semibold text-white mb-1">
                 {slot.name}
               </p>
-              <p className="text-xs text-text-secondary mb-2">{slot.duration}</p>
+              <p className="text-xs text-white/50 mb-2">{slot.duration}</p>
               <p className="font-heading text-xl font-bold text-primary">
                 {slot.adultPrice}₽
               </p>
-              <p className="text-xs text-text-secondary mt-1">
+              <p className="text-xs text-white/50 mt-1">
                 дети — {slot.childPrice}₽
               </p>
             </div>

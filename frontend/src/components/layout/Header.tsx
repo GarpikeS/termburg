@@ -46,7 +46,13 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0" onClick={closeMobileMenu}>
+          <Link to="/" className="flex-shrink-0 flex items-center gap-2" onClick={closeMobileMenu}>
+            <img
+              src="/images/termliny-symbol.svg"
+              alt=""
+              className="h-6 w-6 md:h-7 md:w-7"
+              style={{ filter: 'brightness(0.8) sepia(1) hue-rotate(-10deg)' }}
+            />
             <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary md:text-2xl">
               ТЕРМБУРГ
             </span>
