@@ -6,6 +6,7 @@ import PromotionsCarousel from '@/components/sections/home/PromotionsCarousel';
 import SchedulePreviewSection from '@/components/sections/home/SchedulePreviewSection';
 import PricingPreviewSection from '@/components/sections/home/PricingPreviewSection';
 import ContactsPreviewSection from '@/components/sections/home/ContactsPreviewSection';
+import TermlinyTeaser from '@/components/sections/home/TermlinyTeaser';
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       <AdvantagesSection />
       <ZonesPreviewSection />
       <PromotionsCarousel />
+      <TermlinyTeaser />
       <SchedulePreviewSection />
       <PricingPreviewSection />
       <ContactsPreviewSection />

@@ -34,14 +34,15 @@ function TermlinCard({ termlin }: { termlin: Termlin }) {
   return (
     <Card className="overflow-hidden">
       {/* Character image */}
-      <div className="relative bg-gradient-to-b from-surface-warm to-background flex items-center justify-center p-6 pb-2">
+      <div className="relative">
         <img
           src={termlin.image}
           alt={termlin.name}
-          className="w-48 h-48 object-contain drop-shadow-lg"
+          className="w-full h-64 md:h-72 object-cover"
           loading="lazy"
         />
-        <div className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center ${colors}`}>
+        <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
+        <div className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm ${colors}`}>
           {elementIcons[termlin.element]}
         </div>
       </div>
@@ -127,34 +128,35 @@ export default function TermlinyPage() {
     <PageLayout
       title="Термлины — духи-хранители Термбурга"
       description="Познакомьтесь с Термлинами — мифологическими духами-хранителями бань термального комплекса Термбург."
+      ogImage="/images/termliny/og.webp"
     >
       {/* Hero */}
-      <section className="relative section-padding bg-gradient-to-b from-surface-warm to-background overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-
-        {/* Decorative symbol */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.04] pointer-events-none">
+      <section className="relative overflow-hidden">
+        {/* Hero image */}
+        <div className="relative">
           <img
-            src="/images/termliny-symbol.svg"
-            alt=""
-            className="w-[500px] h-[500px]"
+            src="/images/termliny/hero.webp"
+            alt="Семья духов-хранителей Термбурга в сказочной бане"
+            className="w-full h-[300px] md:h-[450px] lg:h-[550px] object-cover"
           />
-        </div>
-
-        <Container className="relative z-10">
-          <div className="text-center">
-            <img
-              src="/images/termliny-logo-dark.svg"
-              alt="Термлины"
-              className="h-24 md:h-32 mx-auto mb-6"
-            />
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Каждая баня и сауна Термбурга находится под покровительством своего
-              духа-хранителя. Познакомьтесь с ними — и ваш визит станет ещё более
-              особенным.
-            </p>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 pb-8 md:pb-12">
+            <Container>
+              <div className="text-center">
+                <img
+                  src="/images/termliny-logo-dark.svg"
+                  alt="Термлины"
+                  className="h-16 md:h-24 mx-auto mb-4"
+                />
+                <p className="text-base md:text-lg text-text-secondary max-w-2xl mx-auto">
+                  Каждая баня и сауна Термбурга находится под покровительством своего
+                  духа-хранителя. Познакомьтесь с ними — и ваш визит станет ещё более
+                  особенным.
+                </p>
+              </div>
+            </Container>
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* Family tree intro */}

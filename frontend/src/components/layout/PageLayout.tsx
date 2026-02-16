@@ -6,9 +6,10 @@ interface PageLayoutProps {
   children: React.ReactNode;
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
-export default function PageLayout({ children, title, description }: PageLayoutProps) {
+export default function PageLayout({ children, title, description, ogImage }: PageLayoutProps) {
   const fullTitle = title ? `${title} | Термбург` : 'Термбург — термальный комплекс в Москве';
 
   return (
@@ -16,6 +17,11 @@ export default function PageLayout({ children, title, description }: PageLayoutP
       <Helmet>
         <title>{fullTitle}</title>
         {description && <meta name="description" content={description} />}
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        {ogImage && <meta property="og:image:width" content="1200" />}
+        {ogImage && <meta property="og:image:height" content="630" />}
+        <meta property="og:title" content={fullTitle} />
+        {description && <meta property="og:description" content={description} />}
       </Helmet>
       <div className="flex min-h-screen flex-col">
         <Header />
