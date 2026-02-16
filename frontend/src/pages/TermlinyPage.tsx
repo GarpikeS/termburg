@@ -33,18 +33,26 @@ function TermlinCard({ termlin }: { termlin: Termlin }) {
 
   return (
     <Card className="overflow-hidden">
-      <div className="p-6">
+      {/* Character image */}
+      <div className="relative bg-gradient-to-b from-surface-warm to-background flex items-center justify-center p-6 pb-2">
+        <img
+          src={termlin.image}
+          alt={termlin.name}
+          className="w-48 h-48 object-contain drop-shadow-lg"
+          loading="lazy"
+        />
+        <div className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center ${colors}`}>
+          {elementIcons[termlin.element]}
+        </div>
+      </div>
+
+      <div className="p-6 pt-3">
         {/* Header */}
-        <div className="flex items-start gap-4 mb-4">
-          <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${colors}`}>
-            {elementIcons[termlin.element]}
-          </div>
-          <div className="min-w-0">
-            <h3 className="font-heading text-xl font-bold text-text-primary">
-              {termlin.name}
-            </h3>
-            <p className="text-sm text-primary font-medium">{termlin.title}</p>
-          </div>
+        <div className="text-center mb-4">
+          <h3 className="font-heading text-xl font-bold text-text-primary">
+            {termlin.name}
+          </h3>
+          <p className="text-sm text-primary font-medium">{termlin.title}</p>
         </div>
 
         {/* Meaning */}

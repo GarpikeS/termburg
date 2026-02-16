@@ -2,6 +2,7 @@ export interface Termlin {
   id: string;
   name: string;
   title: string;
+  image: string;
   nameMeaning: string;
   signs: string;
   mission: string;
@@ -19,6 +20,7 @@ export const termliny: Termlin[] = [
     id: 'yaromir',
     name: 'Банник-Яромир',
     title: 'Хранитель бань',
+    image: '/images/termliny/yaromir.webp',
     nameMeaning: 'стремящийся к миру',
     signs: 'Старичок с красной шапкой-невидимкой и прилипшими листиками от банных веников.',
     mission: 'Поддерживает нужную температуру, нагоняет пар и создаёт комфортные условия в каждой бане и сауне.',
@@ -34,6 +36,7 @@ export const termliny: Termlin[] = [
     id: 'valkiriya',
     name: 'Банная Бабушка Валькирия',
     title: 'Дух исцеления',
+    image: '/images/termliny/valkiriya.webp',
     nameMeaning: 'имеющая силу лекаря',
     signs: 'Ходит с травками, всегда улыбается, дарует хорошую энергетику.',
     mission: 'Спасает от болезней, облегчает страдания слабых.',
@@ -49,6 +52,7 @@ export const termliny: Termlin[] = [
     id: 'pereslav',
     name: 'Домовой Переслав',
     title: 'Хранитель комплекса',
+    image: '/images/termliny/pereslav.webp',
     nameMeaning: 'очень мудрый, славный',
     signs: 'Седой, в лаптях, друг Яромира и Казимира.',
     mission: 'Охраняет весь комплекс Термбург.',
@@ -64,6 +68,7 @@ export const termliny: Termlin[] = [
     id: 'kazimir',
     name: 'Дворовой Казимир',
     title: 'Хранитель террасы',
+    image: '/images/termliny/kazimir.webp',
     nameMeaning: 'предсказывать, поведать миру',
     signs: 'Когтистые лапы, взлохмаченная шерсть.',
     mission: 'Охраняет открытую террасу.',
@@ -79,6 +84,7 @@ export const termliny: Termlin[] = [
     id: 'vedagor',
     name: 'Кот Ведагор',
     title: 'Исполнитель желаний',
+    image: '/images/termliny/vedagor.webp',
     nameMeaning: 'ведающий',
     signs: 'В очках, пронзительный взгляд, шелковистая шёрстка.',
     mission: 'Волшебный кот, исполняет желания.',
@@ -94,6 +100,7 @@ export const termliny: Termlin[] = [
     id: 'milovan',
     name: 'Кот Люб Милован',
     title: 'Защитник брака',
+    image: '/images/termliny/milovan.webp',
     nameMeaning: 'ласкать, заботиться',
     signs: 'Золотая пушистая шёрстка, крупный размер.',
     mission: 'Охраняет брачное ложе как семейную святыню.',
@@ -109,6 +116,7 @@ export const termliny: Termlin[] = [
     id: 'lelya',
     name: 'Берегиня Леля',
     title: 'Защитница детей',
+    image: '/images/termliny/lelya.webp',
     nameMeaning: 'любимая, лелеющая, лелеемая',
     signs: 'Длинные волосы, мягкий голос, красивая улыбка.',
     mission: 'Охраняет маленьких детей возле воды.',
