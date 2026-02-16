@@ -1,0 +1,43 @@
+export interface SocialLinks {
+  vk: string;
+  telegram: string;
+  instagram: string;
+}
+
+export interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
+export interface ContactInfo {
+  phone: string;
+  address: string;
+  metro: string;
+  email: string;
+  workingHours: string;
+  social: SocialLinks;
+  coordinates: Coordinates;
+  howToGet: string[];
+}
+
+export const contactInfo: ContactInfo = {
+  phone: '+7 (495) 922-02-22',
+  address: 'г. Москва, ул. Гурьянова, д. 30',
+  metro: 'м. Печатники (5 мин пешком)',
+  email: 'info@termburg.ru',
+  workingHours: 'Ежедневно с 8:00 до 23:00',
+  social: {
+    vk: 'https://vk.com/termburg',
+    telegram: 'https://t.me/termburg',
+    instagram: 'https://instagram.com/termburg',
+  },
+  coordinates: {
+    lat: 55.6892,
+    lng: 37.7271,
+  },
+  howToGet: [
+    'От м. Печатники: выход к ул. Гурьянова, 5 минут пешком',
+    'На автомобиле: бесплатная парковка на территории комплекса',
+    'На автобусе: остановка «Гурьянова» маршруты 161, 670',
+  ],
+};

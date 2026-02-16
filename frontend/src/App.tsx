@@ -1,0 +1,44 @@
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import ScrollToTop from '@/components/shared/ScrollToTop';
+
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const AboutPage = lazy(() => import('@/pages/AboutPage'));
+const SchedulePage = lazy(() => import('@/pages/SchedulePage'));
+const PricingPage = lazy(() => import('@/pages/PricingPage'));
+const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
+const PromotionsPage = lazy(() => import('@/pages/PromotionsPage'));
+const BuyPage = lazy(() => import('@/pages/BuyPage'));
+const ContactsPage = lazy(() => import('@/pages/ContactsPage'));
+const CafePage = lazy(() => import('@/pages/CafePage'));
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
+
+function LoadingFallback() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <ScrollToTop />
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/promotions" element={<PromotionsPage />} />
+          <Route path="/buy" element={<BuyPage />} />
+          <Route path="/contacts" element={<ContactsPage />} />
+          <Route path="/cafe" element={<CafePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+    </>
+  );
+}
