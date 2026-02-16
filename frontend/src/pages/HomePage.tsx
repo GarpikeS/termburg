@@ -16,7 +16,7 @@ export default function HomePage() {
       <AdvantagesSection />
       <ZonesPreviewSection />
       <PromotionsCarousel />
-      <Section>
+      <Section warm>
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <TermlinyTeaser />
           <SchedulePreviewSection />
