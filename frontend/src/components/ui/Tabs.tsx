@@ -17,7 +17,7 @@ export default function Tabs({ tabs, activeTab, onChange, className }: TabsProps
   return (
     <div
       className={twMerge(
-        clsx('flex gap-1 border-b border-gray-200', className),
+        clsx('flex gap-1 border-b border-border', className),
       )}
     >
       {tabs.map((tab) => {

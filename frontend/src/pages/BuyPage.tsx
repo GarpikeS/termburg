@@ -51,7 +51,8 @@ export default function BuyPage() {
   return (
     <PageLayout title="Купить онлайн" description="Купить билет, подарочный сертификат или бокс в термальный комплекс Термбург.">
       {/* Hero */}
-      <section className="section-padding bg-surface-warm">
+      <section className="relative section-padding bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary text-center">
             Купить онлайн

@@ -27,7 +27,7 @@ export default function PricingPreviewSection() {
           {weekdayPricing.map((slot) => (
             <div
               key={slot.id}
-              className="bg-surface rounded-xl p-4 text-center shadow-sm"
+              className="bg-surface rounded-xl p-4 text-center border border-border/50"
             >
               <p className="font-heading font-semibold text-text-primary mb-1">
                 {slot.name}

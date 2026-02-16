@@ -65,7 +65,7 @@ export default function ContactsPreviewSection() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="block rounded-xl p-4 bg-surface shadow-sm hover:shadow-md transition-shadow"
+                  className="block rounded-xl p-4 bg-surface border border-border/50 hover:border-border transition-all"
                 >
                   {content}
                 </a>
@@ -75,7 +75,7 @@ export default function ContactsPreviewSection() {
             return (
               <div
                 key={item.label}
-                className="rounded-xl p-4 bg-surface shadow-sm"
+                className="rounded-xl p-4 bg-surface border border-border/50"
               >
                 {content}
               </div>

@@ -12,7 +12,7 @@ export default function Card({ children, className }: CardProps) {
     <div
       className={twMerge(
         clsx(
-          'bg-surface rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6',
+          'bg-surface rounded-2xl border border-border/50 hover:border-border transition-all duration-300 p-6',
           className,
         ),
       )}

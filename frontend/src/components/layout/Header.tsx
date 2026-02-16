@@ -29,22 +29,22 @@ export default function Header() {
 
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
     `text-sm font-medium transition-colors duration-200 hover:text-primary ${
-      isActive ? 'text-primary' : 'text-text-primary'
+      isActive ? 'text-primary' : 'text-text-primary/80'
     }`;
 
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-sm'
-          : 'bg-white/80 backdrop-blur-sm'
+          ? 'bg-background/95 backdrop-blur-md shadow-lg shadow-black/20'
+          : 'bg-background/80 backdrop-blur-sm'
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0" onClick={closeMobileMenu}>
-            <span className="font-heading text-xl font-bold tracking-wider text-primary md:text-2xl">
+            <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary md:text-2xl">
               ТЕРМБУРГ
             </span>
           </Link>
@@ -67,7 +67,7 @@ export default function Header() {
           <div className="hidden lg:block">
             <Link
               to="/buy"
-              className="inline-flex items-center rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-light"
+              className="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-background transition-colors duration-200 hover:bg-primary-light"
             >
               Забронировать
             </Link>
@@ -76,7 +76,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-text-primary transition-colors hover:bg-surface-warm lg:hidden"
+            className="inline-flex items-center justify-center rounded-md p-2 text-text-primary transition-colors hover:bg-surface lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
           >
@@ -88,14 +88,14 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 top-16 z-40 bg-black/20 lg:hidden md:top-20"
+          className="fixed inset-0 top-16 z-40 bg-black/50 lg:hidden md:top-20"
           onClick={closeMobileMenu}
         />
       )}
 
       {/* Mobile Slide-in Menu */}
       <div
-        className={`fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 transform bg-white shadow-xl transition-transform duration-300 ease-in-out md:top-20 md:h-[calc(100vh-5rem)] lg:hidden ${
+        className={`fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 transform bg-surface shadow-xl shadow-black/30 transition-transform duration-300 ease-in-out md:top-20 md:h-[calc(100vh-5rem)] lg:hidden ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -108,7 +108,7 @@ export default function Header() {
               className={({ isActive }) =>
                 `rounded-lg px-4 py-3 text-sm font-medium transition-colors duration-200 ${
                   isActive
-                    ? 'bg-primary/10 text-primary'
+                    ? 'bg-primary/15 text-primary'
                     : 'text-text-primary hover:bg-surface-warm'
                 }`
               }
@@ -118,10 +118,10 @@ export default function Header() {
             </NavLink>
           ))}
 
-          <div className="mt-4 border-t border-gray-100 pt-4">
+          <div className="mt-4 border-t border-border pt-4">
             <Link
               to="/buy"
-              className="block w-full rounded-lg bg-accent px-4 py-3 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-light"
+              className="block w-full rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-background transition-colors duration-200 hover:bg-primary-light"
               onClick={closeMobileMenu}
             >
               Забронировать

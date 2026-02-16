@@ -19,9 +19,10 @@ export default function AboutPage() {
   return (
     <PageLayout title="О Термбурге" description="Узнайте больше о термальном комплексе Термбург в Москве.">
       {/* Hero */}
-      <section className="bg-primary py-16 text-center text-white md:py-20">
+      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl">О Термбурге</h1>
+          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">О Термбурге</h1>
         </Container>
       </section>
 
@@ -80,7 +81,7 @@ export default function AboutPage() {
             {visitRules.map((rule, index) => (
               <div
                 key={index}
-                className="flex items-start gap-4 rounded-xl bg-surface p-4 shadow-sm"
+                className="flex items-start gap-4 rounded-xl bg-surface p-4 border border-border/50"
               >
                 <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
                   {index + 1}

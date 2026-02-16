@@ -8,23 +8,24 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#2B8A94',
-          light: '#5CB8C2',
+          DEFAULT: '#C4A265',
+          light: '#D4B87A',
         },
         accent: {
           DEFAULT: '#D4956A',
           light: '#E8B896',
         },
-        background: '#FAFAF7',
+        background: '#1A1714',
         surface: {
-          DEFAULT: '#FFFFFF',
-          warm: '#F5F0EB',
+          DEFAULT: '#252219',
+          warm: '#2D2A22',
         },
-        'text-primary': '#2D3436',
-        'text-secondary': '#636E72',
-        success: '#27AE60',
-        info: '#3498DB',
+        'text-primary': '#F5F0E8',
+        'text-secondary': '#A89F8F',
+        success: '#5DB879',
+        info: '#6AABDA',
         'warm-gold': '#D4A853',
+        border: '#3D382F',
       },
       fontFamily: {
         heading: ['Montserrat', 'sans-serif'],

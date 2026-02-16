@@ -6,10 +6,10 @@ import Badge from '@/components/ui/Badge';
 import { thermalZones } from '@/data/thermalZones';
 
 const zoneGradients = [
-  'from-primary/40 to-primary-light/30',
-  'from-accent/40 to-warm-gold/30',
-  'from-primary-light/40 to-info/30',
-  'from-warm-gold/40 to-accent/30',
+  'from-primary/20 to-primary-light/10',
+  'from-accent/20 to-warm-gold/10',
+  'from-primary-light/20 to-info/10',
+  'from-warm-gold/20 to-accent/10',
 ];
 
 export default function ZonesPreviewSection() {
@@ -24,7 +24,6 @@ export default function ZonesPreviewSection() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {previewZones.map((zone, index) => (
           <Card key={zone.id} className="p-0 overflow-hidden">
-            {/* Colored placeholder instead of image */}
             <div
               className={`h-44 bg-gradient-to-br ${zoneGradients[index % zoneGradients.length]} flex items-end p-4`}
             >

@@ -28,7 +28,7 @@ export default function SchedulePreviewSection() {
           return (
             <div
               key={event.id}
-              className="flex items-center gap-4 bg-surface rounded-xl p-4 shadow-sm"
+              className="flex items-center gap-4 bg-surface rounded-xl p-4 border border-border/50"
             >
               <div className="min-w-[60px] text-center">
                 <span className="font-heading text-lg font-bold text-primary">

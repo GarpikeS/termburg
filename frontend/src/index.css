@@ -14,10 +14,25 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  color: #2D3436;
-  background-color: #FAFAF7;
+  color: #F5F0E8;
+  background-color: #1A1714;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1A1714;
+}
+::-webkit-scrollbar-thumb {
+  background: #3D382F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4D483F;
 }
 
 h1, h2, h3, h4, h5, h6 {

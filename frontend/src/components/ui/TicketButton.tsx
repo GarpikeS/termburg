@@ -22,12 +22,11 @@ export default function TicketButton({
         clsx(
           'inline-flex items-center justify-center gap-2',
           'px-8 py-3.5 rounded-xl text-base font-medium',
-          'bg-accent text-white',
-          'shadow-sm hover:shadow-md',
-          'hover:bg-accent-light',
+          'bg-primary text-background',
+          'hover:bg-primary-light',
           'transition-all duration-300 ease-out',
           'hover:-translate-y-0.5',
-          'active:translate-y-0 active:shadow-sm',
+          'active:translate-y-0',
           className,
         ),
       )}

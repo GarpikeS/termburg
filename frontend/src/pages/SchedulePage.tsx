@@ -50,10 +50,11 @@ export default function SchedulePage() {
   return (
     <PageLayout title="Расписание" description="Расписание мероприятий термального комплекса Термбург.">
       {/* Hero */}
-      <section className="bg-primary py-16 text-center text-white md:py-20">
+      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl">Расписание мероприятий</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
+          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">Расписание мероприятий</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
             Ежедневные парения, медитации, мастер-классы и оздоровительные программы
           </p>
         </Container>
@@ -68,8 +69,8 @@ export default function SchedulePage() {
               onClick={() => setActiveDay('all')}
               className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                 activeDay === 'all'
-                  ? 'bg-primary text-white'
-                  : 'bg-surface text-text-secondary hover:bg-surface-warm'
+                  ? 'bg-primary text-background'
+                  : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
               }`}
             >
               Все
@@ -80,8 +81,8 @@ export default function SchedulePage() {
                 onClick={() => setActiveDay(day)}
                 className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   activeDay === day
-                    ? 'bg-primary text-white'
-                    : 'bg-surface text-text-secondary hover:bg-surface-warm'
+                    ? 'bg-primary text-background'
+                    : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
                 }`}
               >
                 {dayShortNames[day]}
@@ -100,8 +101,8 @@ export default function SchedulePage() {
                 onClick={() => setActiveType(filter.id)}
                 className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   activeType === filter.id
-                    ? 'bg-primary text-white'
-                    : 'bg-surface text-text-secondary hover:bg-surface-warm'
+                    ? 'bg-primary text-background'
+                    : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
                 }`}
               >
                 {filter.label}
@@ -159,7 +160,7 @@ export default function SchedulePage() {
       </Section>
 
       {/* Legend */}
-      <section className="border-t border-gray-200 bg-surface-warm py-8">
+      <section className="border-t border-border bg-surface-warm py-8">
         <Container>
           <p className="mb-4 text-sm font-medium text-text-primary">Обозначения:</p>
           <div className="flex flex-wrap gap-6">

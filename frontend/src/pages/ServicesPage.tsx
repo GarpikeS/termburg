@@ -17,7 +17,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
     <Card>
       <h3 className="mb-2 text-lg font-bold text-text-primary">{service.name}</h3>
       <p className="mb-4 text-sm text-text-secondary">{service.description}</p>
-      <div className="flex items-center justify-between border-t border-gray-100 pt-3">
+      <div className="flex items-center justify-between border-t border-border pt-3">
         <span className="flex items-center gap-1 text-sm text-text-secondary">
           <Clock className="h-4 w-4" />
           {service.duration}
@@ -34,10 +34,11 @@ export default function ServicesPage() {
   return (
     <PageLayout title="Услуги" description="Полный перечень услуг термального комплекса Термбург.">
       {/* Hero */}
-      <section className="bg-primary py-16 text-center text-white md:py-20">
+      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl">Услуги</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
+          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">Услуги</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
             Широкий спектр услуг для вашего здоровья, красоты и расслабления
           </p>
         </Container>
@@ -52,7 +53,7 @@ export default function ServicesPage() {
           {includedServices.map((service) => (
             <div
               key={service}
-              className="flex items-center gap-3 rounded-xl bg-surface p-4 shadow-sm"
+              className="flex items-center gap-3 rounded-xl bg-surface p-4 border border-border/50"
             >
               <CheckCircle className="h-6 w-6 flex-shrink-0 text-success" />
               <span className="text-text-primary font-medium">{service}</span>

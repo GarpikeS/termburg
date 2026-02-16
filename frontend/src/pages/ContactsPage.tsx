@@ -38,7 +38,8 @@ export default function ContactsPage() {
   return (
     <PageLayout title="Контакты" description="Контактная информация термального комплекса Термбург. Адрес, телефон, email и схема проезда.">
       {/* Hero */}
-      <section className="section-padding bg-surface-warm">
+      <section className="relative section-padding bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary text-center">
             Контакты
@@ -117,7 +118,7 @@ export default function ContactsPage() {
             </div>
 
             {/* Social media */}
-            <div className="pt-4 border-t border-surface-warm">
+            <div className="pt-4 border-t border-border">
               <p className="text-sm text-text-secondary mb-4">Мы в социальных сетях</p>
               <div className="flex gap-4">
                 {socialLinks.map((link) => (
@@ -127,7 +128,7 @@ export default function ContactsPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.name}
-                    className="w-12 h-12 rounded-full bg-surface-warm flex items-center justify-center text-text-secondary hover:bg-primary hover:text-white transition-all duration-300"
+                    className="w-12 h-12 rounded-full bg-surface-warm flex items-center justify-center text-text-secondary hover:bg-primary hover:text-background transition-all duration-300"
                   >
                     {link.icon}
                   </a>
@@ -138,7 +139,7 @@ export default function ContactsPage() {
 
           {/* Right: Map placeholder */}
           <div className="flex flex-col gap-6">
-            <div className="w-full h-80 lg:h-full min-h-[320px] rounded-2xl bg-surface-warm flex items-center justify-center">
+            <div className="w-full h-80 lg:h-full min-h-[320px] rounded-2xl bg-surface border border-border/50 flex items-center justify-center">
               <div className="text-center">
                 <MapPin className="w-12 h-12 text-text-secondary/40 mx-auto mb-3" />
                 <p className="text-text-secondary text-lg font-medium">Яндекс.Карты</p>

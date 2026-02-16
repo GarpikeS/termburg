@@ -64,10 +64,11 @@ export default function PricingPage() {
   return (
     <PageLayout title="Прайс-лист" description="Цены на посещение и услуги термального комплекса Термбург.">
       {/* Hero */}
-      <section className="bg-primary py-16 text-center text-white md:py-20">
+      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl">Прайс-лист</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
+          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">Прайс-лист</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
             Прозрачные цены без скрытых доплат. Всё включено в стоимость посещения: халат, полотенце, тапочки и чай.
           </p>
         </Container>

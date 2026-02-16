@@ -11,10 +11,11 @@ export default function PromotionsPage() {
   return (
     <PageLayout title="Акции" description="Актуальные акции и специальные предложения Термбурга.">
       {/* Hero */}
-      <section className="bg-primary py-16 text-center text-white md:py-20">
+      <section className="relative py-16 text-center md:py-20 bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
-          <h1 className="font-heading text-4xl font-bold md:text-5xl">Акции и спецпредложения</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
+          <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">Акции и спецпредложения</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
             Приятные бонусы для наших гостей. Следите за обновлениями -- мы регулярно добавляем новые предложения.
           </p>
         </Container>

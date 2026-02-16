@@ -37,7 +37,8 @@ export default function CafePage() {
   return (
     <PageLayout title="Кафетерий" description="Кафетерий термального комплекса Термбург — меню, напитки и закуски.">
       {/* Hero */}
-      <section className="section-padding bg-surface-warm">
+      <section className="relative section-padding bg-gradient-to-b from-surface-warm to-background overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
         <Container>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-text-primary text-center">
             Кафетерий

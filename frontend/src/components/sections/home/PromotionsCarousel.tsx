@@ -26,7 +26,7 @@ export default function PromotionsCarousel() {
             <p className="text-sm text-text-secondary leading-relaxed flex-1">
               {promo.description}
             </p>
-            <p className="text-xs text-text-secondary mt-3 pt-3 border-t border-gray-100">
+            <p className="text-xs text-text-secondary mt-3 pt-3 border-t border-border">
               {promo.conditions}
             </p>
           </Card>
