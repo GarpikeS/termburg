@@ -34,14 +34,13 @@ function TermlinCard({ termlin }: { termlin: Termlin }) {
   return (
     <Card className="overflow-hidden">
       {/* Character image */}
-      <div className="relative">
+      <div className="relative bg-[#1a1a2e]">
         <img
           src={termlin.image}
           alt={termlin.name}
-          className="w-full h-64 md:h-72 object-cover"
+          className="w-full aspect-square object-contain mx-auto"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent" />
         <div className={`absolute top-3 right-3 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm ${colors}`}>
           {elementIcons[termlin.element]}
         </div>
@@ -135,7 +134,7 @@ export default function TermlinyPage() {
         {/* Hero image */}
         <div className="relative">
           <img
-            src="/images/termliny/hero.webp"
+            src="/images/termliny/hero.webp?v=2"
             alt="Семья духов-хранителей Термбурга в сказочной бане"
             className="w-full h-[300px] md:h-[450px] lg:h-[550px] object-cover"
           />

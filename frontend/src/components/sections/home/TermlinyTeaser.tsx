@@ -8,7 +8,7 @@ export default function TermlinyTeaser() {
       <Link to="/termliny" className="group block">
         <div className="relative rounded-2xl overflow-hidden">
           <img
-            src="/images/termliny/teaser.webp"
+            src="/images/termliny/teaser.webp?v=2"
             alt="Духи-хранители Термбурга приглашают в гости"
             className="w-full h-[300px] md:h-[400px] object-cover transition-transform duration-500 group-hover:scale-105"
           />
