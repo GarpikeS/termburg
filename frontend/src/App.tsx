@@ -11,6 +11,7 @@ const PromotionsPage = lazy(() => import('@/pages/PromotionsPage'));
 const BuyPage = lazy(() => import('@/pages/BuyPage'));
 const ContactsPage = lazy(() => import('@/pages/ContactsPage'));
 const CafePage = lazy(() => import('@/pages/CafePage'));
+const TermlinyPage = lazy(() => import('@/pages/TermlinyPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function LoadingFallback() {
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/buy" element={<BuyPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/cafe" element={<CafePage />} />
+          <Route path="/termliny" element={<TermlinyPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

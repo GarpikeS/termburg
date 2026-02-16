@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 const navLinks = [
   { to: '/', label: 'Главная' },
   { to: '/about', label: 'О Термбурге' },
+  { to: '/termliny', label: 'Термлины' },
   { to: '/schedule', label: 'Расписание' },
   { to: '/pricing', label: 'Прайс' },
   { to: '/services', label: 'Услуги' },
