@@ -32,25 +32,33 @@ export default function Header() {
 
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
     `text-sm font-medium transition-colors duration-200 hover:text-primary ${
-      isActive ? 'text-primary' : 'text-white/70'
+      isActive ? 'text-primary' : 'text-white/80 hover:text-white'
     }`;
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? 'bg-dark-surface/95 backdrop-blur-md shadow-lg shadow-black/30'
-          : 'bg-dark-surface/80 backdrop-blur-sm'
+          ? 'bg-[#1a1625] shadow-lg shadow-black/25'
+          : 'bg-transparent'
       }`}
     >
+      {/* Subtle gold accent line — visible only when scrolled */}
+      <div
+        className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 ${
+          scrolled ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ background: 'linear-gradient(90deg, transparent 0%, #BA9B4F40 30%, #BA9B4F60 50%, #BA9B4F40 70%, transparent 100%)' }}
+      />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center gap-2" onClick={closeMobileMenu}>
+          <Link to="/" className="flex-shrink-0 flex items-center gap-2.5" onClick={closeMobileMenu}>
             <img
               src="/images/termliny-symbol.svg"
               alt=""
-              className="h-6 w-6 md:h-7 md:w-7 opacity-80"
+              className="h-7 w-7 md:h-8 md:w-8 opacity-70"
             />
             <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary md:text-2xl">
               ТЕРМБУРГ
@@ -85,7 +93,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-white/70 transition-colors hover:bg-white/10 lg:hidden"
+            className="inline-flex items-center justify-center rounded-md p-2 text-white/80 transition-colors hover:text-white lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
           >
@@ -97,14 +105,14 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 top-16 z-40 bg-black/50 lg:hidden md:top-20"
+          className="fixed inset-0 top-16 z-40 bg-black/60 lg:hidden md:top-20"
           onClick={closeMobileMenu}
         />
       )}
 
       {/* Mobile Slide-in Menu */}
       <div
-        className={`fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 transform bg-dark-surface shadow-xl shadow-black/30 transition-transform duration-300 ease-in-out md:top-20 md:h-[calc(100vh-5rem)] lg:hidden ${
+        className={`fixed right-0 top-16 z-50 h-[calc(100vh-4rem)] w-72 transform bg-dark-surface border-l border-dark-border shadow-2xl shadow-black/40 transition-transform duration-300 ease-in-out md:top-20 md:h-[calc(100vh-5rem)] lg:hidden ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -118,7 +126,7 @@ export default function Header() {
                 `rounded-lg px-4 py-3 text-sm font-medium transition-colors duration-200 ${
                   isActive
                     ? 'bg-primary/15 text-primary'
-                    : 'text-white/70 hover:bg-white/5'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
                 }`
               }
               onClick={closeMobileMenu}
