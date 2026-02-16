@@ -6,9 +6,12 @@ import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import TicketButton from '@/components/ui/TicketButton';
 import Container from '@/components/ui/Container';
+import { useBooking } from '@/context/BookingContext';
 import { promotions } from '@/data/promotions';
 
 export default function PromotionsPage() {
+  const { openBooking } = useBooking();
+
   return (
     <PageLayout title="Акции" description="Актуальные акции и специальные предложения Термбурга.">
       <PageHero
@@ -82,7 +85,7 @@ export default function PromotionsPage() {
               Забронируйте посещение и сообщите администратору об акции при оплате. Акции не суммируются.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <TicketButton href="#">
+              <TicketButton onClick={openBooking}>
                 Забронировать
                 <ArrowRight className="ml-2 h-4 w-4" />
               </TicketButton>

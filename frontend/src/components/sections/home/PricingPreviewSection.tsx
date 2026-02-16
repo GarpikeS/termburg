@@ -2,9 +2,12 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import TicketButton from '@/components/ui/TicketButton';
+import { useBooking } from '@/context/BookingContext';
 import { weekdayPricing } from '@/data/pricing';
 
 export default function PricingPreviewSection() {
+  const { openBooking } = useBooking();
+
   return (
     <Section
       title="Стоимость посещения"
@@ -45,7 +48,7 @@ export default function PricingPreviewSection() {
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-4">
-          <TicketButton href="/buy">Забронировать посещение</TicketButton>
+          <TicketButton onClick={openBooking}>Забронировать посещение</TicketButton>
           <Link
             to="/pricing"
             className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-light transition-colors"

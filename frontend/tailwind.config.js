@@ -9,23 +9,23 @@ export default {
       colors: {
         primary: {
           DEFAULT: '#BA9B4F',
-          light: '#D9CBA1',
+          light: '#A88A3D',
         },
         accent: {
           DEFAULT: '#D4956A',
           light: '#E8B896',
         },
-        background: '#191829',
+        background: '#FAF6E8',
         surface: {
-          DEFAULT: '#222139',
-          warm: '#2E2D4B',
+          DEFAULT: '#FFFFFF',
+          warm: '#F0EBD8',
         },
-        'text-primary': '#EDEAE2',
-        'text-secondary': '#9B97AB',
+        'text-primary': '#2D2B3D',
+        'text-secondary': '#6B6880',
         success: '#5DB879',
         info: '#6AABDA',
         'warm-gold': '#D9CBA1',
-        border: '#3C3B58',
+        border: '#E0D9C8',
       },
       fontFamily: {
         heading: ['"Ikra Slab"', 'Georgia', 'serif'],

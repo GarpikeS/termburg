@@ -77,6 +77,35 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* Photo Gallery */}
+      <Section title="Фотогалерея" subtitle="Загляните в наше пространство">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {[
+            { src: '/images/complex/pool.jpg', alt: 'Бассейн' },
+            { src: '/images/complex/gallery9.jpg', alt: 'Зона отдыха' },
+            { src: '/images/complex/herbal.jpg', alt: 'Травяная парная' },
+            { src: '/images/complex/gallery10.jpg', alt: 'Термальная зона' },
+            { src: '/images/complex/barrels.jpg', alt: 'Бани-бочки' },
+            { src: '/images/complex/gallery11.jpg', alt: 'Парная с камнями' },
+            { src: '/images/complex/gallery1.jpg', alt: 'Интерьер' },
+            { src: '/images/complex/gallery12.jpg', alt: 'Парная' },
+            { src: '/images/complex/gallery2.jpg', alt: 'Бассейн' },
+            { src: '/images/complex/gallery13.jpg', alt: 'Зона релаксации' },
+            { src: '/images/complex/gallery3.jpg', alt: 'Отдых' },
+            { src: '/images/complex/gallery14.jpg', alt: 'Термальный комплекс' },
+          ].map((photo, index) => (
+            <div key={index} className="aspect-[4/3] overflow-hidden rounded-xl">
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* Rules */}
       <Section title="Правила посещения">
         <div className="mx-auto max-w-2xl">

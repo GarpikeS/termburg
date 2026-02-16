@@ -17,8 +17,8 @@ export default function PageHero({ title, subtitle, backgroundImage }: PageHeroP
               alt=""
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-background/65" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/50" />
+            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-black/30" />
           </div>
         </>
       ) : (
@@ -28,11 +28,11 @@ export default function PageHero({ title, subtitle, backgroundImage }: PageHeroP
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
       <Container className="relative z-10">
-        <h1 className="font-heading text-4xl font-bold md:text-5xl text-text-primary">
+        <h1 className="font-heading text-4xl font-bold md:text-5xl text-white">
           {title}
         </h1>
         {subtitle && (
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-text-secondary">
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
             {subtitle}
           </p>
         )}

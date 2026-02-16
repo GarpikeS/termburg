@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useBooking } from '@/context/BookingContext';
 
 const navLinks = [
   { to: '/', label: 'Главная' },
@@ -15,6 +16,7 @@ const navLinks = [
 ];
 
 export default function Header() {
+  const { openBooking } = useBooking();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -66,12 +68,13 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:block">
-            <Link
-              to="/buy"
-              className="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-background transition-colors duration-200 hover:bg-primary-light"
+            <button
+              type="button"
+              onClick={openBooking}
+              className="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-primary-light"
             >
               Забронировать
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -120,13 +123,16 @@ export default function Header() {
           ))}
 
           <div className="mt-4 border-t border-border pt-4">
-            <Link
-              to="/buy"
-              className="block w-full rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-background transition-colors duration-200 hover:bg-primary-light"
-              onClick={closeMobileMenu}
+            <button
+              type="button"
+              onClick={() => {
+                closeMobileMenu();
+                openBooking();
+              }}
+              className="block w-full rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-primary-light"
             >
               Забронировать
-            </Link>
+            </button>
           </div>
         </nav>
       </div>

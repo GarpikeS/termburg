@@ -8,6 +8,7 @@ import Tabs from '@/components/ui/Tabs';
 import Badge from '@/components/ui/Badge';
 import TicketButton from '@/components/ui/TicketButton';
 import Container from '@/components/ui/Container';
+import { useBooking } from '@/context/BookingContext';
 import {
   weekdayPricing,
   weekendPricing,
@@ -58,6 +59,7 @@ function PriceTable({ slots }: { slots: PricingSlot[] }) {
 }
 
 export default function PricingPage() {
+  const { openBooking } = useBooking();
   const [activeTab, setActiveTab] = useState('weekday');
 
   const currentPricing = activeTab === 'weekday' ? weekdayPricing : weekendPricing;
@@ -138,7 +140,7 @@ export default function PricingPage() {
           <p className="mx-auto mb-8 max-w-xl text-text-secondary">
             Забронируйте посещение онлайн и получите гарантированное место в удобное для вас время.
           </p>
-          <TicketButton href="#">Забронировать посещение</TicketButton>
+          <TicketButton onClick={openBooking}>Забронировать посещение</TicketButton>
         </Container>
       </section>
     </PageLayout>

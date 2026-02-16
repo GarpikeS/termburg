@@ -5,6 +5,7 @@ import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import TicketButton from '@/components/ui/TicketButton';
 import Container from '@/components/ui/Container';
+import { useBooking } from '@/context/BookingContext';
 import {
   includedServices,
   spaServices,
@@ -32,6 +33,8 @@ function ServiceCard({ service }: { service: ServiceItem }) {
 }
 
 export default function ServicesPage() {
+  const { openBooking } = useBooking();
+
   return (
     <PageLayout title="Услуги" description="Полный перечень услуг термального комплекса Термбург.">
       <PageHero
@@ -127,7 +130,7 @@ export default function ServicesPage() {
           <p className="mx-auto mb-8 max-w-xl text-text-secondary">
             Оставьте заявку онлайн или позвоните нам, и мы подберём для вас идеальную программу.
           </p>
-          <TicketButton href="#">Забронировать посещение</TicketButton>
+          <TicketButton onClick={openBooking}>Забронировать посещение</TicketButton>
         </Container>
       </section>
     </PageLayout>

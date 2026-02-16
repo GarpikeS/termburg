@@ -6,6 +6,7 @@ import Card from '@/components/ui/Card';
 import TicketButton from '@/components/ui/TicketButton';
 import Badge from '@/components/ui/Badge';
 import Container from '@/components/ui/Container';
+import { useBooking } from '@/context/BookingContext';
 
 const tickets = [
   {
@@ -52,6 +53,8 @@ const giftBoxes = [
 ];
 
 export default function BuyPage() {
+  const { openBooking, openPurchase } = useBooking();
+
   return (
     <PageLayout title="Купить онлайн" description="Купить билет, подарочный сертификат или бокс в термальный комплекс Термбург.">
       <PageHero
@@ -74,7 +77,7 @@ export default function BuyPage() {
               <p className="mt-3 text-text-secondary">{ticket.description}</p>
               <p className="mt-4 text-2xl font-bold text-primary">{ticket.price}</p>
               <div className="mt-6">
-                <TicketButton href="#">Купить билет</TicketButton>
+                <TicketButton onClick={openBooking}>Купить билет</TicketButton>
               </div>
             </Card>
           ))}
@@ -101,7 +104,9 @@ export default function BuyPage() {
                 <Badge variant="gold">{cert.value}</Badge>
                 <p className="mt-4 text-text-secondary">{cert.description}</p>
                 <div className="mt-6">
-                  <TicketButton href="#">Купить сертификат</TicketButton>
+                  <TicketButton onClick={() => openPurchase({ name: `Подарочный сертификат на ${cert.value}`, price: cert.value })}>
+                    Купить сертификат
+                  </TicketButton>
                 </div>
               </div>
             </Card>
@@ -123,7 +128,9 @@ export default function BuyPage() {
               <p className="mt-3 text-text-secondary">{box.contents}</p>
               <p className="mt-4 text-2xl font-bold text-primary">{box.price}</p>
               <div className="mt-6">
-                <TicketButton href="#">Купить бокс</TicketButton>
+                <TicketButton onClick={() => openPurchase({ name: box.title, price: box.price })}>
+                  Купить бокс
+                </TicketButton>
               </div>
             </Card>
           ))}

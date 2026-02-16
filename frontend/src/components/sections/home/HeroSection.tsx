@@ -1,7 +1,10 @@
 import Button from '@/components/ui/Button';
 import Container from '@/components/ui/Container';
+import { useBooking } from '@/context/BookingContext';
 
 export default function HeroSection() {
+  const { openBooking } = useBooking();
+
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       {/* Background photo */}
@@ -11,8 +14,8 @@ export default function HeroSection() {
           alt=""
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-background/70 backdrop-blur-[2px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/60" />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/40" />
       </div>
 
       {/* Decorative gold line */}
@@ -23,16 +26,16 @@ export default function HeroSection() {
           Термальный комплекс
         </p>
 
-        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight max-w-4xl mx-auto">
+        <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-4xl mx-auto">
           Пространство тепла и&nbsp;гармонии в&nbsp;сердце Москвы
         </h1>
 
-        <p className="mt-6 text-lg md:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
           Откройте мир термальных источников, парений и глубокого расслабления
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="primary" size="lg" href="/buy">
+          <Button variant="primary" size="lg" onClick={openBooking}>
             Забронировать посещение
           </Button>
           <Button
@@ -44,7 +47,7 @@ export default function HeroSection() {
           </Button>
         </div>
 
-        <p className="mt-12 text-sm text-text-secondary/60">
+        <p className="mt-12 text-sm text-white/60">
           Ежедневно с 8:00 до 23:00 &middot; м. Печатники
         </p>
       </Container>

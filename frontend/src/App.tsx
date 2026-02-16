@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ScrollToTop from '@/components/shared/ScrollToTop';
+import BookingModal from '@/components/shared/BookingModal';
+import PurchaseModal from '@/components/shared/PurchaseModal';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
@@ -26,6 +28,8 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <BookingModal />
+      <PurchaseModal />
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
