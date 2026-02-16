@@ -24,7 +24,7 @@ html {
 body {
   font-family: 'Proxima Nova', 'Inter', system-ui, sans-serif;
   color: #2D2B3D;
-  background-color: #FFFFFF;
+  background-color: #FAF6E8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -34,7 +34,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FFFFFF;
+  background: #FAF6E8;
 }
 ::-webkit-scrollbar-thumb {
   background: #E0D9C8;

@@ -37,19 +37,12 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
-        scrolled
-          ? 'bg-[#1a1625] shadow-lg shadow-black/25'
-          : 'bg-transparent'
+      className={`sticky top-0 z-50 w-full bg-dark-surface ${
+        scrolled ? 'shadow-lg shadow-black/25' : ''
       }`}
     >
-      {/* Subtle gold accent line — visible only when scrolled */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 ${
-          scrolled ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ background: 'linear-gradient(90deg, transparent 0%, #BA9B4F40 30%, #BA9B4F60 50%, #BA9B4F40 70%, transparent 100%)' }}
-      />
+      {/* Gold accent line at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 gold-separator" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">

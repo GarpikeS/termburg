@@ -21,20 +21,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
           {/* Column 1: Logo & Description */}
           <div>
-            <Link to="/" className="inline-flex items-center gap-3">
-              <img
-                src="/images/termliny-text-dark.svg"
-                alt="Термбург"
-                className="h-8"
-              />
-            </Link>
-            <div className="mt-2">
+            <Link to="/" className="inline-flex items-center gap-2.5">
               <img
                 src="/images/termliny-symbol.svg"
                 alt=""
-                className="h-8 w-8 opacity-40"
+                className="h-8 w-8 opacity-70"
               />
-            </div>
+              <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary">
+                ТЕРМБУРГ
+              </span>
+            </Link>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               Термальный комплекс в самом сердце Москвы
             </p>

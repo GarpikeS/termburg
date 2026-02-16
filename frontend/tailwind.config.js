@@ -15,9 +15,9 @@ export default {
           DEFAULT: '#D4956A',
           light: '#E8B896',
         },
-        background: '#FFFFFF',
+        background: '#FAF6E8',
         surface: {
-          DEFAULT: '#FAF6E8',
+          DEFAULT: '#FFFFFF',
           warm: '#F0EBD8',
         },
         'text-primary': '#2D2B3D',
