@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, MapPin } from 'lucide-react';
+import { Menu, X, ChevronDown, MapPin, UserCircle } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 
 interface NavItem {
@@ -160,7 +160,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-5 lg:flex" aria-label="Основная навигация">
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Основная навигация">
             {navItems.map((item) =>
               item.children ? (
                 <DropdownMenu key={item.label} item={item} />
@@ -180,8 +180,15 @@ export default function Header() {
             )}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:block">
+          {/* Desktop CTA + Account */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Link
+              to="/account"
+              className="inline-flex items-center justify-center rounded-lg p-2 text-white/60 hover:text-primary transition-colors duration-200"
+              aria-label="Личный кабинет"
+            >
+              <UserCircle className="h-5.5 w-5.5" />
+            </Link>
             <button
               type="button"
               onClick={openBooking}
@@ -258,8 +265,22 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* CTA */}
-          <div className="border-t border-dark-border pt-4">
+          {/* Account + CTA */}
+          <div className="border-t border-dark-border pt-4 space-y-2">
+            <NavLink
+              to="/account"
+              onClick={closeMobileMenu}
+              className={({ isActive }) =>
+                `flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm font-medium transition-colors duration-200 ${
+                  isActive
+                    ? 'bg-primary/15 text-primary'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`
+              }
+            >
+              <UserCircle className="h-4.5 w-4.5" />
+              Личный кабинет
+            </NavLink>
             <button
               type="button"
               onClick={() => { closeMobileMenu(); openBooking(); }}

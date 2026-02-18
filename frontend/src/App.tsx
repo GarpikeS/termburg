@@ -17,6 +17,10 @@ const TermlinyPage = lazy(() => import('@/pages/TermlinyPage'));
 const NewsPage = lazy(() => import('@/pages/NewsPage'));
 const PartnersPage = lazy(() => import('@/pages/PartnersPage'));
 const CareersPage = lazy(() => import('@/pages/CareersPage'));
+const OfferPage = lazy(() => import('@/pages/OfferPage'));
+const PrivacyPage = lazy(() => import('@/pages/PrivacyPage'));
+const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const AccountPage = lazy(() => import('@/pages/AccountPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function LoadingFallback() {
@@ -48,6 +52,10 @@ export default function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/partners" element={<PartnersPage />} />
           <Route path="/careers" element={<CareersPage />} />
+          <Route path="/offer" element={<OfferPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/account" element={<AccountPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
