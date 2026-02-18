@@ -66,8 +66,8 @@ const mobileGroups = [
     title: 'Ещё',
     links: [
       { to: '/contacts', label: 'Контакты' },
-      { to: '/partners', label: 'Сотрудничество' },
-      { to: '/careers', label: 'Вакансии' },
+      { to: '/contacts#partners', label: 'Сотрудничество' },
+      { to: '/contacts#careers', label: 'Вакансии' },
     ],
   },
 ];

@@ -135,7 +135,7 @@ export default function TermlinyPage() {
           <img
             src="/images/termliny/hero.webp?v=2"
             alt="Семья духов-хранителей Термбурга в сказочной бане"
-            className="w-full object-contain"
+            className="w-full object-cover max-h-[480px]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-transparent to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 pb-6 md:pb-10">

@@ -1,8 +1,14 @@
-import { Phone, MapPin, Train, Mail, Clock, Navigation } from 'lucide-react';
+import { useState } from 'react';
+import {
+  Phone, MapPin, Train, Mail, Clock, Navigation,
+  Handshake, Building2, Megaphone, Camera, PackageOpen, Send,
+  Briefcase, Heart, Flame,
+} from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Container from '@/components/ui/Container';
+import Badge from '@/components/ui/Badge';
 import { contactInfo } from '@/data/contacts';
 
 const socialLinks = [
@@ -26,7 +32,29 @@ const socialLinks = [
   },
 ];
 
+const partnerDirections = [
+  { icon: Building2, title: 'Корпоративные мероприятия', description: 'Тимбилдинги, корпоративы, праздники' },
+  { icon: Megaphone, title: 'Партнёрские программы', description: 'Кросс-маркетинг, совместные акции' },
+  { icon: Camera, title: 'Аренда пространств', description: 'Фотосъёмки, мастер-классы, презентации' },
+  { icon: PackageOpen, title: 'Поставщикам', description: 'Банные аксессуары, косметика, продукты' },
+];
+
+const vacancies = [
+  { title: 'Банщик-парильщик', type: 'Полная занятость', salary: 'от 80 000 ₽', hot: true },
+  { title: 'SPA-мастер', type: 'Полная занятость', salary: 'от 70 000 ₽', hot: false },
+  { title: 'Администратор рецепции', type: 'Сменный график', salary: 'от 55 000 ₽', hot: true },
+  { title: 'Тренер по плаванию', type: 'Частичная занятость', salary: 'от 60 000 ₽', hot: false },
+];
+
 export default function ContactsPage() {
+  const [partnerForm, setPartnerForm] = useState({ company: '', name: '', email: '', message: '' });
+  const [partnerSubmitted, setPartnerSubmitted] = useState(false);
+
+  const handlePartnerSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPartnerSubmitted(true);
+  };
+
   return (
     <PageLayout title="Контакты" description="Контактная информация термального комплекса Термбург. Адрес, телефон, email и схема проезда.">
       <PageHero
@@ -39,7 +67,6 @@ export default function ContactsPage() {
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left: Contact info */}
           <div className="space-y-8">
-            {/* Phone */}
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Phone className="w-6 h-6 text-primary" />
@@ -55,7 +82,6 @@ export default function ContactsPage() {
               </div>
             </div>
 
-            {/* Address */}
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <MapPin className="w-6 h-6 text-primary" />
@@ -66,7 +92,6 @@ export default function ContactsPage() {
               </div>
             </div>
 
-            {/* Metro */}
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Train className="w-6 h-6 text-primary" />
@@ -77,7 +102,6 @@ export default function ContactsPage() {
               </div>
             </div>
 
-            {/* Email */}
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Mail className="w-6 h-6 text-primary" />
@@ -93,7 +117,6 @@ export default function ContactsPage() {
               </div>
             </div>
 
-            {/* Working hours */}
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                 <Clock className="w-6 h-6 text-primary" />
@@ -104,7 +127,6 @@ export default function ContactsPage() {
               </div>
             </div>
 
-            {/* Social media */}
             <div className="pt-4 border-t border-border">
               <p className="text-sm text-text-secondary mb-4">Мы в социальных сетях</p>
               <div className="flex gap-4">
@@ -154,6 +176,136 @@ export default function ContactsPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </Section>
+
+      {/* Сотрудничество */}
+      <Section id="partners" title="Сотрудничество" subtitle="Открыты для партнёрства и совместных проектов">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-10">
+          {partnerDirections.map((dir) => (
+            <div
+              key={dir.title}
+              className="rounded-2xl bg-surface border border-border/50 p-5 hover:border-primary/30 transition-all duration-300 text-center"
+            >
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <dir.icon className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-sm font-bold text-text-primary mb-1">{dir.title}</h3>
+              <p className="text-xs text-text-secondary">{dir.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="max-w-2xl mx-auto">
+          {partnerSubmitted ? (
+            <div className="rounded-2xl bg-surface border border-primary/30 p-10 text-center">
+              <Handshake className="mx-auto mb-4 h-12 w-12 text-primary" />
+              <h3 className="text-xl font-bold text-text-primary mb-2">Заявка отправлена!</h3>
+              <p className="text-text-secondary">Мы свяжемся с вами в ближайшее время.</p>
+            </div>
+          ) : (
+            <form onSubmit={handlePartnerSubmit} className="rounded-2xl bg-surface border border-border/50 p-8 space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label className="block text-sm font-medium text-text-primary mb-1.5">Компания</label>
+                  <input
+                    type="text"
+                    required
+                    value={partnerForm.company}
+                    onChange={(e) => setPartnerForm({ ...partnerForm, company: e.target.value })}
+                    placeholder="ООО «Название»"
+                    className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-primary mb-1.5">Ваше имя</label>
+                  <input
+                    type="text"
+                    required
+                    value={partnerForm.name}
+                    onChange={(e) => setPartnerForm({ ...partnerForm, name: e.target.value })}
+                    placeholder="Иван Иванов"
+                    className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-1.5">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={partnerForm.email}
+                  onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
+                  placeholder="ivan@company.ru"
+                  className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-1.5">Сообщение</label>
+                <textarea
+                  required
+                  rows={3}
+                  value={partnerForm.message}
+                  onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })}
+                  placeholder="Расскажите о вашем предложении..."
+                  className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors resize-none"
+                />
+              </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  type="submit"
+                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-light transition-colors"
+                >
+                  <Send className="w-4 h-4" />
+                  Отправить заявку
+                </button>
+                <a href="mailto:partners@termburg.ru" className="text-sm text-primary hover:text-primary-light transition-colors">
+                  partners@termburg.ru
+                </a>
+              </div>
+            </form>
+          )}
+        </div>
+      </Section>
+
+      {/* Вакансии */}
+      <Section id="careers" title="Вакансии" subtitle="Присоединяйтесь к команде Термбурга" warm>
+        <div className="grid gap-5 sm:grid-cols-2 max-w-3xl mx-auto mb-8">
+          {vacancies.map((v) => (
+            <div
+              key={v.title}
+              className="rounded-2xl bg-surface border border-border/50 p-6 hover:border-primary/30 transition-all duration-300"
+            >
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <h3 className="text-base font-bold text-text-primary">{v.title}</h3>
+                {v.hot && (
+                  <Badge variant="gold" className="flex items-center gap-1 flex-shrink-0 text-xs">
+                    <Flame className="w-3 h-3" />
+                    Горящая
+                  </Badge>
+                )}
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-text-secondary">{v.type}</span>
+                <span className="text-sm font-semibold text-primary">{v.salary}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="mailto:hr@termburg.ru"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-light transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              Отправить резюме
+            </a>
+            <span className="text-sm text-text-secondary">hr@termburg.ru</span>
+          </div>
+          <p className="mt-3 text-xs text-text-secondary">
+            Бесплатное посещение комплекса для сотрудников &bull; ДМС &bull; Обучение &bull; Карьерный рост
+          </p>
         </div>
       </Section>
     </PageLayout>

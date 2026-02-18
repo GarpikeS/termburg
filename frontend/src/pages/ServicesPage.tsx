@@ -1,8 +1,9 @@
-import { CheckCircle, Clock, Sparkles, Waves, GraduationCap } from 'lucide-react';
+import { CheckCircle, Clock, Sparkles, Waves, GraduationCap, Ticket, Gift, CalendarCheck } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
 import TicketButton from '@/components/ui/TicketButton';
 import Container from '@/components/ui/Container';
 import { useBooking } from '@/context/BookingContext';
@@ -61,7 +62,7 @@ function ServiceCard({ service, image }: { service: ServiceItem; image?: string 
 }
 
 export default function ServicesPage() {
-  const { openBooking } = useBooking();
+  const { openBooking, openPurchase } = useBooking();
 
   return (
     <PageLayout title="Услуги" description="Полный перечень услуг термального комплекса Термбург.">
@@ -86,6 +87,50 @@ export default function ServicesPage() {
               <span className="text-text-primary font-medium">{service}</span>
             </div>
           ))}
+        </div>
+      </Section>
+
+      {/* Купить */}
+      <Section warm>
+        <div className="grid gap-5 sm:grid-cols-3">
+          <button
+            type="button"
+            onClick={openBooking}
+            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
+          >
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <Ticket className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-1">Купить посещение</h3>
+            <p className="text-sm text-text-secondary mb-3">Разовый билет для взрослых и детей</p>
+            <Badge variant="default">от 540 ₽</Badge>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => openPurchase({ name: 'Абонемент', price: 'от 4 500 ₽' })}
+            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
+          >
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <CalendarCheck className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-1">Купить абонемент</h3>
+            <p className="text-sm text-text-secondary mb-3">5 или 10 посещений со скидкой</p>
+            <Badge variant="gold">выгодно</Badge>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => openPurchase({ name: 'Подарочный сертификат', price: 'от 3 000 ₽' })}
+            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
+          >
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <Gift className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-1">Сертификат в подарок</h3>
+            <p className="text-sm text-text-secondary mb-3">Подарочные сертификаты и боксы</p>
+            <Badge variant="default">от 3 000 ₽</Badge>
+          </button>
         </div>
       </Section>
 
@@ -131,9 +176,9 @@ export default function ServicesPage() {
         <div className="mb-6">
           <div className="mb-4 overflow-hidden rounded-xl">
             <img
-              src="/images/promo/swimming.jpg"
+              src="/images/complex/pool.webp"
               alt="Школа плавания в Термбурге"
-              className="w-full h-64 md:h-80 object-cover object-top"
+              className="w-full h-56 md:h-72 object-cover"
               loading="lazy"
             />
           </div>

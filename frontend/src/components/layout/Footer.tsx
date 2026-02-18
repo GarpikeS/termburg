@@ -18,8 +18,6 @@ const navCol2 = [
 ];
 
 const bottomLinks = [
-  { to: '/partners', label: 'Сотрудничество' },
-  { to: '/careers', label: 'Вакансии' },
   { to: '/offer', label: 'Публичная оферта' },
   { to: '/privacy', label: 'Политика конфиденциальности' },
 ];
