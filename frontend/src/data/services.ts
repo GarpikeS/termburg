@@ -8,12 +8,64 @@ export interface ServiceItem {
 }
 
 export const includedServices: string[] = [
-  'Доступ ко всем термальным зонам',
+  'Доступ ко всем 12 парным',
   'Шезлонг и полотенце',
   'Шапочка для парения',
   'Тапочки и халат',
   'Чай в зоне отдыха',
   'Wi-Fi',
+];
+
+export interface CosmeticClay {
+  id: string;
+  name: string;
+  color: string;
+  description: string;
+}
+
+export const cosmeticClays: CosmeticClay[] = [
+  {
+    id: 'white',
+    name: 'Белая глина (каолин)',
+    color: '#F5F5F0',
+    description: 'Очищение и сужение пор, подходит для чувствительной кожи',
+  },
+  {
+    id: 'blue',
+    name: 'Голубая глина',
+    color: '#6B8FAD',
+    description: 'Противовоспалительный эффект, разглаживание мелких морщин',
+  },
+  {
+    id: 'green',
+    name: 'Зелёная глина',
+    color: '#6B8E5A',
+    description: 'Глубокая детоксикация, нормализация работы сальных желёз',
+  },
+  {
+    id: 'red',
+    name: 'Красная глина',
+    color: '#B85C5C',
+    description: 'Улучшение кровообращения, снятие раздражений и аллергий',
+  },
+  {
+    id: 'yellow',
+    name: 'Жёлтая глина',
+    color: '#C4A94D',
+    description: 'Тонизирование кожи, насыщение кислородом, антиоксидантный эффект',
+  },
+  {
+    id: 'black',
+    name: 'Чёрная глина (марокканская)',
+    color: '#3A3A3A',
+    description: 'Максимальное очищение, антицеллюлитный эффект, вывод токсинов',
+  },
+  {
+    id: 'pink',
+    name: 'Розовая глина',
+    color: '#D4A0A0',
+    description: 'Деликатный уход, увлажнение и омоложение, для любого типа кожи',
+  },
 ];
 
 export const spaServices: ServiceItem[] = [

@@ -14,19 +14,47 @@ import {
   type ServiceItem,
 } from '@/data/services';
 
-function ServiceCard({ service }: { service: ServiceItem }) {
+const spaImages: Record<string, string> = {
+  'spa-classic': '/images/services/spa-classic.jpg',
+  'spa-thai': '/images/services/spa-thai.jpg',
+  'spa-stone': '/images/services/spa-stone.jpg',
+  'spa-relax': '/images/services/spa-relax.jpg',
+  'spa-detox': '/images/services/spa-detox.jpg',
+  'spa-peeling': '/images/services/spa-peeling.jpg',
+};
+
+const steamImages: Record<string, string> = {
+  'steam-author': '/images/services/steam-author.jpg',
+  'steam-couple': '/images/services/steam-couple.jpg',
+  'steam-corporate': '/images/services/steam-corporate.jpg',
+  'steam-kids': '/images/services/steam-kids.jpg',
+};
+
+function ServiceCard({ service, image }: { service: ServiceItem; image?: string }) {
   return (
-    <Card>
-      <h3 className="mb-2 text-lg font-bold text-text-primary">{service.name}</h3>
-      <p className="mb-4 text-sm text-text-secondary">{service.description}</p>
-      <div className="flex items-center justify-between border-t border-border pt-3">
-        <span className="flex items-center gap-1 text-sm text-text-secondary">
-          <Clock className="h-4 w-4" />
-          {service.duration}
-        </span>
-        <span className="text-lg font-bold text-primary">
-          {service.priceNote || `${service.price.toLocaleString('ru-RU')}\u00A0\u20BD`}
-        </span>
+    <Card className="p-0 overflow-hidden flex flex-col">
+      {image && (
+        <div className="h-40 overflow-hidden">
+          <img
+            src={image}
+            alt={service.name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      )}
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="mb-2 text-lg font-bold text-text-primary">{service.name}</h3>
+        <p className="mb-4 text-sm text-text-secondary flex-1">{service.description}</p>
+        <div className="flex items-center justify-between border-t border-border pt-3">
+          <span className="flex items-center gap-1 text-sm text-text-secondary">
+            <Clock className="h-4 w-4" />
+            {service.duration}
+          </span>
+          <span className="text-lg font-bold text-primary">
+            {service.priceNote || `${service.price.toLocaleString('ru-RU')}\u00A0\u20BD`}
+          </span>
+        </div>
       </div>
     </Card>
   );
@@ -69,11 +97,11 @@ export default function ServicesPage() {
       >
         <div className="mb-6 flex items-center gap-2 text-accent">
           <Sparkles className="h-5 w-5" />
-          <span className="text-sm font-medium">Записывайтесь заранее -- количество мест ограничено</span>
+          <span className="text-sm font-medium">Записывайтесь заранее — количество мест ограничено</span>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {spaServices.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service.id} service={service} image={spaImages[service.id]} />
           ))}
         </div>
       </Section>
@@ -89,7 +117,7 @@ export default function ServicesPage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steamServices.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service.id} service={service} image={steamImages[service.id]} />
           ))}
         </div>
       </Section>
@@ -105,7 +133,7 @@ export default function ServicesPage() {
             <img
               src="/images/promo/swimming.jpg"
               alt="Школа плавания в Термбурге"
-              className="w-full h-48 object-cover"
+              className="w-full h-64 md:h-80 object-cover object-top"
               loading="lazy"
             />
           </div>
@@ -118,6 +146,17 @@ export default function ServicesPage() {
           {swimmingSchool.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}
+        </div>
+        <div className="mt-8 text-center">
+          <button
+            onClick={openBooking}
+            className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3 font-semibold text-background hover:bg-primary-light transition-colors"
+          >
+            Записаться на занятие
+          </button>
+          <p className="mt-3 text-sm text-text-secondary">
+            Или позвоните: <a href="tel:+79091674746" className="text-primary hover:underline">+7 (909) 167-47-46</a>
+          </p>
         </div>
       </Section>
 

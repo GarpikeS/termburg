@@ -12,136 +12,153 @@ export interface Subscription {
   period: string;
   adultPrice: number;
   discount: number;
+  description?: string;
 }
 
-export interface SpaPrice {
+export interface Certificate {
   id: string;
   name: string;
-  duration: string;
-  adultPrice: number;
+  price: number;
+  description: string;
 }
 
 export const weekdayPricing: PricingSlot[] = [
   {
-    id: 'wd-morning',
-    name: 'Утро',
-    duration: '8:00-12:00',
-    adultPrice: 1800,
-    childPrice: 900,
+    id: 'wd-1h',
+    name: '1 час',
+    duration: '1 час',
+    adultPrice: 540,
+    childPrice: 270,
   },
   {
-    id: 'wd-day',
-    name: 'День',
-    duration: '12:00-17:00',
-    adultPrice: 2200,
-    childPrice: 1100,
+    id: 'wd-2h',
+    name: '2 часа',
+    duration: '2 часа',
+    adultPrice: 1050,
+    childPrice: 525,
   },
   {
-    id: 'wd-evening',
-    name: 'Вечер',
-    duration: '17:00-23:00',
+    id: 'wd-3h',
+    name: '3 часа',
+    duration: '3 часа',
+    adultPrice: 1500,
+    childPrice: 750,
+  },
+  {
+    id: 'wd-4h',
+    name: '4 часа',
+    duration: '4 часа',
+    adultPrice: 1900,
+    childPrice: 950,
+  },
+  {
+    id: 'wd-unlimited',
+    name: 'Безлимит на день',
+    duration: '9:00–23:00',
     adultPrice: 2500,
     childPrice: 1250,
-  },
-  {
-    id: 'wd-allday',
-    name: 'Весь день',
-    duration: '8:00-23:00',
-    adultPrice: 3200,
-    childPrice: 1600,
   },
 ];
 
 export const weekendPricing: PricingSlot[] = [
   {
-    id: 'we-morning',
-    name: 'Утро',
-    duration: '8:00-12:00',
-    adultPrice: 2200,
-    childPrice: 1100,
+    id: 'we-1h',
+    name: '1 час',
+    duration: '1 час',
+    adultPrice: 760,
+    childPrice: 380,
   },
   {
-    id: 'we-day',
-    name: 'День',
-    duration: '12:00-17:00',
-    adultPrice: 2800,
-    childPrice: 1400,
+    id: 'we-2h',
+    name: '2 часа',
+    duration: '2 часа',
+    adultPrice: 1400,
+    childPrice: 700,
   },
   {
-    id: 'we-evening',
-    name: 'Вечер',
-    duration: '17:00-23:00',
-    adultPrice: 3200,
-    childPrice: 1600,
+    id: 'we-3h',
+    name: '3 часа',
+    duration: '3 часа',
+    adultPrice: 2000,
+    childPrice: 1000,
   },
   {
-    id: 'we-allday',
-    name: 'Весь день',
-    duration: '8:00-23:00',
-    adultPrice: 4000,
-    childPrice: 2000,
+    id: 'we-4h',
+    name: '4 часа',
+    duration: '4 часа',
+    adultPrice: 2600,
+    childPrice: 1300,
+  },
+  {
+    id: 'we-unlimited',
+    name: 'Безлимит на день',
+    duration: '9:00–23:00',
+    adultPrice: 3250,
+    childPrice: 1625,
   },
 ];
 
 export const subscriptions: Subscription[] = [
   {
-    id: 'sub-5',
-    name: '5 посещений',
-    period: '5 визитов',
-    adultPrice: 12000,
-    discount: 15,
-  },
-  {
-    id: 'sub-10',
-    name: '10 посещений',
-    period: '10 визитов',
-    adultPrice: 22000,
-    discount: 20,
-  },
-  {
-    id: 'sub-unlimited',
-    name: 'Безлимит на месяц',
-    period: '30 дней',
-    adultPrice: 35000,
+    id: 'sub-main-1',
+    name: 'Основной безлимит',
+    period: '1 месяц',
+    adultPrice: 13500,
     discount: 0,
+    description: 'Безлимитное посещение каждый день',
+  },
+  {
+    id: 'sub-day-1',
+    name: 'Дневной безлимит',
+    period: '1 месяц (9:00–16:00)',
+    adultPrice: 11700,
+    discount: 13,
+    description: 'Посещение в дневное время с 9:00 до 16:00',
+  },
+  {
+    id: 'sub-parent-1',
+    name: 'Хороший родитель',
+    period: '1 месяц (1 взр. + 1 реб.)',
+    adultPrice: 17600,
+    discount: 0,
+    description: '1 взрослый + 1 ребёнок до 13 лет',
+  },
+  {
+    id: 'sub-family-1',
+    name: 'Семейный',
+    period: '1 месяц (2 взр. + 1 реб.)',
+    adultPrice: 30375,
+    discount: 10,
+    description: '2 взрослых + 1 ребёнок',
+  },
+  {
+    id: 'sub-trio-1',
+    name: 'На троих',
+    period: '1 месяц (3 взрослых)',
+    adultPrice: 33750,
+    discount: 17,
+    description: '3 взрослых с безлимитным посещением',
   },
 ];
 
-export const spaPricing: SpaPrice[] = [
+export const certificates: Certificate[] = [
   {
-    id: 'spa-classic',
-    name: 'Классический массаж',
-    duration: '60 мин',
-    adultPrice: 4500,
+    id: 'cert-3000',
+    name: 'Сертификат 3 000 ₽',
+    price: 3000,
+    description: 'Идеально для первого знакомства с Термбургом',
   },
   {
-    id: 'spa-thai',
-    name: 'Тайский массаж',
-    duration: '90 мин',
-    adultPrice: 6500,
+    id: 'cert-5000',
+    name: 'Сертификат 5 000 ₽',
+    price: 5000,
+    description: 'Комплексное посещение с процедурами',
   },
   {
-    id: 'spa-stone',
-    name: 'Стоун-терапия',
-    duration: '60 мин',
-    adultPrice: 5000,
-  },
-  {
-    id: 'spa-relax',
-    name: 'SPA-программа «Релакс»',
-    duration: '120 мин',
-    adultPrice: 9500,
-  },
-  {
-    id: 'spa-detox',
-    name: 'SPA-программа «Детокс»',
-    duration: '150 мин',
-    adultPrice: 12000,
-  },
-  {
-    id: 'spa-peeling',
-    name: 'Пилинг и обёртывание',
-    duration: '90 мин',
-    adultPrice: 7000,
+    id: 'cert-10000',
+    name: 'Сертификат 10 000 ₽',
+    price: 10000,
+    description: 'Премиальный подарок с SPA-услугами',
   },
 ];
+

@@ -19,20 +19,32 @@ export default function PromotionsCarousel() {
           <Card
             key={promo.id}
             dark
-            className="min-w-[280px] max-w-[320px] flex-shrink-0 snap-start flex flex-col"
+            className="min-w-[300px] max-w-[340px] flex-shrink-0 snap-start flex flex-col p-0 overflow-hidden"
           >
-            <Badge variant="gold" className="self-start mb-3">
-              {promo.badge}
-            </Badge>
-            <h3 className="font-heading text-lg font-semibold text-white mb-2">
-              {promo.title}
-            </h3>
-            <p className="text-sm text-white/70 leading-relaxed flex-1">
-              {promo.description}
-            </p>
-            <p className="text-xs text-white/50 mt-3 pt-3 border-t border-white/10">
-              {promo.conditions}
-            </p>
+            {promo.banner && (
+              <div className="h-44 overflow-hidden">
+                <img
+                  src={promo.banner}
+                  alt={promo.title}
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
+            )}
+            <div className="p-5 flex flex-col flex-1">
+              <Badge variant="gold" className="self-start mb-3">
+                {promo.badge}
+              </Badge>
+              <h3 className="font-heading text-lg font-semibold text-white mb-2">
+                {promo.title}
+              </h3>
+              <p className="text-sm text-white/70 leading-relaxed flex-1">
+                {promo.description}
+              </p>
+              <p className="text-xs text-white/50 mt-3 pt-3 border-t border-white/10">
+                {promo.conditions}
+              </p>
+            </div>
           </Card>
         ))}
       </div>

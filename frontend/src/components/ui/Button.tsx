@@ -1,4 +1,5 @@
 import { type ReactNode, type ButtonHTMLAttributes } from 'react';
+import { Link } from 'react-router-dom';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -47,6 +48,14 @@ export default function Button({
   );
 
   if (href) {
+    // Internal links use react-router Link for SPA navigation
+    if (href.startsWith('/')) {
+      return (
+        <Link to={href} className={classes}>
+          {children}
+        </Link>
+      );
+    }
     return (
       <a href={href} className={classes}>
         {children}

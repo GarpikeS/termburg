@@ -9,7 +9,7 @@ export default {
       colors: {
         primary: {
           DEFAULT: '#BA9B4F',
-          light: '#A88A3D',
+          light: '#CCAF6A',
         },
         accent: {
           DEFAULT: '#D4956A',
@@ -32,7 +32,7 @@ export default {
       },
       fontFamily: {
         heading: ['"Ikra Slab"', 'Georgia', 'serif'],
-        body: ['"Proxima Nova"', 'Inter', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },

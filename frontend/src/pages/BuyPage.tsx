@@ -7,17 +7,21 @@ import TicketButton from '@/components/ui/TicketButton';
 import Badge from '@/components/ui/Badge';
 import Container from '@/components/ui/Container';
 import { useBooking } from '@/context/BookingContext';
+import { weekdayPricing } from '@/data/pricing';
+
+const minAdult = weekdayPricing[0].adultPrice;
+const minChild = weekdayPricing[0].childPrice;
 
 const tickets = [
   {
     title: 'Взрослый билет',
     description: 'Полный доступ ко всем термальным зонам, бассейнам и зонам отдыха.',
-    price: 'от 2 500 ₽',
+    price: `от ${minAdult.toLocaleString('ru-RU')} \u20BD`,
   },
   {
     title: 'Взрослый + ребёнок',
-    description: 'Совместное посещение: один взрослый и один ребёнок (3–12 лет).',
-    price: 'от 3 800 ₽',
+    description: 'Совместное посещение: один взрослый и один ребёнок (3\u201312 лет).',
+    price: `от ${(minAdult + minChild).toLocaleString('ru-RU')} \u20BD`,
   },
 ];
 

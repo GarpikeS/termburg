@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, Users, Baby, Percent, Sparkles } from 'lucide-react';
+import { Clock, Users, Baby, Percent, Sparkles, Gift } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
@@ -13,9 +13,10 @@ import {
   weekdayPricing,
   weekendPricing,
   subscriptions,
-  spaPricing,
+  certificates,
   type PricingSlot,
 } from '@/data/pricing';
+import { spaServices } from '@/data/services';
 
 const pricingTabs = [
   { id: 'weekday', label: 'Будни' },
@@ -24,14 +25,10 @@ const pricingTabs = [
 
 function PriceTable({ slots }: { slots: PricingSlot[] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {slots.map((slot) => (
         <Card key={slot.id} className="text-center">
-          <div className="mb-3 flex items-center justify-center gap-2 text-text-secondary">
-            <Clock className="h-4 w-4" />
-            <span className="text-sm">{slot.duration}</span>
-          </div>
-          <h3 className="mb-4 text-xl font-bold text-text-primary">{slot.name}</h3>
+          <h3 className="mb-3 text-xl font-bold text-text-primary">{slot.name}</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between rounded-lg bg-surface-warm px-4 py-2">
               <span className="flex items-center gap-2 text-sm text-text-secondary">
@@ -68,7 +65,7 @@ export default function PricingPage() {
     <PageLayout title="Прайс-лист" description="Цены на посещение и услуги термального комплекса Термбург.">
       <PageHero
         title="Прайс-лист"
-        subtitle="Прозрачные цены без скрытых доплат. Всё включено в стоимость посещения: халат, полотенце, тапочки и чай."
+        subtitle="Прозрачные цены без скрытых доплат. Всё включено: халат, полотенце, тапочки и чай."
         backgroundImage="/images/complex/sauna.webp"
       />
 
@@ -99,7 +96,10 @@ export default function PricingPage() {
                 </Badge>
               )}
               <h3 className="mb-2 text-xl font-bold text-text-primary">{sub.name}</h3>
-              <p className="mb-4 text-sm text-text-secondary">{sub.period}</p>
+              <p className="mb-1 text-sm text-text-secondary">{sub.period}</p>
+              {sub.description && (
+                <p className="mb-3 text-xs text-text-secondary">{sub.description}</p>
+              )}
               <p className="text-2xl font-bold text-primary">
                 {sub.adultPrice.toLocaleString('ru-RU')}&nbsp;&#8381;
               </p>
@@ -108,10 +108,28 @@ export default function PricingPage() {
         </div>
       </Section>
 
+      {/* Certificates */}
+      <Section title="Подарочные сертификаты" subtitle="Действительны 6 месяцев с момента покупки">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {certificates.map((cert) => (
+            <Card key={cert.id} className="text-center">
+              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Gift className="w-7 h-7 text-primary" />
+              </div>
+              <h3 className="mb-2 text-xl font-bold text-text-primary">{cert.name}</h3>
+              <p className="mb-3 text-sm text-text-secondary">{cert.description}</p>
+              <p className="text-2xl font-bold text-primary">
+                {cert.price.toLocaleString('ru-RU')}&nbsp;&#8381;
+              </p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
       {/* SPA Pricing */}
-      <Section title="SPA-процедуры" subtitle="Индивидуальный подход к каждому гостю">
+      <Section title="SPA-процедуры" subtitle="Индивидуальный подход к каждому гостю" warm>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {spaPricing.map((spa) => (
+          {spaServices.map((spa) => (
             <Card key={spa.id}>
               <div className="mb-3 flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-accent" />
@@ -123,7 +141,7 @@ export default function PricingPage() {
                   {spa.duration}
                 </span>
                 <span className="text-lg font-bold text-primary">
-                  {spa.adultPrice.toLocaleString('ru-RU')}&nbsp;&#8381;
+                  {spa.price.toLocaleString('ru-RU')}&nbsp;&#8381;
                 </span>
               </div>
             </Card>
@@ -139,7 +157,7 @@ export default function PricingPage() {
             Готовы к отдыху?
           </h2>
           <p className="mx-auto mb-8 max-w-xl text-white/70">
-            Забронируйте посещение онлайн и получите гарантированное место в удобное для вас время.
+            Забронируйте посещение онлайн — выберите удобный тариф от 1 часа до безлимита.
           </p>
           <TicketButton onClick={openBooking}>Забронировать посещение</TicketButton>
         </Container>

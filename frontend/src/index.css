@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  font-family: 'Proxima Nova', 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   color: #2D2B3D;
   background-color: #FAF6E8;
   -webkit-font-smoothing: antialiased;
@@ -81,7 +81,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 .animate-scroll {
   animation: scroll 30s linear infinite;
+  will-change: transform;
 }
 .animate-scroll:hover {
   animation-play-state: paused;
+}
+
+/* Fade-in for carousel slides */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Hide horizontal scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

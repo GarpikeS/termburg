@@ -1,4 +1,4 @@
-export interface ThermalZone {
+export interface BathType {
   id: number;
   name: string;
   description: string;
@@ -7,17 +7,36 @@ export interface ThermalZone {
   image: string;
 }
 
-export const thermalZones: ThermalZone[] = [
+/** @deprecated Use bathTypes instead */
+export type ThermalZone = BathType;
+
+export const bathTypes: BathType[] = [
   {
     id: 1,
-    name: 'Римские термы',
-    description: 'Классические термальные купели с различной температурой воды.',
-    temperature: '36-42°C',
-    features: ['Термальные купели', 'Гидромассаж', 'Ароматерапия'],
-    image: '/images/complex/pool.webp',
+    name: 'Русская парная',
+    description: 'Классическая русская баня с берёзовыми и дубовыми вениками.',
+    temperature: '80-100°C',
+    features: ['Веники', 'Парение на полке', 'Ледяная купель'],
+    image: '/images/complex/gallery8.webp',
   },
   {
     id: 2,
+    name: 'Сибирская парная',
+    description: 'Мощная жаровая баня по сибирской традиции с кедровым паром.',
+    temperature: '90-110°C',
+    features: ['Кедровый пар', 'Жаровой камень', 'Глубокий прогрев'],
+    image: '/images/complex/sauna.webp',
+  },
+  {
+    id: 3,
+    name: 'Травяная парная',
+    description: 'Ароматная парная с настоями целебных трав и мягким паром.',
+    temperature: '55-65°C',
+    features: ['Фитотерапия', 'Ароматерапия', 'Укрепление иммунитета'],
+    image: '/images/complex/herbal.webp',
+  },
+  {
+    id: 4,
     name: 'Хаммам',
     description: 'Турецкая парильня с мягким паром и мраморными лежаками.',
     temperature: '45-50°C',
@@ -25,15 +44,55 @@ export const thermalZones: ThermalZone[] = [
     image: '/images/complex/gallery6.webp',
   },
   {
-    id: 3,
-    name: 'Японская баня (Офуро)',
-    description: 'Деревянные купели с горячей водой по японской традиции.',
-    temperature: '40-45°C',
-    features: ['Кедровые купели', 'Травяные настои', 'Медитация'],
+    id: 5,
+    name: 'Шаманская сауна',
+    description: 'Сауна с элементами шаманских ритуалов и ароматами тайги.',
+    temperature: '70-85°C',
+    features: ['Ритуальное парение', 'Ароматы тайги', 'Медитация'],
+    image: '/images/complex/gallery5.webp',
+  },
+  {
+    id: 6,
+    name: 'Деревенская сауна',
+    description: 'Уютная сауна в деревенском стиле с печью по-чёрному.',
+    temperature: '80-90°C',
+    features: ['Печь по-чёрному', 'Деревенский колорит', 'Веники'],
+    image: '/images/complex/gallery4.webp',
+  },
+  {
+    id: 7,
+    name: 'Бани-бочки',
+    description: 'Компактные кедровые бочки на открытой террасе с видом на парк.',
+    temperature: '60-80°C',
+    features: ['Кедровая бочка', 'Вид на парк', 'Терраса'],
     image: '/images/complex/barrels.webp',
   },
   {
-    id: 4,
+    id: 8,
+    name: 'Песчаная сауна',
+    description: 'Необычная сауна с прогретым песком для глубокого расслабления.',
+    temperature: '50-60°C',
+    features: ['Тёплый песок', 'Детоксикация', 'Расслабление'],
+    image: '/images/complex/pool.webp',
+  },
+  {
+    id: 9,
+    name: 'Сауна с гималайской солью',
+    description: 'Сауна со стенами из розовой гималайской соли для галотерапии.',
+    temperature: '55-65°C',
+    features: ['Гималайская соль', 'Галотерапия', 'Оздоровление дыхания'],
+    image: '/images/complex/gallery5.webp',
+  },
+  {
+    id: 10,
+    name: 'Липовая сауна',
+    description: 'Нежная сауна из липы с мягким ароматом и приятным теплом.',
+    temperature: '60-75°C',
+    features: ['Липовый аромат', 'Мягкий пар', 'Релаксация'],
+    image: '/images/complex/herbal.webp',
+  },
+  {
+    id: 11,
     name: 'Инфракрасная сауна',
     description: 'Мягкий глубокий прогрев инфракрасными лучами.',
     temperature: '50-60°C',
@@ -41,35 +100,14 @@ export const thermalZones: ThermalZone[] = [
     image: '/images/complex/sauna.webp',
   },
   {
-    id: 5,
-    name: 'Соляная пещера',
-    description: 'Комната с микроклиматом соляных шахт.',
-    temperature: '20-22°C',
-    features: ['Галотерапия', 'Оздоровление дыхания', 'Релаксация'],
-    image: '/images/complex/gallery5.webp',
-  },
-  {
-    id: 6,
-    name: 'Травяная сауна',
-    description: 'Ароматная сауна с настоями целебных трав.',
-    temperature: '60-70°C',
-    features: ['Фитотерапия', 'Ароматерапия', 'Иммунитет'],
-    image: '/images/complex/herbal.webp',
-  },
-  {
-    id: 7,
-    name: 'Бассейн',
-    description: 'Просторный бассейн с термальной водой.',
-    temperature: '28-30°C',
-    features: ['Термальная вода', 'Гидромассажные зоны', 'Водопад'],
-    image: '/images/complex/pool.webp',
-  },
-  {
-    id: 8,
-    name: 'Ледяная купель',
-    description: 'Контрастная купель для закаливания.',
-    temperature: '4-6°C',
-    features: ['Закаливание', 'Контрастные процедуры', 'Бодрость'],
-    image: '/images/complex/gallery4.webp',
+    id: 12,
+    name: 'Бани индивидуального парения',
+    description: 'Приватные бани для персонального парения с мастером.',
+    temperature: '70-90°C',
+    features: ['Приватность', 'Персональный мастер', 'Индивидуальная программа'],
+    image: '/images/complex/gallery8.webp',
   },
 ];
+
+/** @deprecated Use bathTypes instead */
+export const thermalZones = bathTypes;

@@ -8,10 +8,10 @@ import { thermalZones } from '@/data/thermalZones';
 
 const visitRules = [
   'Вход с 8:00, последний вход в 22:00',
-  'Дети до 3 лет -- бесплатно, от 3 до 12 -- детский билет',
+  'Дети до 3 лет —бесплатно, от 3 до 12 —детский билет',
   'Необходимо иметь сменную обувь (или приобрести на месте)',
   'В термальных зонах обязательно использование полотенца',
-  'Максимальное время нахождения в горячих зонах -- 15 минут',
+  'Максимальное время нахождения в горячих зонах —15 минут',
   'Запрещено посещение в состоянии алкогольного опьянения',
 ];
 
@@ -27,12 +27,11 @@ export default function AboutPage() {
       <Section>
         <div className="mx-auto max-w-3xl space-y-6 text-center">
           <p className="text-lg leading-relaxed text-text-primary">
-            Термбург -- это современный термальный комплекс, расположенный в самом сердце Москвы,
-            в районе Печатники. Мы объединили лучшие термальные традиции со всего мира: от римских
+            Термбург — это современный термальный комплекс в районе Печатники (Москва). Мы объединили лучшие термальные традиции со всего мира: от римских
             терм до японского офуро, от турецкого хаммама до скандинавских парений.
           </p>
           <p className="text-lg leading-relaxed text-text-secondary">
-            Наша миссия -- создать пространство, где каждый гость найдёт свой путь к расслаблению
+            Наша миссия —создать пространство, где каждый гость найдёт свой путь к расслаблению
             и оздоровлению. Мы верим, что забота о себе должна быть доступной и приятной.
           </p>
         </div>
@@ -41,7 +40,7 @@ export default function AboutPage() {
       {/* Thermal zones */}
       <Section
         title="Термальные зоны"
-        subtitle="8 уникальных зон для вашего здоровья и расслабления"
+        subtitle="12 видов парных для вашего здоровья и расслабления"
         warm
       >
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -81,17 +80,17 @@ export default function AboutPage() {
       <Section title="Фотогалерея" subtitle="Загляните в наше пространство">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {[
-            { src: '/images/complex/pool.jpg', alt: 'Бассейн' },
+            { src: '/images/complex/pool.webp', alt: 'Бассейн' },
             { src: '/images/complex/gallery9.jpg', alt: 'Зона отдыха' },
-            { src: '/images/complex/herbal.jpg', alt: 'Травяная парная' },
+            { src: '/images/complex/herbal.webp', alt: 'Травяная парная' },
             { src: '/images/complex/gallery10.jpg', alt: 'Термальная зона' },
-            { src: '/images/complex/barrels.jpg', alt: 'Бани-бочки' },
+            { src: '/images/complex/barrels.webp', alt: 'Бани-бочки' },
             { src: '/images/complex/gallery11.jpg', alt: 'Парная с камнями' },
-            { src: '/images/complex/gallery1.jpg', alt: 'Интерьер' },
+            { src: '/images/complex/gallery5.webp', alt: 'Интерьер' },
             { src: '/images/complex/gallery12.jpg', alt: 'Парная' },
-            { src: '/images/complex/gallery2.jpg', alt: 'Бассейн' },
+            { src: '/images/complex/gallery6.webp', alt: 'Каменка' },
             { src: '/images/complex/gallery13.jpg', alt: 'Зона релаксации' },
-            { src: '/images/complex/gallery3.jpg', alt: 'Отдых' },
+            { src: '/images/complex/gallery4.webp', alt: 'Отдых' },
             { src: '/images/complex/gallery14.jpg', alt: 'Термальный комплекс' },
           ].map((photo, index) => (
             <div key={index} className="aspect-[4/3] overflow-hidden rounded-xl">

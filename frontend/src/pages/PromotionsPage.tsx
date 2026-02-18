@@ -16,7 +16,7 @@ export default function PromotionsPage() {
     <PageLayout title="Акции" description="Актуальные акции и специальные предложения Термбурга.">
       <PageHero
         title="Акции и спецпредложения"
-        subtitle="Приятные бонусы для наших гостей. Следите за обновлениями -- мы регулярно добавляем новые предложения."
+        subtitle="Приятные бонусы для наших гостей. Следите за обновлениями — мы регулярно добавляем новые предложения."
         backgroundImage="/images/complex/gallery4.webp"
       />
 
@@ -27,11 +27,11 @@ export default function PromotionsPage() {
             <Card key={promo.id} className="relative flex flex-col overflow-hidden p-0">
               {/* Banner image */}
               {promo.banner && (
-                <div className="h-32 overflow-hidden">
+                <div className="overflow-hidden">
                   <img
                     src={promo.banner}
                     alt={promo.title}
-                    className="w-full h-full object-cover"
+                    className="w-full aspect-[560/400] object-contain bg-surface-warm"
                     loading="lazy"
                   />
                 </div>

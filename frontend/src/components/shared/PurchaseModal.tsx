@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { X, CheckCircle, Phone } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 
@@ -8,81 +8,120 @@ export default function PurchaseModal() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [recipientName, setRecipientName] = useState('');
+
+  const isCertificate = purchaseItem?.name.toLowerCase().includes('сертификат') ?? false;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStep('success');
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     closeModal();
     setTimeout(() => {
       setStep('form');
       setName('');
       setPhone('');
       setEmail('');
+      setRecipientName('');
     }, 300);
-  };
+  }, [closeModal]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!purchaseOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [purchaseOpen, handleClose]);
 
   if (!purchaseOpen || !purchaseItem) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={handleClose}>
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="purchase-title"
+      onClick={handleClose}
+    >
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div
         className="relative w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4 rounded-t-2xl">
-          <h2 className="font-heading text-xl font-bold text-gray-900">Оформить заказ</h2>
-          <button onClick={handleClose} className="rounded-lg p-1.5 hover:bg-gray-100 transition-colors">
-            <X className="h-5 w-5 text-gray-500" />
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-white px-6 py-4 rounded-t-2xl">
+          <h2 id="purchase-title" className="font-heading text-xl font-bold text-text-primary">Оформить заказ</h2>
+          <button onClick={handleClose} className="rounded-lg p-1.5 hover:bg-surface-warm transition-colors" aria-label="Закрыть">
+            <X className="h-5 w-5 text-text-secondary" />
           </button>
         </div>
 
         {step === 'form' ? (
           <form onSubmit={handleSubmit} className="p-6 space-y-5">
             {/* Товар */}
-            <div className="rounded-xl bg-[#FAF6E8] border border-[#E0D9C8] px-5 py-4">
-              <p className="text-sm text-gray-500">Товар</p>
-              <p className="font-medium text-gray-900">{purchaseItem.name}</p>
-              <p className="mt-1 text-xl font-bold text-[#BA9B4F]">{purchaseItem.price}</p>
+            <div className="rounded-xl bg-background border border-border px-5 py-4">
+              <p className="text-sm text-text-secondary">Товар</p>
+              <p className="font-medium text-text-primary">{purchaseItem.name}</p>
+              <p className="mt-1 text-xl font-bold text-primary">{purchaseItem.price}</p>
             </div>
+
+            {/* Имя получателя (для сертификатов) */}
+            {isCertificate && (
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                  Имя получателя сертификата
+                </label>
+                <input
+                  type="text"
+                  value={recipientName}
+                  onChange={(e) => setRecipientName(e.target.value)}
+                  placeholder="Кому дарите?"
+                  className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
+                />
+                <p className="mt-1 text-xs text-text-secondary/70">
+                  Будет указано на сертификате. Оставьте пустым, если не нужно.
+                </p>
+              </div>
+            )}
 
             {/* Контактные данные */}
             <div className="space-y-3">
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">Имя</label>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">Ваше имя</label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ваше имя"
-                  className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-2.5 text-gray-900 placeholder:text-gray-400 focus:border-[#BA9B4F] focus:ring-2 focus:ring-[#BA9B4F]/20 outline-none transition-colors"
+                  className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">Телефон</label>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">Телефон</label>
                 <input
                   type="tel"
                   required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+7 (___) ___-__-__"
-                  className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-2.5 text-gray-900 placeholder:text-gray-400 focus:border-[#BA9B4F] focus:ring-2 focus:ring-[#BA9B4F]/20 outline-none transition-colors"
+                  className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-gray-700">Email</label>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">Email</label>
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-2.5 text-gray-900 placeholder:text-gray-400 focus:border-[#BA9B4F] focus:ring-2 focus:ring-[#BA9B4F]/20 outline-none transition-colors"
+                  className="w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors"
                 />
               </div>
             </div>
@@ -90,30 +129,30 @@ export default function PurchaseModal() {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full rounded-xl bg-[#BA9B4F] px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-[#A88A3D] active:bg-[#9A7F35]"
+              className="w-full rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-primary-light active:brightness-90"
             >
               Оформить заказ
             </button>
           </form>
         ) : (
           <div className="p-8 text-center">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-              <CheckCircle className="h-8 w-8 text-green-600" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
+              <CheckCircle className="h-8 w-8 text-success" />
             </div>
-            <h3 className="mb-2 font-heading text-xl font-bold text-gray-900">Заказ оформлен!</h3>
-            <p className="mb-6 text-gray-600">
+            <h3 className="mb-2 font-heading text-xl font-bold text-text-primary">Заказ оформлен!</h3>
+            <p className="mb-6 text-text-secondary">
               Мы свяжемся с вами для подтверждения и оплаты.
             </p>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-xl bg-[#FAF6E8] px-5 py-3">
-              <Phone className="h-4 w-4 text-[#BA9B4F]" />
-              <a href="tel:+74959220222" className="font-medium text-gray-900">
-                +7 (495) 922-02-22
+            <div className="mb-6 inline-flex items-center gap-2 rounded-xl bg-background px-5 py-3">
+              <Phone className="h-4 w-4 text-primary" />
+              <a href="tel:+79091674746" className="font-medium text-text-primary">
+                +7 (909) 167-47-46
               </a>
             </div>
             <div>
               <button
                 onClick={handleClose}
-                className="w-full rounded-xl bg-[#BA9B4F] px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-[#A88A3D]"
+                className="w-full rounded-xl bg-primary px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-primary-light"
               >
                 Закрыть
               </button>

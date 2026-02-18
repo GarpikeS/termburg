@@ -1,31 +1,31 @@
-import { Thermometer, Heart, Clock, Sparkles } from 'lucide-react';
+import { Flame, Heart, Clock, Sparkles } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 
 const advantages = [
   {
-    icon: Thermometer,
-    title: '8 термальных зон',
+    icon: Flame,
+    title: '12 видов парных',
     description:
-      'От римских терм до японского офуро — разнообразие традиций со всего мира',
+      'Русская, сибирская, травяная, хаммам, бани-бочки и другие бани со всего мира',
   },
   {
     icon: Heart,
     title: 'Забота о здоровье',
     description:
-      'Термальные процедуры укрепляют иммунитет и улучшают самочувствие',
+      '7 видов косметических глин: белая, голубая, зелёная, красная, жёлтая, чёрная и розовая',
   },
   {
     icon: Clock,
     title: 'Гибкое расписание',
     description:
-      'Ежедневные мероприятия, специальные программы для пенсионеров',
+      'Бесплатные и платные коллективные парения, аквааэробика, йога и суставная гимнастика',
   },
   {
     icon: Sparkles,
-    title: 'SPA и массаж',
+    title: 'SPA и парение',
     description:
-      'Профессиональные SPA-процедуры и авторские парения',
+      'Авторские парения от мастеров, SPA-процедуры, массажи и пилинги',
   },
 ];
 

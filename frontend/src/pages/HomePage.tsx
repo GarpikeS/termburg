@@ -3,10 +3,8 @@ import HeroSection from '@/components/sections/home/HeroSection';
 import AdvantagesSection from '@/components/sections/home/AdvantagesSection';
 import ZonesPreviewSection from '@/components/sections/home/ZonesPreviewSection';
 import PhotoStrip from '@/components/sections/home/PhotoStrip';
-import PromotionsCarousel from '@/components/sections/home/PromotionsCarousel';
 import SchedulePreviewSection from '@/components/sections/home/SchedulePreviewSection';
 import PricingPreviewSection from '@/components/sections/home/PricingPreviewSection';
-import ContactsPreviewSection from '@/components/sections/home/ContactsPreviewSection';
 import TermlinyTeaser from '@/components/sections/home/TermlinyTeaser';
 import Section from '@/components/ui/Section';
 
@@ -20,7 +18,6 @@ export default function HomePage() {
       <div className="gold-separator" />
       <PhotoStrip />
       <div className="gold-separator" />
-      <PromotionsCarousel />
       <Section dark ornament separator>
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <TermlinyTeaser />
@@ -28,7 +25,6 @@ export default function HomePage() {
         </div>
       </Section>
       <PricingPreviewSection />
-      <ContactsPreviewSection />
     </PageLayout>
   );
 }

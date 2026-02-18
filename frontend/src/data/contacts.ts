@@ -21,19 +21,19 @@ export interface ContactInfo {
 }
 
 export const contactInfo: ContactInfo = {
-  phone: '+7 (495) 922-02-22',
-  address: 'г. Москва, ул. Гурьянова, д. 30',
-  metro: 'м. Печатники (5 мин пешком)',
+  phone: '+7 (909) 167-47-46',
+  address: 'г. Москва, ул. Гурьянова, д. 30, 2 этаж',
+  metro: 'м. Печатники',
   email: 'info@termburg.ru',
-  workingHours: 'Ежедневно с 8:00 до 23:00',
+  workingHours: 'Ежедневно с 9:00 до 23:00',
   social: {
     vk: 'https://vk.com/termburg',
     telegram: 'https://t.me/termburg',
     instagram: 'https://instagram.com/termburg',
   },
   coordinates: {
-    lat: 55.6892,
-    lng: 37.7271,
+    lat: 55.680707,
+    lng: 37.715830,
   },
   howToGet: [
     'От м. Печатники: выход к ул. Гурьянова, 5 минут пешком',
