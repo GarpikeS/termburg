@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import HeroSection from '@/components/sections/home/HeroSection';
 import AdvantagesSection from '@/components/sections/home/AdvantagesSection';
@@ -7,6 +8,8 @@ import SchedulePreviewSection from '@/components/sections/home/SchedulePreviewSe
 import PricingPreviewSection from '@/components/sections/home/PricingPreviewSection';
 import TermlinyTeaser from '@/components/sections/home/TermlinyTeaser';
 import Section from '@/components/ui/Section';
+
+const NewsPreviewSection = lazy(() => import('@/components/sections/home/NewsPreviewSection'));
 
 export default function HomePage() {
   return (
@@ -25,6 +28,9 @@ export default function HomePage() {
         </div>
       </Section>
       <PricingPreviewSection />
+      <Suspense fallback={null}>
+        <NewsPreviewSection />
+      </Suspense>
     </PageLayout>
   );
 }

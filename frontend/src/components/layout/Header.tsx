@@ -72,6 +72,12 @@ const mobileGroups = [
   },
 ];
 
+const cities = [
+  { name: 'Москва', active: true },
+  { name: 'Санкт-Петербург', active: false },
+  { name: 'Казань', active: false },
+];
+
 function DropdownMenu({ item }: { item: NavItem }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -123,10 +129,61 @@ function DropdownMenu({ item }: { item: NavItem }) {
   );
 }
 
+function CitySelector() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white/80 transition-colors"
+      >
+        <MapPin className="w-3.5 h-3.5 text-primary" />
+        <span>Москва</span>
+        <ChevronDown className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && (
+        <div className="absolute top-full left-0 mt-2 w-44 rounded-xl bg-dark-surface border border-dark-border shadow-xl shadow-black/30 py-1 z-50">
+          {cities.map((city) => (
+            <button
+              key={city.name}
+              type="button"
+              onClick={() => { if (city.active) setOpen(false); }}
+              className={`w-full text-left px-4 py-2.5 text-sm flex items-center justify-between transition-colors ${
+                city.active
+                  ? 'text-primary bg-white/5'
+                  : 'text-white/40 cursor-default'
+              }`}
+            >
+              {city.name}
+              {!city.active && (
+                <span className="text-[10px] bg-white/10 text-white/40 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                  Скоро
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Header() {
   const { openBooking } = useBooking();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileCityOpen, setMobileCityOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -151,13 +208,18 @@ export default function Header() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center gap-2.5" onClick={closeMobileMenu}>
-            <img src="/images/termliny-symbol.svg" alt="" className="h-7 w-7 md:h-8 md:w-8 opacity-70" />
-            <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary md:text-2xl">
-              ТЕРМБУРГ
-            </span>
-          </Link>
+          {/* Logo + City */}
+          <div className="flex items-center gap-4">
+            <Link to="/" className="flex-shrink-0 flex items-center gap-2.5" onClick={closeMobileMenu}>
+              <img src="/images/termburg-logo.svg" alt="" className="h-7 w-7 md:h-8 md:w-8 opacity-70" />
+              <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary md:text-2xl">
+                ТЕРМБУРГ
+              </span>
+            </Link>
+            <div className="hidden lg:block">
+              <CitySelector />
+            </div>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Основная навигация">
@@ -226,14 +288,38 @@ export default function Header() {
       >
         <div className="p-4">
           {/* City selector */}
-          <div className="mb-4 rounded-xl bg-white/5 border border-dark-border px-4 py-3">
+          <button
+            type="button"
+            onClick={() => setMobileCityOpen(!mobileCityOpen)}
+            className="w-full mb-4 rounded-xl bg-white/5 border border-dark-border px-4 py-3 text-left"
+          >
             <div className="flex items-center gap-2 text-white/80">
               <MapPin className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium">Москва</span>
-              <span className="ml-auto text-[10px] text-white/30 uppercase tracking-wider">скоро ещё</span>
+              <ChevronDown className={`ml-auto w-3.5 h-3.5 text-white/40 transition-transform ${mobileCityOpen ? 'rotate-180' : ''}`} />
             </div>
             <p className="mt-1 text-xs text-white/40">ул. Гурьянова, д. 30</p>
-          </div>
+          </button>
+
+          {mobileCityOpen && (
+            <div className="mb-4 rounded-xl bg-white/5 border border-dark-border overflow-hidden">
+              {cities.map((city) => (
+                <div
+                  key={city.name}
+                  className={`px-4 py-2.5 text-sm flex items-center justify-between ${
+                    city.active ? 'text-primary' : 'text-white/40'
+                  }`}
+                >
+                  {city.name}
+                  {!city.active && (
+                    <span className="text-[10px] bg-white/10 text-white/40 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+                      Скоро
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Grouped navigation */}
           <nav aria-label="Мобильная навигация">

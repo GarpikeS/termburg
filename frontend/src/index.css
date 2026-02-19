@@ -104,3 +104,16 @@ h1, h2, h3, h4, h5, h6 {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Reduced motion: stop video autoplay and animations */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+  .animate-scroll {
+    animation: none;
+  }
+  .animate-fade-in {
+    animation: none;
+  }
+}

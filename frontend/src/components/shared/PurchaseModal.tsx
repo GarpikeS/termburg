@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
-import { X, CheckCircle, Phone } from 'lucide-react';
+import { X, CheckCircle, Phone, Users, Baby } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
+
+type TicketType = 'adult' | 'child';
 
 export default function PurchaseModal() {
   const { purchaseOpen, purchaseItem, closeModal } = useBooking();
@@ -9,8 +11,11 @@ export default function PurchaseModal() {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
+  const [ticketType, setTicketType] = useState<TicketType>('adult');
 
   const isCertificate = purchaseItem?.name.toLowerCase().includes('сертификат') ?? false;
+  const hasChildPrice = !!purchaseItem?.childPrice;
+  const displayPrice = ticketType === 'child' && hasChildPrice ? purchaseItem!.childPrice! : purchaseItem?.price ?? '';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +30,7 @@ export default function PurchaseModal() {
       setPhone('');
       setEmail('');
       setRecipientName('');
+      setTicketType('adult');
     }, 300);
   }, [closeModal]);
 
@@ -67,8 +73,50 @@ export default function PurchaseModal() {
             <div className="rounded-xl bg-background border border-border px-5 py-4">
               <p className="text-sm text-text-secondary">Товар</p>
               <p className="font-medium text-text-primary">{purchaseItem.name}</p>
-              <p className="mt-1 text-xl font-bold text-primary">{purchaseItem.price}</p>
+              <p className="mt-1 text-xl font-bold text-primary">{displayPrice}</p>
             </div>
+
+            {/* Взрослый / Детский toggle */}
+            {hasChildPrice && (
+              <div>
+                <p className="mb-2 text-sm font-medium text-text-secondary">Тип билета</p>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setTicketType('adult')}
+                    className={`flex-1 flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 border ${
+                      ticketType === 'adult'
+                        ? 'bg-primary text-white border-primary shadow-md shadow-primary/20'
+                        : 'bg-surface border-border text-text-secondary hover:text-text-primary hover:border-primary/30'
+                    }`}
+                  >
+                    <Users className="w-4 h-4" />
+                    Взрослый
+                    <span className={`text-xs ${ticketType === 'adult' ? 'text-white/80' : 'text-text-secondary'}`}>
+                      {purchaseItem.price}
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTicketType('child')}
+                    className={`flex-1 flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 border ${
+                      ticketType === 'child'
+                        ? 'bg-accent text-white border-accent shadow-md shadow-accent/20'
+                        : 'bg-surface border-border text-text-secondary hover:text-text-primary hover:border-accent/30'
+                    }`}
+                  >
+                    <Baby className="w-4 h-4" />
+                    Детский
+                    <span className={`text-xs ${ticketType === 'child' ? 'text-white/80' : 'text-text-secondary'}`}>
+                      {purchaseItem.childPrice}
+                    </span>
+                  </button>
+                </div>
+                <p className="mt-1.5 text-xs text-text-secondary/70">
+                  Дети до 3 лет — бесплатно. Детский билет: 3–12 лет.
+                </p>
+              </div>
+            )}
 
             {/* Имя получателя (для сертификатов) */}
             {isCertificate && (

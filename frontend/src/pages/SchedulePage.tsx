@@ -1,11 +1,10 @@
 import { useState, useMemo } from 'react';
-import { Clock, Timer, User, CalendarDays, CalendarRange } from 'lucide-react';
+import { Clock, Timer, ChevronRight, ChevronLeft, Calendar, List } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
-import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
 import Container from '@/components/ui/Container';
+import { useBooking } from '@/context/BookingContext';
 import { scheduleEvents, daysOfWeek, type ScheduleEvent } from '@/data/schedule';
 
 const dayShortNames: Record<string, string> = {
@@ -18,332 +17,311 @@ const dayShortNames: Record<string, string> = {
   Воскресенье: 'Вс',
 };
 
-const typeFilters = [
-  { id: 'all', label: 'Все' },
-  { id: 'free', label: 'Бесплатные' },
-  { id: 'paid', label: 'Платные' },
-];
-
-function getTypeBadge(event: ScheduleEvent) {
-  switch (event.type) {
-    case 'free':
-      return <Badge variant="success">Бесплатно</Badge>;
-    case 'paid':
-      return <Badge variant="info">{event.price ? `${event.price} \u20BD` : 'Платно'}</Badge>;
-    case 'senior':
-      return <Badge variant="gold">Для пенсионеров</Badge>;
-    default:
-      return null;
-  }
-}
-
-function getWeekDates(): { day: string; date: Date }[] {
-  const today = new Date();
-  const dayOfWeek = today.getDay();
-  const monday = new Date(today);
-  monday.setDate(today.getDate() - ((dayOfWeek + 6) % 7));
-
-  return daysOfWeek.map((name, i) => {
-    const d = new Date(monday);
-    d.setDate(monday.getDate() + i);
-    return { day: name, date: d };
-  });
-}
-
-function getMonthWeeks(): { day: string; date: Date }[][] {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-
-  const weeks: { day: string; date: Date }[][] = [];
-  let current = new Date(firstDay);
-  // rewind to Monday
-  const dow = current.getDay();
-  current.setDate(current.getDate() - ((dow + 6) % 7));
-
-  while (current <= lastDay || weeks.length === 0) {
-    const week: { day: string; date: Date }[] = [];
-    for (let i = 0; i < 7; i++) {
-      const d = new Date(current);
-      week.push({ day: daysOfWeek[i], date: d });
-      current.setDate(current.getDate() + 1);
-    }
-    weeks.push(week);
-    if (current > lastDay && week[6].date >= lastDay) break;
-  }
-
-  return weeks;
-}
-
 const monthNames = [
   'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
   'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
 ];
 
-function eventsForDay(dayName: string, type: string): ScheduleEvent[] {
-  return scheduleEvents.filter((e) => {
-    const dayMatch = e.day.includes(dayName);
-    const typeMatch = type === 'all' || e.type === type;
-    return dayMatch && typeMatch;
-  });
+function getCurrentDayName(): string {
+  const jsDay = new Date().getDay();
+  const idx = jsDay === 0 ? 6 : jsDay - 1;
+  return daysOfWeek[idx];
 }
 
-export default function SchedulePage() {
-  const [viewMode, setViewMode] = useState<'week' | 'month'>('week');
-  const [activeDay, setActiveDay] = useState<string>('all');
-  const [activeType, setActiveType] = useState<string>('all');
+function getDayNameByDate(date: Date): string {
+  const jsDay = date.getDay();
+  const idx = jsDay === 0 ? 6 : jsDay - 1;
+  return daysOfWeek[idx];
+}
 
-  const weekDates = useMemo(getWeekDates, []);
-  const monthWeeks = useMemo(getMonthWeeks, []);
+function eventsForDay(dayName: string): ScheduleEvent[] {
+  return scheduleEvents.filter((e) => e.day.includes(dayName));
+}
 
-  const filteredEvents = scheduleEvents.filter((event) => {
-    const dayMatch = activeDay === 'all' || event.day.includes(activeDay);
-    const typeMatch = activeType === 'all' || event.type === activeType;
-    return dayMatch && typeMatch;
-  });
+function EventRow({ event }: { event: ScheduleEvent }) {
+  const { openPurchase } = useBooking();
+  const isPaid = event.type === 'paid';
 
+  return (
+    <div
+      className={`flex items-center gap-4 rounded-2xl p-4 transition-all duration-200 ${
+        isPaid
+          ? 'bg-surface border border-primary/15 hover:border-primary/30 cursor-pointer'
+          : 'bg-surface border border-border/40'
+      }`}
+      onClick={() => {
+        if (isPaid && event.price) {
+          openPurchase({ name: event.name, price: `${event.price} \u20BD` });
+        }
+      }}
+      role={isPaid ? 'button' : undefined}
+      tabIndex={isPaid ? 0 : undefined}
+    >
+      <div className="flex-shrink-0 w-14 text-center">
+        <span className="font-heading text-lg font-bold text-primary">{event.time}</span>
+      </div>
+      <div className={`w-0.5 self-stretch rounded-full ${isPaid ? 'bg-primary/40' : 'bg-border'}`} />
+      <div className="flex-1 min-w-0">
+        <h3 className="font-medium text-text-primary text-sm">{event.name}</h3>
+        <div className="flex items-center gap-2 mt-0.5 text-xs text-text-secondary">
+          <span className="flex items-center gap-1">
+            <Timer className="w-3 h-3" />
+            {event.duration}
+          </span>
+          {event.instructor && <span>{event.instructor}</span>}
+        </div>
+      </div>
+      <div className="flex-shrink-0">
+        {isPaid && event.price ? (
+          <div className="flex items-center gap-1">
+            <span className="text-sm font-bold text-primary">{event.price} &#8381;</span>
+            <ChevronRight className="w-3.5 h-3.5 text-primary/50" />
+          </div>
+        ) : (
+          <span className="inline-block rounded-full bg-emerald-500/10 text-emerald-600 px-2.5 py-0.5 text-xs font-semibold">
+            Бесплатно
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ---- Calendar ---- */
+
+function getMonthDays(year: number, month: number) {
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const daysInMonth = lastDay.getDate();
+  let startOffset = firstDay.getDay() - 1;
+  if (startOffset < 0) startOffset = 6;
+  return { daysInMonth, startOffset };
+}
+
+interface CalendarProps {
+  year: number;
+  month: number;
+  selectedDate: Date | null;
+  onSelectDate: (date: Date) => void;
+  onPrevMonth: () => void;
+  onNextMonth: () => void;
+}
+
+function CalendarPanel({ year, month, selectedDate, onSelectDate, onPrevMonth, onNextMonth }: CalendarProps) {
+  const { daysInMonth, startOffset } = getMonthDays(year, month);
   const today = new Date();
+  const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < startOffset; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  return (
+    <div className="rounded-2xl border border-border bg-surface p-5">
+      {/* Month nav */}
+      <div className="flex items-center justify-between mb-4">
+        <button type="button" onClick={onPrevMonth} className="rounded-lg p-1.5 hover:bg-surface-warm text-text-secondary hover:text-text-primary transition-colors">
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <h3 className="font-heading text-base font-bold text-text-primary">
+          {monthNames[month]} {year}
+        </h3>
+        <button type="button" onClick={onNextMonth} className="rounded-lg p-1.5 hover:bg-surface-warm text-text-secondary hover:text-text-primary transition-colors">
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Day headers */}
+      <div className="grid grid-cols-7 mb-1">
+        {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((d) => (
+          <div key={d} className="text-center text-[11px] font-medium text-text-secondary py-1.5">{d}</div>
+        ))}
+      </div>
+
+      {/* Cells */}
+      <div className="grid grid-cols-7 gap-0.5">
+        {cells.map((day, i) => {
+          if (day === null) return <div key={`e-${i}`} className="aspect-square" />;
+
+          const date = new Date(year, month, day);
+          const dayName = getDayNameByDate(date);
+          const dayEvents = eventsForDay(dayName);
+          const hasPaid = dayEvents.some((e) => e.type === 'paid');
+          const hasFree = dayEvents.some((e) => e.type === 'free');
+          const isToday = isCurrentMonth && today.getDate() === day;
+          const isSelected = selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === month && selectedDate.getFullYear() === year;
+
+          return (
+            <button
+              key={day}
+              type="button"
+              onClick={() => onSelectDate(date)}
+              className={`aspect-square rounded-lg flex flex-col items-center justify-center gap-0.5 transition-all duration-150 text-xs ${
+                isSelected
+                  ? 'bg-primary text-white font-bold shadow-sm shadow-primary/20'
+                  : isToday
+                    ? 'bg-primary/15 text-primary font-bold ring-1 ring-primary/30'
+                    : 'hover:bg-surface-warm text-text-primary'
+              }`}
+            >
+              <span>{day}</span>
+              {dayEvents.length > 0 && (
+                <div className="flex gap-px">
+                  {hasFree && <span className={`w-1 h-1 rounded-full ${isSelected ? 'bg-white/70' : 'bg-emerald-500'}`} />}
+                  {hasPaid && <span className={`w-1 h-1 rounded-full ${isSelected ? 'bg-white/70' : 'bg-primary'}`} />}
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Legend */}
+      <div className="flex items-center justify-center gap-4 mt-4 pt-3 border-t border-border/50 text-[10px] text-text-secondary">
+        <span className="flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          Бесплатно
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          Платно
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* ---- Main Page ---- */
+
+export default function SchedulePage() {
+  const currentDay = getCurrentDayName();
+  const now = new Date();
+
+  const [activeDay, setActiveDay] = useState(currentDay);
+  const [calYear, setCalYear] = useState(now.getFullYear());
+  const [calMonth, setCalMonth] = useState(now.getMonth());
+  const [selectedDate, setSelectedDate] = useState<Date>(now);
+
+  // Displayed day name — either from day tab or from calendar click
+  const displayDayName = getDayNameByDate(selectedDate);
+  const events = useMemo(() => eventsForDay(displayDayName), [displayDayName]);
+
+  function prevMonth() {
+    if (calMonth === 0) { setCalMonth(11); setCalYear((y) => y - 1); }
+    else setCalMonth((m) => m - 1);
+  }
+  function nextMonth() {
+    if (calMonth === 11) { setCalMonth(0); setCalYear((y) => y + 1); }
+    else setCalMonth((m) => m + 1);
+  }
+
+  function handleDateSelect(date: Date) {
+    setSelectedDate(date);
+    setActiveDay(getDayNameByDate(date));
+  }
+
+  function handleDayTab(day: string) {
+    setActiveDay(day);
+    // Set selectedDate to the next occurrence of this day in current month
+    const dayIdx = daysOfWeek.indexOf(day);
+    for (let d = 1; d <= 31; d++) {
+      const date = new Date(calYear, calMonth, d);
+      if (date.getMonth() !== calMonth) break;
+      if (getDayNameByDate(date) === day) {
+        setSelectedDate(date);
+        break;
+      }
+    }
+  }
 
   return (
     <PageLayout title="Расписание" description="Расписание мероприятий термального комплекса Термбург.">
       <PageHero
-        title="Расписание мероприятий"
-        subtitle="Коллективные парения, аквааэробика, йога и суставная гимнастика"
+        title="Расписание"
+        subtitle="Коллективные парения, аквааэробика, йога и другие мероприятия"
         backgroundImage="/images/complex/gallery8.webp"
       />
 
       <Section>
-        {/* View mode toggle */}
-        <div className="mb-6 flex items-center gap-3">
-          <button
-            onClick={() => setViewMode('week')}
-            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
-              viewMode === 'week'
-                ? 'bg-primary text-background'
-                : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
-            }`}
-          >
-            <CalendarDays className="h-4 w-4" />
-            Неделя
-          </button>
-          <button
-            onClick={() => setViewMode('month')}
-            className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
-              viewMode === 'month'
-                ? 'bg-primary text-background'
-                : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
-            }`}
-          >
-            <CalendarRange className="h-4 w-4" />
-            Месяц
-          </button>
-        </div>
-
-        {viewMode === 'week' ? (
-          <>
-            {/* Day filters */}
-            <div className="mb-6">
-              <p className="mb-3 text-sm font-medium text-text-secondary">День недели</p>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setActiveDay('all')}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                    activeDay === 'all'
-                      ? 'bg-primary text-background'
-                      : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
-                  }`}
-                >
-                  Все
-                </button>
-                {daysOfWeek.map((day) => (
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* LEFT — Events */}
+          <div className="flex-1 min-w-0">
+            {/* Day tabs */}
+            <div className="flex gap-1.5 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+              {daysOfWeek.map((day) => {
+                const isActive = activeDay === day;
+                const isCurrent = day === currentDay;
+                return (
                   <button
                     key={day}
-                    onClick={() => setActiveDay(day)}
-                    className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                      activeDay === day
-                        ? 'bg-primary text-background'
-                        : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
+                    type="button"
+                    onClick={() => handleDayTab(day)}
+                    className={`flex-shrink-0 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? 'bg-primary text-white shadow-md shadow-primary/20'
+                        : isCurrent
+                          ? 'bg-primary/10 text-primary border border-primary/20'
+                          : 'bg-surface-warm text-text-secondary hover:text-text-primary hover:bg-surface'
                     }`}
                   >
                     {dayShortNames[day]}
+                    {isCurrent && !isActive && (
+                      <span className="ml-1 text-[10px] opacity-60">(сегодня)</span>
+                    )}
                   </button>
-                ))}
-              </div>
+                );
+              })}
             </div>
 
-            {/* Type filters */}
-            <div className="mb-8">
-              <p className="mb-3 text-sm font-medium text-text-secondary">Тип мероприятия</p>
-              <div className="flex flex-wrap gap-2">
-                {typeFilters.map((filter) => (
-                  <button
-                    key={filter.id}
-                    onClick={() => setActiveType(filter.id)}
-                    className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                      activeType === filter.id
-                        ? 'bg-primary text-background'
-                        : 'bg-surface text-text-secondary hover:bg-surface-warm border border-border/50'
-                    }`}
-                  >
-                    {filter.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+            {/* Date label */}
+            <p className="text-sm text-text-secondary mb-4">
+              {selectedDate.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })}
+            </p>
 
-            {/* Events grid */}
-            {filteredEvents.length > 0 ? (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {filteredEvents.map((event) => (
-                  <Card key={event.id}>
-                    <div className="mb-3 flex items-start justify-between gap-3">
-                      <h3 className="text-lg font-bold text-text-primary">{event.name}</h3>
-                      {getTypeBadge(event)}
-                    </div>
-                    <p className="mb-4 text-sm text-text-secondary">{event.description}</p>
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-text-secondary">
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        {event.time}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Timer className="h-4 w-4" />
-                        {event.duration}
-                      </span>
-                      {event.instructor && (
-                        <span className="flex items-center gap-1">
-                          <User className="h-4 w-4" />
-                          {event.instructor}
-                        </span>
-                      )}
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-1">
-                      {event.day.map((d) => (
-                        <span
-                          key={d}
-                          className="rounded bg-surface-warm px-2 py-0.5 text-xs text-text-secondary"
-                        >
-                          {dayShortNames[d]}
-                        </span>
-                      ))}
-                    </div>
-                  </Card>
+            {/* Events */}
+            {events.length > 0 ? (
+              <div className="space-y-2.5">
+                {events.map((event) => (
+                  <EventRow key={event.id} event={event} />
                 ))}
               </div>
             ) : (
               <div className="py-12 text-center">
-                <p className="text-lg text-text-secondary">
-                  Нет мероприятий по выбранным фильтрам
-                </p>
+                <Clock className="w-10 h-10 text-text-secondary/30 mx-auto mb-3" />
+                <p className="text-text-secondary">Нет мероприятий в этот день</p>
               </div>
             )}
-          </>
-        ) : (
-          /* Month calendar view */
-          <div className="rounded-2xl overflow-hidden border border-border/50 shadow-sm">
-            {/* Month header */}
-            <div className="bg-dark-surface py-4 px-6">
-              <h3 className="text-center font-heading text-xl font-bold text-white">
-                {monthNames[today.getMonth()]} {today.getFullYear()}
-              </h3>
-            </div>
-
-            {/* Day names header */}
-            <div className="grid grid-cols-7">
-              {daysOfWeek.map((day, i) => (
-                <div
-                  key={day}
-                  className={`py-3 text-center text-xs font-bold uppercase tracking-wider ${
-                    i >= 5
-                      ? 'bg-primary/5 text-primary'
-                      : 'bg-surface-warm text-text-secondary'
-                  }`}
-                >
-                  {dayShortNames[day]}
-                </div>
-              ))}
-            </div>
-
-            {/* Weeks */}
-            {monthWeeks.map((week, wi) => (
-              <div key={wi} className="grid grid-cols-7">
-                {week.map(({ day, date }, di) => {
-                  const isCurrentMonth = date.getMonth() === today.getMonth();
-                  const isToday = date.toDateString() === today.toDateString();
-                  const isWeekend = di >= 5;
-                  const dayEvents = eventsForDay(day, 'all');
-
-                  return (
-                    <div
-                      key={di}
-                      className={`min-h-[110px] p-2 border-t border-r border-border/20 last:border-r-0 transition-colors ${
-                        isCurrentMonth
-                          ? isWeekend ? 'bg-primary/[0.02]' : 'bg-white'
-                          : 'bg-surface/30'
-                      } ${isToday ? 'ring-2 ring-inset ring-primary/60 bg-primary/5' : ''}`}
-                    >
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span
-                          className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-medium ${
-                            isToday
-                              ? 'bg-primary text-white font-bold'
-                              : isCurrentMonth
-                              ? 'text-text-primary'
-                              : 'text-text-secondary/30'
-                          }`}
-                        >
-                          {date.getDate()}
-                        </span>
-                        {dayEvents.length > 0 && isCurrentMonth && (
-                          <span className="text-[10px] text-text-secondary/60">{dayEvents.length}</span>
-                        )}
-                      </div>
-                      {isCurrentMonth && (
-                        <div className="space-y-0.5">
-                          {dayEvents.slice(0, 3).map((evt) => (
-                            <div
-                              key={evt.id}
-                              className={`rounded-md px-1.5 py-0.5 text-[10px] leading-tight truncate font-medium ${
-                                evt.type === 'free'
-                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-100'
-                                  : 'bg-blue-50 text-blue-700 border border-blue-100'
-                              }`}
-                              title={`${evt.time} — ${evt.name}`}
-                            >
-                              {evt.time} {evt.name.length > 12 ? evt.name.slice(0, 12) + '…' : evt.name}
-                            </div>
-                          ))}
-                          {dayEvents.length > 3 && (
-                            <p className="text-[10px] text-primary font-medium pl-1">
-                              +{dayEvents.length - 3} ещё
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
           </div>
-        )}
+
+          {/* RIGHT — Calendar */}
+          <div className="lg:w-[320px] flex-shrink-0">
+            <div className="lg:sticky lg:top-24">
+              <CalendarPanel
+                year={calYear}
+                month={calMonth}
+                selectedDate={selectedDate}
+                onSelectDate={handleDateSelect}
+                onPrevMonth={prevMonth}
+                onNextMonth={nextMonth}
+              />
+            </div>
+          </div>
+        </div>
       </Section>
 
       {/* Legend */}
       <section className="border-t border-border bg-surface-warm py-8">
         <Container>
-          <p className="mb-4 text-sm font-medium text-text-primary">Обозначения:</p>
-          <div className="flex flex-wrap gap-6">
-            <div className="flex items-center gap-2">
-              <Badge variant="success">Бесплатно</Badge>
-              <span className="text-sm text-text-secondary">—включено в стоимость посещения</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Badge variant="info">Платно</Badge>
-              <span className="text-sm text-text-secondary">—оплачивается отдельно</span>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-text-secondary">
+            <span className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-emerald-500/40" />
+              Бесплатно &mdash; включено в посещение
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-primary/40" />
+              Платно &mdash; нажмите для покупки
+            </span>
           </div>
         </Container>
       </section>

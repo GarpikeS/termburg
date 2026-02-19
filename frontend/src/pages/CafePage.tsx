@@ -4,14 +4,8 @@ import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Container from '@/components/ui/Container';
-import { cafeMenu } from '@/data/cafe';
+import { cafeMenu, type MenuItem } from '@/data/cafe';
 import { type ReactNode } from 'react';
-
-interface MenuItem {
-  name: string;
-  price: number;
-  description?: string;
-}
 
 const categoryConfig: Record<string, { title: string; icon: ReactNode }> = {
   hotDrinks: {
@@ -65,7 +59,7 @@ export default function CafePage() {
                     </div>
                   </div>
                   <p className="text-lg font-bold text-primary whitespace-nowrap">
-                    {item.price} ₽
+                    {item.price} &#8381;
                   </p>
                 </Card>
               ))}

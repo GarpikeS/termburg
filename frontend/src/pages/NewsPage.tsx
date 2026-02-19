@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Calendar, ExternalLink, ChevronDown, Filter } from 'lucide-react';
+import { Calendar, ExternalLink, ChevronDown, Filter, BookOpen } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Badge from '@/components/ui/Badge';
+import { dzenArticles } from '@/data/dzen';
 
 interface NewsItem {
   id: number | string;
@@ -19,21 +20,21 @@ const fallbackNews: NewsItem[] = [
     id: 1,
     text: 'Открытие новой травяной парной\n\nМы рады представить обновлённую травяную парную с расширенным набором целебных трав и новой системой подачи пара.',
     date: '2026-02-15',
-    image: '/images/complex/gallery1.webp',
+    image: '/images/complex/gallery1.jpg',
     link: 'https://t.me/termburg',
   },
   {
     id: 2,
     text: 'Зимний фестиваль парения\n\nС 1 по 28 февраля приглашаем на зимний фестиваль парения — мастер-классы, авторские программы и подарки для гостей.',
     date: '2026-02-01',
-    image: '/images/complex/gallery2.webp',
+    image: '/images/complex/gallery2.jpg',
     link: 'https://t.me/termburg',
   },
   {
     id: 3,
     text: 'Новые SPA-программы\n\nВ нашем меню появились три новые SPA-программы: «Сибирский ритуал», «Восточная сказка» и «Скандинавский детокс».',
     date: '2026-01-20',
-    image: '/images/complex/gallery3.webp',
+    image: '/images/complex/gallery3.jpg',
     link: 'https://t.me/termburg',
   },
   {
@@ -173,10 +174,10 @@ export default function NewsPage() {
 
         {/* Loading skeleton */}
         {loading && (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, i) => (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+            {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="animate-pulse rounded-2xl bg-surface border border-border/30 overflow-hidden">
-                <div className="h-48 bg-surface-warm" />
+                <div className="h-64 bg-surface-warm" />
                 <div className="p-5 space-y-3">
                   <div className="h-4 bg-surface-warm rounded w-3/4" />
                   <div className="h-3 bg-surface-warm rounded w-full" />
@@ -195,7 +196,7 @@ export default function NewsPage() {
                 <p className="text-lg text-text-secondary">Новостей за этот период нет</p>
               </div>
             ) : (
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
                 {visibleNews.map((item) => {
                   const title = getTitle(item.text);
                   const body = getBody(item.text);
@@ -207,7 +208,7 @@ export default function NewsPage() {
                     >
                       {/* Image */}
                       {item.image && (
-                        <div className="relative h-48 overflow-hidden">
+                        <div className="relative h-64 overflow-hidden">
                           <img
                             src={item.image}
                             alt=""
@@ -227,13 +228,13 @@ export default function NewsPage() {
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-base font-bold text-text-primary mb-2 line-clamp-2">
+                        <h3 className="text-lg font-bold text-text-primary mb-2">
                           {title}
                         </h3>
 
                         {/* Body */}
                         {body && (
-                          <p className="text-sm text-text-secondary line-clamp-3 mb-4">{body}</p>
+                          <p className="text-sm text-text-secondary line-clamp-5 mb-4">{body}</p>
                         )}
 
                         {/* Link */}
@@ -254,24 +255,74 @@ export default function NewsPage() {
                 })}
               </div>
             )}
-
-            {/* Load more */}
-            {hasMore && (
-              <div className="mt-10 text-center">
-                <button
-                  type="button"
-                  onClick={() => setVisibleCount((c) => c + ITEMS_PER_PAGE)}
-                  className="inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 px-6 py-3 text-sm font-medium text-primary hover:bg-primary/5 transition-colors"
-                >
-                  <ChevronDown className="h-4 w-4" />
-                  Загрузить ещё
-                </button>
-              </div>
-            )}
           </>
         )}
       </Section>
 
+      {/* Dzen section */}
+      <Section warm title="Читайте на Дзене" subtitle="Полезные статьи о бане, здоровье и отдыхе">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {dzenArticles.map((article) => (
+            <a
+              key={article.id}
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group rounded-2xl bg-surface border border-border/50 overflow-hidden transition-all duration-300 hover:border-primary/20 hover:-translate-y-0.5 hover:shadow-lg"
+            >
+              <div className="relative h-44 overflow-hidden">
+                <img
+                  src={article.image}
+                  alt=""
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute top-3 left-3">
+                  <Badge className="bg-orange-500/90 text-white text-xs">
+                    <BookOpen className="w-3 h-3 mr-1" />
+                    Дзен
+                  </Badge>
+                </div>
+              </div>
+              <div className="p-5">
+                <time className="text-xs text-text-secondary mb-2 block">{formatDate(article.date)}</time>
+                <h3 className="text-base font-bold text-text-primary mb-2 group-hover:text-primary transition-colors">
+                  {article.title}
+                </h3>
+                <p className="text-sm text-text-secondary line-clamp-2">{article.excerpt}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <a
+            href="https://dzen.ru/termburg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-light transition-colors"
+          >
+            Все статьи на Дзен
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+      </Section>
+
+      {/* Load more for news */}
+      {!loading && hasMore && (
+        <Section>
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => setVisibleCount((c) => c + ITEMS_PER_PAGE)}
+              className="inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 px-6 py-3 text-sm font-medium text-primary hover:bg-primary/5 transition-colors"
+            >
+              <ChevronDown className="h-4 w-4" />
+              Загрузить ещё
+            </button>
+          </div>
+        </Section>
+      )}
     </PageLayout>
   );
 }

@@ -130,46 +130,22 @@ export default function TermlinyPage() {
       ogImage="/images/termliny/og.webp"
     >
       {/* Hero */}
-      <section className="relative overflow-hidden bg-dark-surface">
-        <div className="relative">
-          <img
-            src="/images/termliny/hero.webp?v=2"
-            alt="Семья духов-хранителей Термбурга в сказочной бане"
-            className="w-full object-cover max-h-[480px]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-surface via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 pb-6 md:pb-10">
-            <Container>
-              <div className="text-center">
-                <img
-                  src="/images/termliny-logo-dark.svg"
-                  alt="Термлины"
-                  className="h-14 md:h-20 mx-auto mb-3"
-                />
-                <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto drop-shadow-lg">
-                  Каждая баня и сауна Термбурга находится под покровительством своего
-                  духа-хранителя. Познакомьтесь с ними — и ваш визит станет ещё более
-                  особенным.
-                </p>
-              </div>
-            </Container>
+      <section className="relative overflow-hidden bg-dark-surface py-10 md:py-16">
+        <Container>
+          <div className="text-center">
+            <img
+              src="/images/termliny-logo-dark.svg"
+              alt="Термлины"
+              className="h-14 md:h-20 mx-auto mb-4"
+            />
+            <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto">
+              Каждая баня и сауна Термбурга находится под покровительством своего
+              духа-хранителя. Познакомьтесь с ними — и ваш визит станет ещё более
+              особенным.
+            </p>
           </div>
-        </div>
+        </Container>
       </section>
-
-      {/* Family tree intro */}
-      <Section dark ornament separator>
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
-            Семья духов Термбурга
-          </h2>
-          <p className="text-white/70 text-lg">
-            Банник-Яромир привёл свою семью в Термбург, и теперь каждый из них
-            оберегает свою часть комплекса. Здесь живут и кот-философ Ведагор,
-            и таинственный дворовой Казимир, и юная берегиня Леля.
-          </p>
-        </div>
-      </Section>
 
       {/* Termlin cards */}
       <Section dark ornament>

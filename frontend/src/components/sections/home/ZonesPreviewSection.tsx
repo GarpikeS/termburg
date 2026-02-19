@@ -1,12 +1,11 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import { bathTypes } from '@/data/thermalZones';
+import { useBooking } from '@/context/BookingContext';
 
 export default function ZonesPreviewSection() {
-  const previewBaths = bathTypes.slice(0, 4);
+  const { openBathDetail } = useBooking();
 
   return (
     <Section
@@ -14,9 +13,13 @@ export default function ZonesPreviewSection() {
       title="12 видов парных"
       subtitle="Бани и сауны по традициям разных стран и культур"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {previewBaths.map((bath) => (
-          <Card key={bath.id} className="p-0 overflow-hidden">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {bathTypes.map((bath) => (
+          <Card
+            key={bath.id}
+            className="p-0 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+            onClick={() => openBathDetail(bath)}
+          >
             <div className="relative h-44 overflow-hidden">
               <img
                 src={bath.image}
@@ -39,16 +42,6 @@ export default function ZonesPreviewSection() {
             </div>
           </Card>
         ))}
-      </div>
-
-      <div className="mt-10 text-center">
-        <Link
-          to="/about"
-          className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-light transition-colors"
-        >
-          Все 12 парных
-          <ArrowRight className="w-4 h-4" />
-        </Link>
       </div>
     </Section>
   );

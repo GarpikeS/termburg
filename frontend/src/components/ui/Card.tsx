@@ -6,9 +6,10 @@ interface CardProps {
   children: ReactNode;
   className?: string;
   dark?: boolean;
+  onClick?: () => void;
 }
 
-export default function Card({ children, className, dark = false }: CardProps) {
+export default function Card({ children, className, dark = false, onClick }: CardProps) {
   return (
     <div
       className={twMerge(
@@ -20,6 +21,10 @@ export default function Card({ children, className, dark = false }: CardProps) {
           className,
         ),
       )}
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } } : undefined}
     >
       {children}
     </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Phone, MapPin, Train, Mail, Clock, Navigation,
+  Phone, MapPin, Train, Car, Bus, Mail, Clock,
   Handshake, Building2, Megaphone, Camera, PackageOpen, Send,
   Briefcase, Heart, Flame,
 } from 'lucide-react';
@@ -9,7 +9,7 @@ import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Container from '@/components/ui/Container';
 import Badge from '@/components/ui/Badge';
-import { contactInfo } from '@/data/contacts';
+import { contactInfo, type RouteDirection } from '@/data/contacts';
 
 const socialLinks = [
   {
@@ -31,6 +31,12 @@ const socialLinks = [
     ),
   },
 ];
+
+const routeIcons: Record<RouteDirection['icon'], typeof Train> = {
+  metro: Train,
+  car: Car,
+  bus: Bus,
+};
 
 const partnerDirections = [
   { icon: Building2, title: 'Корпоративные мероприятия', description: 'Тимбилдинги, корпоративы, праздники' },
@@ -163,19 +169,48 @@ export default function ContactsPage() {
         </div>
       </Section>
 
-      {/* How to get */}
+      {/* How to get — structured routes */}
       <Section title="Как добраться" warm>
-        <div className="max-w-3xl mx-auto">
-          <ul className="space-y-4">
-            {contactInfo.howToGet.map((item, index) => (
-              <li key={index} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Navigation className="w-5 h-5 text-primary" />
+        <div className="grid gap-6 md:grid-cols-3">
+          {contactInfo.howToGet.map((route) => {
+            const Icon = routeIcons[route.icon];
+            return (
+              <div
+                key={route.id}
+                className="rounded-2xl bg-surface border border-border/50 p-6 hover:border-primary/20 transition-all"
+              >
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold text-text-primary">{route.title}</h3>
                 </div>
-                <p className="text-text-primary text-lg leading-relaxed pt-1.5">{item}</p>
-              </li>
-            ))}
-          </ul>
+
+                {/* Steps */}
+                <ol className="space-y-3">
+                  {route.steps.map((step) => (
+                    <li key={step.number} className="flex items-start gap-3">
+                      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center mt-0.5">
+                        {step.number}
+                      </span>
+                      <div className="flex-1">
+                        <p className="text-sm text-text-primary leading-relaxed">{step.text}</p>
+                        {step.image && (
+                          <img
+                            src={step.image}
+                            alt={`Шаг ${step.number}`}
+                            className="mt-2 rounded-lg w-full h-32 object-cover"
+                            loading="lazy"
+                          />
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            );
+          })}
         </div>
       </Section>
 

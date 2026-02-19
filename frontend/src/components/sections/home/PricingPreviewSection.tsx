@@ -6,7 +6,7 @@ import { useBooking } from '@/context/BookingContext';
 import { weekdayPricing, weekendPricing, subscriptions } from '@/data/pricing';
 
 export default function PricingPreviewSection() {
-  const { openBooking } = useBooking();
+  const { openBooking, openPurchase } = useBooking();
 
   return (
     <Section
@@ -26,7 +26,13 @@ export default function PricingPreviewSection() {
             </div>
             <div className="divide-y divide-white/5">
               {weekdayPricing.map((slot) => (
-                <div key={slot.id} className="flex items-center justify-between px-6 py-3">
+                <div
+                  key={slot.id}
+                  className="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-white/5 transition-colors"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => openPurchase({ name: `Будни — ${slot.name}`, price: `${slot.adultPrice.toLocaleString('ru-RU')} ₽`, childPrice: `${slot.childPrice.toLocaleString('ru-RU')} ₽` })}
+                >
                   <span className="text-white/80">{slot.name}</span>
                   <div className="flex items-center gap-4">
                     <span className="text-primary font-bold">{slot.adultPrice.toLocaleString('ru-RU')}₽</span>
@@ -44,7 +50,13 @@ export default function PricingPreviewSection() {
             </div>
             <div className="divide-y divide-white/5">
               {weekendPricing.map((slot) => (
-                <div key={slot.id} className="flex items-center justify-between px-6 py-3">
+                <div
+                  key={slot.id}
+                  className="flex items-center justify-between px-6 py-3 cursor-pointer hover:bg-white/5 transition-colors"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => openPurchase({ name: `Выходные — ${slot.name}`, price: `${slot.adultPrice.toLocaleString('ru-RU')} ₽`, childPrice: `${slot.childPrice.toLocaleString('ru-RU')} ₽` })}
+                >
                   <span className="text-white/80">{slot.name}</span>
                   <div className="flex items-center gap-4">
                     <span className="text-primary font-bold">{slot.adultPrice.toLocaleString('ru-RU')}₽</span>
@@ -66,7 +78,10 @@ export default function PricingPreviewSection() {
             {subscriptions.slice(0, 3).map((sub) => (
               <div
                 key={sub.id}
-                className="rounded-xl bg-white/5 border border-white/10 p-5 hover:border-primary/30 transition-colors"
+                className="rounded-xl bg-white/5 border border-white/10 p-5 hover:border-primary/30 transition-colors cursor-pointer"
+                role="button"
+                tabIndex={0}
+                onClick={() => openPurchase({ name: `Абонемент «${sub.name}»`, price: `${sub.adultPrice.toLocaleString('ru-RU')} ₽` })}
               >
                 <div className="flex items-start justify-between mb-2">
                   <h4 className="font-bold text-white">{sub.name}</h4>

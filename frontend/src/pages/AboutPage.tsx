@@ -1,17 +1,14 @@
-import { Thermometer, ShieldCheck, ListChecks } from 'lucide-react';
+import { ShieldCheck, ListChecks } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
-import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import { thermalZones } from '@/data/thermalZones';
 
 const visitRules = [
   'Вход с 8:00, последний вход в 22:00',
-  'Дети до 3 лет —бесплатно, от 3 до 12 —детский билет',
+  'Дети до 3 лет — бесплатно, от 3 до 12 — детский билет',
   'Необходимо иметь сменную обувь (или приобрести на месте)',
   'В термальных зонах обязательно использование полотенца',
-  'Максимальное время нахождения в горячих зонах —15 минут',
+  'Максимальное время нахождения в горячих зонах — 15 минут',
   'Запрещено посещение в состоянии алкогольного опьянения',
 ];
 
@@ -31,53 +28,14 @@ export default function AboutPage() {
             терм до японского офуро, от турецкого хаммама до скандинавских парений.
           </p>
           <p className="text-lg leading-relaxed text-text-secondary">
-            Наша миссия —создать пространство, где каждый гость найдёт свой путь к расслаблению
+            Наша миссия — создать пространство, где каждый гость найдёт свой путь к расслаблению
             и оздоровлению. Мы верим, что забота о себе должна быть доступной и приятной.
           </p>
         </div>
       </Section>
 
-      {/* Thermal zones */}
-      <Section
-        title="Термальные зоны"
-        subtitle="12 видов парных для вашего здоровья и расслабления"
-        warm
-      >
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {thermalZones.map((zone) => (
-            <Card key={zone.id} className="flex flex-col p-0 overflow-hidden">
-              <div className="h-32 overflow-hidden">
-                <img
-                  src={zone.image}
-                  alt={zone.name}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-5 flex flex-col flex-1">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-text-primary">{zone.name}</h3>
-                  <div className="flex items-center gap-1 text-accent">
-                    <Thermometer className="h-4 w-4" />
-                    <span className="text-sm font-medium">{zone.temperature}</span>
-                  </div>
-                </div>
-                <p className="mb-4 flex-1 text-sm text-text-secondary">{zone.description}</p>
-                <div className="flex flex-wrap gap-1">
-                  {zone.features.map((feature) => (
-                    <Badge key={feature} variant="default" className="text-xs">
-                      {feature}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
       {/* Photo Gallery */}
-      <Section title="Фотогалерея" subtitle="Загляните в наше пространство">
+      <Section title="Фотогалерея" subtitle="Загляните в наше пространство" warm>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {[
             { src: '/images/complex/pool.webp', alt: 'Бассейн' },

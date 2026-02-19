@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import ScrollToTop from '@/components/shared/ScrollToTop';
 import BookingModal from '@/components/shared/BookingModal';
 import PurchaseModal from '@/components/shared/PurchaseModal';
+import BathDetailModal from '@/components/shared/BathDetailModal';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const AboutPage = lazy(() => import('@/pages/AboutPage'));
@@ -37,6 +38,7 @@ export default function App() {
       <ScrollToTop />
       <BookingModal />
       <PurchaseModal />
+      <BathDetailModal />
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<HomePage />} />

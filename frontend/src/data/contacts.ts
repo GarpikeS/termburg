@@ -9,6 +9,19 @@ export interface Coordinates {
   lng: number;
 }
 
+export interface RouteStep {
+  number: number;
+  text: string;
+  image?: string;
+}
+
+export interface RouteDirection {
+  id: string;
+  title: string;
+  icon: 'metro' | 'car' | 'bus';
+  steps: RouteStep[];
+}
+
 export interface ContactInfo {
   phone: string;
   address: string;
@@ -17,7 +30,7 @@ export interface ContactInfo {
   workingHours: string;
   social: SocialLinks;
   coordinates: Coordinates;
-  howToGet: string[];
+  howToGet: RouteDirection[];
 }
 
 export const contactInfo: ContactInfo = {
@@ -36,8 +49,36 @@ export const contactInfo: ContactInfo = {
     lng: 37.715830,
   },
   howToGet: [
-    'От м. Печатники: выход к ул. Гурьянова, 5 минут пешком',
-    'На автомобиле: бесплатная парковка на территории комплекса',
-    'На автобусе: остановка «Гурьянова» маршруты 161, 670',
+    {
+      id: 'metro',
+      title: 'От метро',
+      icon: 'metro',
+      steps: [
+        { number: 1, text: 'Выйдите на станции м. Печатники (Люблинская линия)' },
+        { number: 2, text: 'Выход к ул. Гурьянова (последний вагон из центра)' },
+        { number: 3, text: 'Идите прямо по ул. Гурьянова ~400 м' },
+        { number: 4, text: 'Термбург будет справа, д. 30, вход со двора, 2 этаж' },
+      ],
+    },
+    {
+      id: 'car',
+      title: 'На автомобиле',
+      icon: 'car',
+      steps: [
+        { number: 1, text: 'Введите в навигаторе: ул. Гурьянова, д. 30' },
+        { number: 2, text: 'Въезд на парковку со стороны двора' },
+        { number: 3, text: 'Бесплатная парковка для гостей комплекса' },
+      ],
+    },
+    {
+      id: 'bus',
+      title: 'На автобусе',
+      icon: 'bus',
+      steps: [
+        { number: 1, text: 'Автобусы 161, 670 — остановка «Гурьянова»' },
+        { number: 2, text: 'От остановки 2 минуты пешком в сторону д. 30' },
+        { number: 3, text: 'Вход со двора, 2 этаж' },
+      ],
+    },
   ],
 };

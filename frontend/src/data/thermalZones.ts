@@ -5,6 +5,7 @@ export interface BathType {
   temperature: string;
   features: string[];
   image: string;
+  tips: string[];
 }
 
 /** @deprecated Use bathTypes instead */
@@ -18,6 +19,11 @@ export const bathTypes: BathType[] = [
     temperature: '80-100°C',
     features: ['Веники', 'Парение на полке', 'Ледяная купель'],
     image: '/images/complex/gallery8.webp',
+    tips: [
+      'Рекомендуемое время: 10-15 мин',
+      'Используйте веник для усиления эффекта',
+      'Пейте воду между заходами',
+    ],
   },
   {
     id: 2,
@@ -26,6 +32,11 @@ export const bathTypes: BathType[] = [
     temperature: '90-110°C',
     features: ['Кедровый пар', 'Жаровой камень', 'Глубокий прогрев'],
     image: '/images/complex/sauna.webp',
+    tips: [
+      'Рекомендуемое время: 8-12 мин',
+      'Не рекомендуется при первом посещении',
+      'Обязательна ледяная купель после захода',
+    ],
   },
   {
     id: 3,
@@ -34,6 +45,11 @@ export const bathTypes: BathType[] = [
     temperature: '55-65°C',
     features: ['Фитотерапия', 'Ароматерапия', 'Укрепление иммунитета'],
     image: '/images/complex/herbal.webp',
+    tips: [
+      'Рекомендуемое время: 15-20 мин',
+      'Идеальна для первого захода',
+      'Дышите глубоко для максимального эффекта трав',
+    ],
   },
   {
     id: 4,
@@ -42,6 +58,11 @@ export const bathTypes: BathType[] = [
     temperature: '45-50°C',
     features: ['Мраморные лежаки', 'Мыльный массаж', 'Пилинг'],
     image: '/images/complex/gallery6.webp',
+    tips: [
+      'Рекомендуемое время: 20-30 мин',
+      'Попробуйте мыльный массаж у мастера',
+      'Мягкий пар подходит для всей семьи',
+    ],
   },
   {
     id: 5,
@@ -50,6 +71,11 @@ export const bathTypes: BathType[] = [
     temperature: '70-85°C',
     features: ['Ритуальное парение', 'Ароматы тайги', 'Медитация'],
     image: '/images/complex/gallery5.webp',
+    tips: [
+      'Рекомендуемое время: 10-15 мин',
+      'Расслабьтесь и сосредоточьтесь на дыхании',
+      'Уникальная атмосфера для медитации',
+    ],
   },
   {
     id: 6,
@@ -58,6 +84,11 @@ export const bathTypes: BathType[] = [
     temperature: '80-90°C',
     features: ['Печь по-чёрному', 'Деревенский колорит', 'Веники'],
     image: '/images/complex/gallery4.webp',
+    tips: [
+      'Рекомендуемое время: 10-15 мин',
+      'Попробуйте парение с веником',
+      'Аутентичная атмосфера русской деревни',
+    ],
   },
   {
     id: 7,
@@ -66,6 +97,11 @@ export const bathTypes: BathType[] = [
     temperature: '60-80°C',
     features: ['Кедровая бочка', 'Вид на парк', 'Терраса'],
     image: '/images/complex/barrels.webp',
+    tips: [
+      'Рекомендуемое время: 15-20 мин',
+      'Наслаждайтесь видом на парк',
+      'Особенно приятно в зимнее время',
+    ],
   },
   {
     id: 8,
@@ -74,6 +110,11 @@ export const bathTypes: BathType[] = [
     temperature: '50-60°C',
     features: ['Тёплый песок', 'Детоксикация', 'Расслабление'],
     image: '/images/complex/pool.webp',
+    tips: [
+      'Рекомендуемое время: 15-20 мин',
+      'Присыпьте тело тёплым песком',
+      'Отлично снимает мышечное напряжение',
+    ],
   },
   {
     id: 9,
@@ -82,6 +123,11 @@ export const bathTypes: BathType[] = [
     temperature: '55-65°C',
     features: ['Гималайская соль', 'Галотерапия', 'Оздоровление дыхания'],
     image: '/images/complex/gallery5.webp',
+    tips: [
+      'Рекомендуемое время: 15-20 мин',
+      'Полезна для органов дыхания',
+      'Соляной воздух укрепляет иммунитет',
+    ],
   },
   {
     id: 10,
@@ -90,6 +136,11 @@ export const bathTypes: BathType[] = [
     temperature: '60-75°C',
     features: ['Липовый аромат', 'Мягкий пар', 'Релаксация'],
     image: '/images/complex/herbal.webp',
+    tips: [
+      'Рекомендуемое время: 15-20 мин',
+      'Мягкая температура подходит для долгого пребывания',
+      'Аромат липы успокаивает нервную систему',
+    ],
   },
   {
     id: 11,
@@ -98,6 +149,11 @@ export const bathTypes: BathType[] = [
     temperature: '50-60°C',
     features: ['Глубокий прогрев', 'Детоксикация', 'Расслабление'],
     image: '/images/complex/sauna.webp',
+    tips: [
+      'Рекомендуемое время: 20-30 мин',
+      'Пейте много воды до и после процедуры',
+      'Эффективна для восстановления мышц',
+    ],
   },
   {
     id: 12,
@@ -106,6 +162,11 @@ export const bathTypes: BathType[] = [
     temperature: '70-90°C',
     features: ['Приватность', 'Персональный мастер', 'Индивидуальная программа'],
     image: '/images/complex/gallery8.webp',
+    tips: [
+      'Рекомендуемое время: по программе мастера',
+      'Забронируйте заранее — места ограничены',
+      'Идеально для пар и небольших компаний',
+    ],
   },
 ];
 

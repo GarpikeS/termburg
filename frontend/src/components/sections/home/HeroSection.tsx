@@ -8,7 +8,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
-      {/* Background photo */}
+      {/* Background image */}
       <div className="absolute inset-0">
         <img
           src="/images/complex/pool.webp"
