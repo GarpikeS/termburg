@@ -4,7 +4,7 @@ import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
 import Badge from '@/components/ui/Badge';
-import { dzenArticles } from '@/data/dzen';
+import { dzenArticles, DZEN_CHANNEL } from '@/data/dzen';
 
 interface NewsItem {
   id: number | string;
@@ -20,21 +20,21 @@ const fallbackNews: NewsItem[] = [
     id: 1,
     text: 'Открытие новой травяной парной\n\nМы рады представить обновлённую травяную парную с расширенным набором целебных трав и новой системой подачи пара.',
     date: '2026-02-15',
-    image: '/images/complex/gallery1.jpg',
+    image: '/images/complex/gallery1.webp',
     link: 'https://t.me/termburg',
   },
   {
     id: 2,
     text: 'Зимний фестиваль парения\n\nС 1 по 28 февраля приглашаем на зимний фестиваль парения — мастер-классы, авторские программы и подарки для гостей.',
     date: '2026-02-01',
-    image: '/images/complex/gallery2.jpg',
+    image: '/images/complex/gallery2.webp',
     link: 'https://t.me/termburg',
   },
   {
     id: 3,
     text: 'Новые SPA-программы\n\nВ нашем меню появились три новые SPA-программы: «Сибирский ритуал», «Восточная сказка» и «Скандинавский детокс».',
     date: '2026-01-20',
-    image: '/images/complex/gallery3.jpg',
+    image: '/images/complex/gallery3.webp',
     link: 'https://t.me/termburg',
   },
   {
@@ -297,7 +297,7 @@ export default function NewsPage() {
 
         <div className="mt-8 text-center">
           <a
-            href="https://dzen.ru/termburg"
+            href={DZEN_CHANNEL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-light transition-colors"

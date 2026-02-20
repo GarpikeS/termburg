@@ -9,19 +9,19 @@ const previewNews = [
     id: 1,
     title: 'Открытие новой травяной парной',
     date: '2026-02-15',
-    image: '/images/complex/gallery1.jpg',
+    image: '/images/complex/gallery1.webp',
   },
   {
     id: 2,
     title: 'Зимний фестиваль парения',
     date: '2026-02-01',
-    image: '/images/complex/gallery2.jpg',
+    image: '/images/complex/gallery2.webp',
   },
   {
     id: 3,
     title: 'Новые SPA-программы',
     date: '2026-01-20',
-    image: '/images/complex/gallery3.jpg',
+    image: '/images/complex/gallery3.webp',
   },
 ];
 

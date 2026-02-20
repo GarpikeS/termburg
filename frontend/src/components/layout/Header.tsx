@@ -10,8 +10,6 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Расписание', to: '/schedule' },
-  { label: 'Новости', to: '/news' },
   {
     label: 'О комплексе',
     children: [
@@ -24,14 +22,14 @@ const navItems: NavItem[] = [
     label: 'Услуги',
     children: [
       { to: '/services', label: 'SPA и парение' },
+      { to: '/swimming-school', label: 'Школа плавания' },
+      { to: '/steam-school', label: 'Школа парения' },
       { to: '/pricing', label: 'Прайс-лист' },
-      { to: '/buy', label: 'Купить онлайн' },
     ],
   },
-  {
-    label: 'Акции',
-    to: '/promotions',
-  },
+  { label: 'Расписание', to: '/schedule' },
+  { label: 'Акции', to: '/promotions' },
+  { label: 'Новости', to: '/news' },
   { label: 'Контакты', to: '/contacts' },
 ];
 
@@ -41,14 +39,6 @@ const mobileGroups = [
     title: 'Основное',
     links: [
       { to: '/', label: 'Главная' },
-      { to: '/schedule', label: 'Расписание' },
-      { to: '/news', label: 'Новости' },
-      { to: '/promotions', label: 'Акции' },
-    ],
-  },
-  {
-    title: 'Комплекс',
-    links: [
       { to: '/about', label: 'О Термбурге' },
       { to: '/termliny', label: 'Термлины' },
       { to: '/cafe', label: 'Кафетерий' },
@@ -58,15 +48,18 @@ const mobileGroups = [
     title: 'Услуги и цены',
     links: [
       { to: '/services', label: 'SPA и парение' },
+      { to: '/swimming-school', label: 'Школа плавания' },
+      { to: '/steam-school', label: 'Школа парения' },
       { to: '/pricing', label: 'Прайс-лист' },
-      { to: '/buy', label: 'Купить онлайн' },
+      { to: '/schedule', label: 'Расписание' },
     ],
   },
   {
     title: 'Ещё',
     links: [
+      { to: '/promotions', label: 'Акции' },
+      { to: '/news', label: 'Новости' },
       { to: '/contacts', label: 'Контакты' },
-      { to: '/contacts#partners', label: 'Сотрудничество' },
       { to: '/contacts#careers', label: 'Вакансии' },
     ],
   },
@@ -206,12 +199,12 @@ export default function Header() {
     >
       <div className="absolute bottom-0 left-0 right-0 gold-separator" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl 2xl:max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo + City */}
           <div className="flex items-center gap-4">
             <Link to="/" className="flex-shrink-0 flex items-center gap-2.5" onClick={closeMobileMenu}>
-              <img src="/images/termburg-logo.svg" alt="" className="h-7 w-7 md:h-8 md:w-8 opacity-70" />
+              <img src="/favicon.ico" alt="" className="h-7 w-7 md:h-8 md:w-8" />
               <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary md:text-2xl">
                 ТЕРМБУРГ
               </span>

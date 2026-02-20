@@ -46,10 +46,10 @@ const partnerDirections = [
 ];
 
 const vacancies = [
-  { title: 'Банщик-парильщик', type: 'Полная занятость', salary: 'от 80 000 ₽', hot: true },
-  { title: 'SPA-мастер', type: 'Полная занятость', salary: 'от 70 000 ₽', hot: false },
-  { title: 'Администратор рецепции', type: 'Сменный график', salary: 'от 55 000 ₽', hot: true },
-  { title: 'Тренер по плаванию', type: 'Частичная занятость', salary: 'от 60 000 ₽', hot: false },
+  { title: 'Банщик-парильщик', type: 'Полная занятость', salary: 'от 80 000 ₽', hot: true, image: '/images/services/steam-author.webp' },
+  { title: 'SPA-мастер', type: 'Полная занятость', salary: 'от 70 000 ₽', hot: false, image: '/images/services/spa-classic.webp' },
+  { title: 'Администратор рецепции', type: 'Сменный график', salary: 'от 55 000 ₽', hot: true, image: '/images/complex/gallery9.webp' },
+  { title: 'Тренер по плаванию', type: 'Частичная занятость', salary: 'от 60 000 ₽', hot: false, image: '/images/complex/pool.webp' },
 ];
 
 export default function ContactsPage() {
@@ -216,90 +216,94 @@ export default function ContactsPage() {
 
       {/* Сотрудничество */}
       <Section id="partners" title="Сотрудничество" subtitle="Открыты для партнёрства и совместных проектов">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-10">
-          {partnerDirections.map((dir) => (
-            <div
-              key={dir.title}
-              className="rounded-2xl bg-surface border border-border/50 p-5 hover:border-primary/30 transition-all duration-300 text-center"
-            >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <dir.icon className="w-6 h-6 text-primary" />
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Left — направления */}
+          <div className="grid gap-4 sm:grid-cols-2 content-start">
+            {partnerDirections.map((dir) => (
+              <div
+                key={dir.title}
+                className="rounded-2xl bg-surface border border-border/50 p-5 hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <dir.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="text-sm font-bold text-text-primary mb-1">{dir.title}</h3>
+                <p className="text-xs text-text-secondary">{dir.description}</p>
               </div>
-              <h3 className="text-sm font-bold text-text-primary mb-1">{dir.title}</h3>
-              <p className="text-xs text-text-secondary">{dir.description}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="max-w-2xl mx-auto">
-          {partnerSubmitted ? (
-            <div className="rounded-2xl bg-surface border border-primary/30 p-10 text-center">
-              <Handshake className="mx-auto mb-4 h-12 w-12 text-primary" />
-              <h3 className="text-xl font-bold text-text-primary mb-2">Заявка отправлена!</h3>
-              <p className="text-text-secondary">Мы свяжемся с вами в ближайшее время.</p>
-            </div>
-          ) : (
-            <form onSubmit={handlePartnerSubmit} className="rounded-2xl bg-surface border border-border/50 p-8 space-y-5">
-              <div className="grid gap-5 sm:grid-cols-2">
+          {/* Right — форма */}
+          <div>
+            {partnerSubmitted ? (
+              <div className="rounded-2xl bg-surface border border-primary/30 p-10 text-center">
+                <Handshake className="mx-auto mb-4 h-12 w-12 text-primary" />
+                <h3 className="text-xl font-bold text-text-primary mb-2">Заявка отправлена!</h3>
+                <p className="text-text-secondary">Мы свяжемся с вами в ближайшее время.</p>
+              </div>
+            ) : (
+              <form onSubmit={handlePartnerSubmit} className="rounded-2xl bg-surface border border-border/50 p-8 space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label className="block text-sm font-medium text-text-primary mb-1.5">Компания</label>
+                    <input
+                      type="text"
+                      required
+                      value={partnerForm.company}
+                      onChange={(e) => setPartnerForm({ ...partnerForm, company: e.target.value })}
+                      placeholder="ООО «Название»"
+                      className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-text-primary mb-1.5">Ваше имя</label>
+                    <input
+                      type="text"
+                      required
+                      value={partnerForm.name}
+                      onChange={(e) => setPartnerForm({ ...partnerForm, name: e.target.value })}
+                      placeholder="Иван Иванов"
+                      className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
                 <div>
-                  <label className="block text-sm font-medium text-text-primary mb-1.5">Компания</label>
+                  <label className="block text-sm font-medium text-text-primary mb-1.5">Email</label>
                   <input
-                    type="text"
+                    type="email"
                     required
-                    value={partnerForm.company}
-                    onChange={(e) => setPartnerForm({ ...partnerForm, company: e.target.value })}
-                    placeholder="ООО «Название»"
+                    value={partnerForm.email}
+                    onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
+                    placeholder="ivan@company.ru"
                     className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-text-primary mb-1.5">Ваше имя</label>
-                  <input
-                    type="text"
+                  <label className="block text-sm font-medium text-text-primary mb-1.5">Сообщение</label>
+                  <textarea
                     required
-                    value={partnerForm.name}
-                    onChange={(e) => setPartnerForm({ ...partnerForm, name: e.target.value })}
-                    placeholder="Иван Иванов"
-                    className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
+                    rows={3}
+                    value={partnerForm.message}
+                    onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })}
+                    placeholder="Расскажите о вашем предложении..."
+                    className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors resize-none"
                   />
                 </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-text-primary mb-1.5">Email</label>
-                <input
-                  type="email"
-                  required
-                  value={partnerForm.email}
-                  onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
-                  placeholder="ivan@company.ru"
-                  className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-text-primary mb-1.5">Сообщение</label>
-                <textarea
-                  required
-                  rows={3}
-                  value={partnerForm.message}
-                  onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })}
-                  placeholder="Расскажите о вашем предложении..."
-                  className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors resize-none"
-                />
-              </div>
-              <div className="flex flex-wrap items-center gap-4">
-                <button
-                  type="submit"
-                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-light transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                  Отправить заявку
-                </button>
-                <a href="mailto:partners@termburg.ru" className="text-sm text-primary hover:text-primary-light transition-colors">
-                  partners@termburg.ru
-                </a>
-              </div>
-            </form>
-          )}
+                <div className="flex flex-wrap items-center gap-4">
+                  <button
+                    type="submit"
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-light transition-colors"
+                  >
+                    <Send className="w-4 h-4" />
+                    Отправить заявку
+                  </button>
+                  <a href="mailto:partners@termburg.ru" className="text-sm text-primary hover:text-primary-light transition-colors">
+                    partners@termburg.ru
+                  </a>
+                </div>
+              </form>
+            )}
+          </div>
         </div>
       </Section>
 
@@ -309,20 +313,25 @@ export default function ContactsPage() {
           {vacancies.map((v) => (
             <div
               key={v.title}
-              className="rounded-2xl bg-surface border border-border/50 p-6 hover:border-primary/30 transition-all duration-300"
+              className="group rounded-2xl bg-surface border border-border/50 overflow-hidden hover:border-primary/30 transition-all duration-300"
             >
-              <div className="flex items-start justify-between gap-2 mb-2">
-                <h3 className="text-base font-bold text-text-primary">{v.title}</h3>
-                {v.hot && (
-                  <Badge variant="gold" className="flex items-center gap-1 flex-shrink-0 text-xs">
-                    <Flame className="w-3 h-3" />
-                    Горящая
-                  </Badge>
-                )}
+              <div className="h-32 overflow-hidden">
+                <img src={v.image} alt={v.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-text-secondary">{v.type}</span>
-                <span className="text-sm font-semibold text-primary">{v.salary}</span>
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <h3 className="text-base font-bold text-text-primary">{v.title}</h3>
+                  {v.hot && (
+                    <Badge variant="gold" className="flex items-center gap-1 flex-shrink-0 text-xs">
+                      <Flame className="w-3 h-3" />
+                      Горящая
+                    </Badge>
+                  )}
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-text-secondary">{v.type}</span>
+                  <span className="text-sm font-semibold text-primary">{v.salary}</span>
+                </div>
               </div>
             </div>
           ))}

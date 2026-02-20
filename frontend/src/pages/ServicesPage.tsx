@@ -1,45 +1,58 @@
-import { CheckCircle, Clock, Sparkles, Waves, GraduationCap, Ticket, Gift, CalendarCheck } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { CheckCircle, Clock, Sparkles, Waves, Ticket, Gift, CalendarCheck, X, CheckCircle2 } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
-import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import TicketButton from '@/components/ui/TicketButton';
 import Container from '@/components/ui/Container';
+import Card from '@/components/ui/Card';
 import { useBooking } from '@/context/BookingContext';
 import {
   includedServices,
   spaServices,
   steamServices,
-  swimmingSchool,
   type ServiceItem,
 } from '@/data/services';
 
 const spaImages: Record<string, string> = {
-  'spa-classic': '/images/services/spa-classic.jpg',
-  'spa-thai': '/images/services/spa-thai.jpg',
-  'spa-stone': '/images/services/spa-stone.jpg',
-  'spa-relax': '/images/services/spa-relax.jpg',
-  'spa-detox': '/images/services/spa-detox.jpg',
-  'spa-peeling': '/images/services/spa-peeling.jpg',
+  'spa-classic': '/images/services/spa-classic.webp',
+  'spa-thai': '/images/services/spa-thai.webp',
+  'spa-stone': '/images/services/spa-stone.webp',
+  'spa-relax': '/images/services/spa-relax.webp',
+  'spa-detox': '/images/services/spa-detox.webp',
+  'spa-peeling': '/images/services/spa-peeling.webp',
 };
 
 const steamImages: Record<string, string> = {
-  'steam-author': '/images/services/steam-author.jpg',
-  'steam-couple': '/images/services/steam-couple.jpg',
-  'steam-corporate': '/images/services/steam-corporate.jpg',
-  'steam-kids': '/images/services/steam-kids.jpg',
+  'steam-author': '/images/services/steam-author.webp',
+  'steam-couple': '/images/services/steam-couple.webp',
+  'steam-corporate': '/images/services/steam-corporate.webp',
+  'steam-kids': '/images/services/steam-kids.webp',
 };
 
-function ServiceCard({ service, image }: { service: ServiceItem; image?: string }) {
+function ServiceCard({
+  service,
+  image,
+  onClick,
+}: {
+  service: ServiceItem;
+  image?: string;
+  onClick?: () => void;
+}) {
+  const hasDetails = !!service.fullDescription;
+
   return (
-    <Card className="p-0 overflow-hidden flex flex-col">
+    <Card
+      className={`p-0 overflow-hidden flex flex-col ${hasDetails ? 'cursor-pointer hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300' : ''}`}
+      onClick={hasDetails ? onClick : undefined}
+    >
       {image && (
         <div className="h-40 overflow-hidden">
           <img
             src={image}
             alt={service.name}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${hasDetails ? 'group-hover:scale-105 transition-transform duration-500' : ''}`}
             loading="lazy"
           />
         </div>
@@ -56,13 +69,119 @@ function ServiceCard({ service, image }: { service: ServiceItem; image?: string 
             {service.priceNote || `${service.price.toLocaleString('ru-RU')}\u00A0\u20BD`}
           </span>
         </div>
+        {hasDetails && (
+          <p className="mt-2 text-xs text-primary/70 text-center">Нажмите, чтобы узнать подробнее</p>
+        )}
       </div>
     </Card>
   );
 }
 
+function ServiceModal({
+  service,
+  image,
+  onClose,
+}: {
+  service: ServiceItem;
+  image?: string;
+  onClose: () => void;
+}) {
+  const { openBooking } = useBooking();
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
+      <div
+        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-surface border border-border shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Image */}
+        {image && (
+          <div className="h-56 sm:h-64 overflow-hidden rounded-t-2xl">
+            <img src={image} alt={service.name} className="w-full h-full object-cover" />
+          </div>
+        )}
+
+        {/* Close */}
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white/80 hover:text-white transition-colors"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Content */}
+        <div className="p-6 sm:p-8">
+          <h2 className="text-2xl font-bold text-text-primary mb-2">{service.name}</h2>
+          <div className="flex items-center gap-4 mb-5">
+            <span className="flex items-center gap-1.5 text-sm text-text-secondary">
+              <Clock className="h-4 w-4" />
+              {service.duration}
+            </span>
+            <span className="text-lg font-bold text-primary">
+              {service.priceNote || `${service.price.toLocaleString('ru-RU')}\u00A0\u20BD`}
+            </span>
+          </div>
+
+          {service.fullDescription && (
+            <p className="text-text-secondary leading-relaxed mb-6">
+              {service.fullDescription}
+            </p>
+          )}
+
+          {service.includes && service.includes.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold text-text-primary uppercase tracking-wider mb-3">
+                Что входит
+              </h3>
+              <ul className="space-y-2">
+                {service.includes.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm text-text-secondary">
+                    <CheckCircle2 className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={() => { onClose(); openBooking(); }}
+            className="w-full rounded-xl bg-primary px-6 py-3 text-center font-semibold text-white hover:bg-primary-light transition-colors duration-200"
+          >
+            Записаться
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ServicesPage() {
   const { openBooking, openPurchase } = useBooking();
+  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | undefined>();
+
+  const allImages: Record<string, string> = { ...spaImages, ...steamImages };
+
+  const openModal = (service: ServiceItem) => {
+    setSelectedService(service);
+    setSelectedImage(allImages[service.id]);
+  };
 
   return (
     <PageLayout title="Услуги" description="Полный перечень услуг термального комплекса Термбург.">
@@ -146,7 +265,12 @@ export default function ServicesPage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {spaServices.map((service) => (
-            <ServiceCard key={service.id} service={service} image={spaImages[service.id]} />
+            <ServiceCard
+              key={service.id}
+              service={service}
+              image={spaImages[service.id]}
+              onClick={() => openModal(service)}
+            />
           ))}
         </div>
       </Section>
@@ -162,46 +286,13 @@ export default function ServicesPage() {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steamServices.map((service) => (
-            <ServiceCard key={service.id} service={service} image={steamImages[service.id]} />
-          ))}
-        </div>
-      </Section>
-
-      {/* Swimming school */}
-      <Section
-        title="Школа плавания"
-        subtitle="Обучение плаванию для детей и взрослых в термальном бассейне"
-        warm
-      >
-        <div className="mb-6">
-          <div className="mb-4 overflow-hidden rounded-xl">
-            <img
-              src="/images/complex/pool.webp"
-              alt="Школа плавания в Термбурге"
-              className="w-full h-56 md:h-72 object-cover"
-              loading="lazy"
+            <ServiceCard
+              key={service.id}
+              service={service}
+              image={steamImages[service.id]}
+              onClick={() => openModal(service)}
             />
-          </div>
-          <div className="flex items-center gap-2 text-info">
-            <GraduationCap className="h-5 w-5" />
-            <span className="text-sm font-medium">Сертифицированные тренеры с опытом от 5 лет</span>
-          </div>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {swimmingSchool.map((service) => (
-            <ServiceCard key={service.id} service={service} />
           ))}
-        </div>
-        <div className="mt-8 text-center">
-          <button
-            onClick={openBooking}
-            className="inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3 font-semibold text-background hover:bg-primary-light transition-colors"
-          >
-            Записаться на занятие
-          </button>
-          <p className="mt-3 text-sm text-text-secondary">
-            Или позвоните: <a href="tel:+79091674746" className="text-primary hover:underline">+7 (909) 167-47-46</a>
-          </p>
         </div>
       </Section>
 
@@ -218,6 +309,15 @@ export default function ServicesPage() {
           <TicketButton onClick={openBooking}>Забронировать посещение</TicketButton>
         </Container>
       </section>
+
+      {/* Service Modal */}
+      {selectedService && (
+        <ServiceModal
+          service={selectedService}
+          image={selectedImage}
+          onClose={() => setSelectedService(null)}
+        />
+      )}
     </PageLayout>
   );
 }

@@ -12,6 +12,8 @@ import {
   Wifi,
   Coffee,
   Shirt,
+  Package,
+  ShoppingBag,
 } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
@@ -25,6 +27,8 @@ import {
   weekendPricing,
   subscriptions,
   certificates,
+  giftBoxes,
+  merchItems,
 } from '@/data/pricing';
 import { spaServices } from '@/data/services';
 
@@ -37,6 +41,14 @@ const includedItems = [
   { icon: Coffee, label: 'Чай' },
   { icon: Wifi, label: 'Wi-Fi' },
 ];
+
+/* ─── Subscription highlights ─── */
+const subscriptionHighlights: Record<string, { badge?: string; badgeVariant?: 'default' | 'gold' | 'success' }> = {
+  'sub-day-1': { badge: 'Выгодно', badgeVariant: 'success' },
+  'sub-parent-1': { badge: 'Для семьи', badgeVariant: 'gold' },
+  'sub-family-1': { badge: 'Для семьи', badgeVariant: 'gold' },
+  'sub-trio-1': { badge: 'Выгодно', badgeVariant: 'success' },
+};
 
 /* ─── Pricing table ─── */
 function PricingTable() {
@@ -159,25 +171,31 @@ function PricingTable() {
   );
 }
 
-/* ─── Subscription card ─── */
+/* ─── Subscription card (with CTA) ─── */
 function SubscriptionCard({
   name,
   period,
   price,
   discount,
   description,
+  badge,
+  badgeVariant,
+  onPurchase,
 }: {
   name: string;
   period: string;
   price: number;
   discount: number;
   description?: string;
+  badge?: string;
+  badgeVariant?: 'default' | 'gold' | 'success';
+  onPurchase: () => void;
 }) {
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-2xl bg-surface border border-border/50 hover:border-primary/20 p-5 transition-all duration-300">
       {/* Icon */}
       <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-        <CreditCardIcon className="h-6 w-6 text-primary" />
+        <Users className="h-6 w-6 text-primary" />
       </div>
 
       {/* Info */}
@@ -190,26 +208,30 @@ function SubscriptionCard({
               -{discount}%
             </Badge>
           )}
+          {badge && (
+            <Badge variant={badgeVariant || 'default'} className="text-xs py-0.5">
+              {badge}
+            </Badge>
+          )}
         </div>
         <p className="text-sm text-text-secondary mt-0.5">{period}</p>
         {description && <p className="text-xs text-text-secondary mt-1">{description}</p>}
       </div>
 
-      {/* Price */}
-      <div className="text-right flex-shrink-0 sm:ml-auto">
+      {/* Price + CTA */}
+      <div className="flex items-center gap-4 flex-shrink-0 sm:ml-auto">
         <p className="text-2xl font-bold text-primary">
           {price.toLocaleString('ru-RU')}&nbsp;&#8381;
         </p>
+        <TicketButton onClick={onPurchase} className="whitespace-nowrap">
+          Оформить
+        </TicketButton>
       </div>
     </div>
   );
 }
 
-function CreditCardIcon({ className }: { className?: string }) {
-  return <Users className={className} />;
-}
-
-/* ─── Certificate card ─── */
+/* ─── Certificate card (clickable) ─── */
 const certGradients = [
   'from-amber-700/20 via-amber-600/10 to-amber-800/5 border-amber-600/20',
   'from-primary/20 via-primary/10 to-primary/5 border-primary/30',
@@ -221,15 +243,18 @@ function CertificateCard({
   price,
   description,
   index,
+  onPurchase,
 }: {
   name: string;
   price: number;
   description: string;
   index: number;
+  onPurchase: () => void;
 }) {
   return (
     <div
-      className={`relative rounded-2xl bg-gradient-to-br ${certGradients[index] || certGradients[0]} border p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+      onClick={onPurchase}
+      className={`relative rounded-2xl bg-gradient-to-br ${certGradients[index] || certGradients[0]} border p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer`}
     >
       <div className="w-14 h-14 rounded-full bg-white/80 flex items-center justify-center mx-auto mb-4 shadow-sm">
         <Gift className="w-7 h-7 text-primary" />
@@ -240,15 +265,21 @@ function CertificateCard({
         {price.toLocaleString('ru-RU')}&nbsp;&#8381;
       </p>
       <p className="text-xs text-text-secondary mt-2">Действителен 6 месяцев</p>
+      <div className="mt-4">
+        <span className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20">
+          <Gift className="h-4 w-4" />
+          Подарить
+        </span>
+      </div>
     </div>
   );
 }
 
 /* ─── SPA card with overlay ─── */
 const spaImages = [
-  '/images/complex/gallery1.jpg',
-  '/images/complex/gallery2.jpg',
-  '/images/complex/gallery3.jpg',
+  '/images/complex/gallery1.webp',
+  '/images/complex/gallery2.webp',
+  '/images/complex/gallery3.webp',
   '/images/complex/gallery4.webp',
   '/images/complex/gallery5.webp',
   '/images/complex/sauna.webp',
@@ -300,7 +331,7 @@ function SpaCard({
 
 /* ─── Main page ─── */
 export default function PricingPage() {
-  const { openBooking } = useBooking();
+  const { openBooking, openPurchase } = useBooking();
 
   return (
     <PageLayout title="Прайс-лист" description="Цены на посещение и услуги термального комплекса Термбург.">
@@ -334,27 +365,33 @@ export default function PricingPage() {
         <PricingTable />
       </Section>
 
-      {/* ── Subscriptions ── */}
+      {/* ── Subscriptions (with CTA) ── */}
       <Section
         title="Абонементы"
         subtitle="Выгодные предложения для постоянных гостей"
         warm
       >
         <div className="space-y-4">
-          {subscriptions.map((sub) => (
-            <SubscriptionCard
-              key={sub.id}
-              name={sub.name}
-              period={sub.period}
-              price={sub.adultPrice}
-              discount={sub.discount}
-              description={sub.description}
-            />
-          ))}
+          {subscriptions.map((sub) => {
+            const highlight = subscriptionHighlights[sub.id];
+            return (
+              <SubscriptionCard
+                key={sub.id}
+                name={sub.name}
+                period={sub.period}
+                price={sub.adultPrice}
+                discount={sub.discount}
+                description={sub.description}
+                badge={highlight?.badge}
+                badgeVariant={highlight?.badgeVariant}
+                onPurchase={() => openPurchase({ name: `Абонемент «${sub.name}»`, price: `${sub.adultPrice.toLocaleString('ru-RU')} ₽` })}
+              />
+            );
+          })}
         </div>
       </Section>
 
-      {/* ── Gift certificates ── */}
+      {/* ── Gift certificates (clickable) ── */}
       <Section
         title="Подарочные сертификаты"
         subtitle="Лучший подарок — впечатления"
@@ -367,7 +404,69 @@ export default function PricingPage() {
               price={cert.price}
               description={cert.description}
               index={i}
+              onPurchase={() => openPurchase({ name: cert.name, price: `${cert.price.toLocaleString('ru-RU')} ₽` })}
             />
+          ))}
+        </div>
+      </Section>
+
+      {/* ── Gift boxes ── */}
+      <Section
+        title="Подарочные боксы"
+        subtitle="Готовые наборы для незабываемого подарка"
+        warm
+      >
+        <div className="grid md:grid-cols-2 gap-8">
+          {giftBoxes.map((box) => (
+            <div
+              key={box.id}
+              className="flex flex-col items-center text-center rounded-2xl bg-surface border border-border/50 hover:border-primary/20 p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+              onClick={() => openPurchase({ name: box.name, price: `${box.price.toLocaleString('ru-RU')} ₽` })}
+            >
+              <div className="w-16 h-16 rounded-full bg-warm-gold/10 flex items-center justify-center mb-6">
+                <Package className="w-8 h-8 text-warm-gold" />
+              </div>
+              <h3 className="font-heading text-2xl font-bold text-text-primary">
+                {box.name}
+              </h3>
+              <p className="mt-3 text-text-secondary">{box.contents}</p>
+              <p className="mt-4 text-2xl font-bold text-primary">
+                {box.price.toLocaleString('ru-RU')}&nbsp;&#8381;
+              </p>
+              <div className="mt-6">
+                <TicketButton onClick={(e) => { e.stopPropagation(); openPurchase({ name: box.name, price: `${box.price.toLocaleString('ru-RU')} ₽` }); }}>
+                  Купить бокс
+                </TicketButton>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* ── Merch ── */}
+      <Section
+        title="Мерч Термбурга"
+        subtitle="Заберите частичку Термбурга с собой"
+      >
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {merchItems.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col rounded-2xl bg-surface border border-border/50 hover:border-primary/20 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+              onClick={() => openPurchase({ name: item.name, price: `${item.price.toLocaleString('ru-RU')} ₽` })}
+            >
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <ShoppingBag className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-lg font-bold text-text-primary">{item.name}</h3>
+              <p className="mt-1 text-sm text-text-secondary flex-1">{item.description}</p>
+              <div className="mt-4 flex items-center justify-between">
+                <p className="text-xl font-bold text-primary">
+                  {item.price.toLocaleString('ru-RU')}&nbsp;&#8381;
+                </p>
+                <span className="text-sm font-medium text-primary hover:underline">Купить</span>
+              </div>
+            </div>
           ))}
         </div>
       </Section>

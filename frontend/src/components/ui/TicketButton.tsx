@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 interface TicketButtonProps {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
 

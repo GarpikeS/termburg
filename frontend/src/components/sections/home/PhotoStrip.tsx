@@ -1,16 +1,16 @@
 const photos = [
   { src: '/images/complex/gallery5.webp', alt: 'Травяная парная с тёплым освещением' },
-  { src: '/images/complex/gallery9.jpg', alt: 'Зона отдыха комплекса' },
+  { src: '/images/complex/gallery9.webp', alt: 'Зона отдыха комплекса' },
   { src: '/images/complex/herbal.webp', alt: 'Травяная парная' },
-  { src: '/images/complex/gallery14.jpg', alt: 'Термальный комплекс' },
+  { src: '/images/complex/gallery14.webp', alt: 'Термальный комплекс' },
   { src: '/images/complex/gallery4.webp', alt: 'Парная с каменкой и травами' },
-  { src: '/images/complex/gallery10.jpg', alt: 'Термальная зона' },
+  { src: '/images/complex/gallery10.webp', alt: 'Термальная зона' },
   { src: '/images/complex/barrels.webp', alt: 'Бани-бочки на террасе' },
-  { src: '/images/complex/gallery12.jpg', alt: 'Парная' },
+  { src: '/images/complex/gallery12.webp', alt: 'Парная' },
   { src: '/images/complex/gallery8.webp', alt: 'Парная с вениками' },
-  { src: '/images/complex/gallery11.jpg', alt: 'Парная с камнями' },
+  { src: '/images/complex/gallery11.webp', alt: 'Парная с камнями' },
   { src: '/images/complex/gallery6.webp', alt: 'Каменка в парной' },
-  { src: '/images/complex/gallery13.jpg', alt: 'Зона релаксации' },
+  { src: '/images/complex/gallery13.webp', alt: 'Зона релаксации' },
 ];
 
 export default function PhotoStrip() {

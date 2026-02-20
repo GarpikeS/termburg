@@ -141,6 +141,20 @@ export const subscriptions: Subscription[] = [
   },
 ];
 
+export interface GiftBox {
+  id: string;
+  name: string;
+  contents: string;
+  price: number;
+}
+
+export interface MerchItem {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+}
+
 export const certificates: Certificate[] = [
   {
     id: 'cert-3000',
@@ -160,5 +174,28 @@ export const certificates: Certificate[] = [
     price: 10000,
     description: 'Премиальный подарок с SPA-услугами',
   },
+];
+
+export const giftBoxes: GiftBox[] = [
+  {
+    id: 'box-relax',
+    name: 'Бокс Релакс',
+    contents: 'Сертификат + халат + набор чая',
+    price: 7500,
+  },
+  {
+    id: 'box-premium',
+    name: 'Бокс Премиум',
+    contents: 'Сертификат + халат + SPA-набор + шампанское',
+    price: 15000,
+  },
+];
+
+export const merchItems: MerchItem[] = [
+  { id: 'merch-robe', name: 'Халат Термбург', price: 3500, description: 'Махровый халат с вышивкой логотипа' },
+  { id: 'merch-towel', name: 'Полотенце Термбург', price: 1200, description: 'Банное полотенце из египетского хлопка' },
+  { id: 'merch-slippers', name: 'Тапочки Термбург', price: 800, description: 'Уютные войлочные тапочки' },
+  { id: 'merch-tea', name: 'Чайный набор', price: 1500, description: 'Коллекция травяных чаёв из нашего кафетерия' },
+  { id: 'merch-cap', name: 'Банная шапка', price: 600, description: 'Войлочная шапка для парной с логотипом' },
 ];
 

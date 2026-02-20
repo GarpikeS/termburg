@@ -11,7 +11,6 @@ const SchedulePage = lazy(() => import('@/pages/SchedulePage'));
 const PricingPage = lazy(() => import('@/pages/PricingPage'));
 const ServicesPage = lazy(() => import('@/pages/ServicesPage'));
 const PromotionsPage = lazy(() => import('@/pages/PromotionsPage'));
-const BuyPage = lazy(() => import('@/pages/BuyPage'));
 const ContactsPage = lazy(() => import('@/pages/ContactsPage'));
 const CafePage = lazy(() => import('@/pages/CafePage'));
 const TermlinyPage = lazy(() => import('@/pages/TermlinyPage'));
@@ -22,6 +21,8 @@ const OfferPage = lazy(() => import('@/pages/OfferPage'));
 const PrivacyPage = lazy(() => import('@/pages/PrivacyPage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const AccountPage = lazy(() => import('@/pages/AccountPage'));
+const SwimmingSchoolPage = lazy(() => import('@/pages/SwimmingSchoolPage'));
+const SteamSchoolPage = lazy(() => import('@/pages/SteamSchoolPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function LoadingFallback() {
@@ -46,8 +47,9 @@ export default function App() {
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/swimming-school" element={<SwimmingSchoolPage />} />
+          <Route path="/steam-school" element={<SteamSchoolPage />} />
           <Route path="/promotions" element={<PromotionsPage />} />
-          <Route path="/buy" element={<BuyPage />} />
           <Route path="/contacts" element={<ContactsPage />} />
           <Route path="/cafe" element={<CafePage />} />
           <Route path="/termliny" element={<TermlinyPage />} />

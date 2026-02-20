@@ -7,45 +7,49 @@ export interface DzenArticle {
   date: string;
 }
 
+const DZEN_CHANNEL = 'https://dzen.ru/id/652f7beb5939720dfbfa6bc8';
+
 export const dzenArticles: DzenArticle[] = [
   {
     id: 1,
-    title: 'Как правильно париться в русской бане: гид для новичков',
-    excerpt: 'Разбираемся в тонкостях парения: температура, веники, контрасты и время заходов. Советы от мастеров Термбурга.',
-    url: 'https://dzen.ru/termburg',
-    image: '/images/complex/gallery8.webp',
+    title: 'Детская анимация каждую субботу в Термбурге',
+    excerpt: 'Каждую субботу в 15:00 приглашаем маленьких гостей на увлекательную детскую анимацию в нашем уютном Термбурге!',
+    url: 'https://dzen.ru/shorts/698ae7c4e2b37f7e4e8c206b',
+    image: '/images/complex/gallery4.webp',
     date: '2026-02-10',
   },
   {
     id: 2,
-    title: '5 причин посещать баню зимой',
-    excerpt: 'Зимнее парение — это не только приятно, но и невероятно полезно. Рассказываем о пяти главных преимуществах.',
-    url: 'https://dzen.ru/termburg',
+    title: 'Отборочный этап чемпионата по банному мастерству ЖОГОВО 2026',
+    excerpt: 'В Москве морозы, а у нас в Термбурге жарко! Приглашаем на отборочный этап Народного чемпионата по банному мастерству.',
+    url: 'https://dzen.ru/shorts/6982e6b889768b7def949c78',
     image: '/images/complex/gallery5.webp',
-    date: '2026-01-25',
+    date: '2026-02-04',
   },
   {
     id: 3,
-    title: 'Хаммам vs русская баня: что выбрать?',
-    excerpt: 'Сравниваем две великие банные традиции. Температура, влажность, процедуры — подробный разбор для каждого.',
-    url: 'https://dzen.ru/termburg',
-    image: '/images/complex/gallery6.webp',
-    date: '2026-01-15',
+    title: 'Школа плавания в термальном комплексе Термбург',
+    excerpt: 'Обучение плаванию для детей и взрослых в нашем термальном бассейне. Сертифицированные тренеры, индивидуальный подход.',
+    url: 'https://termburg.ru/news/shkola-plavaniya-v-termalnom-komplekse-termburg/',
+    image: '/images/complex/pool.webp',
+    date: '2025-09-25',
   },
   {
     id: 4,
-    title: 'Детокс в бане: миф или реальность?',
-    excerpt: 'Учёные и банщики сходятся во мнении: баня действительно помогает очищению организма. Но есть нюансы.',
-    url: 'https://dzen.ru/termburg',
-    image: '/images/complex/sauna.webp',
-    date: '2026-01-05',
+    title: 'Термбург — лучшие бани Москвы',
+    excerpt: 'Почему Термбург входит в топ банных комплексов столицы: 15+ термальных зон, авторские парения и уникальная атмосфера.',
+    url: 'https://termburg.ru/news/termburg-luchshie-bani-moskvy/',
+    image: '/images/complex/gallery6.webp',
+    date: '2025-09-24',
   },
   {
     id: 5,
-    title: 'Травяные настои для парной: рецепты от Термбурга',
-    excerpt: 'Делимся рецептами ароматных настоев из мяты, эвкалипта и лаванды, которые мы используем в травяной парной.',
-    url: 'https://dzen.ru/termburg',
+    title: 'Баня в Москве в термальном комплексе Термбург',
+    excerpt: 'Всё о банях Термбурга: русская парная, хаммам, японское офуро и скандинавские парения — в одном пространстве.',
+    url: 'https://termburg.ru/news/banya-v-moskve-v-termalnom-komplekse-termburg/',
     image: '/images/complex/herbal.webp',
-    date: '2025-12-20',
+    date: '2025-11-12',
   },
 ];
+
+export { DZEN_CHANNEL };

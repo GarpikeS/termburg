@@ -34,7 +34,7 @@ export default function CafePage() {
       <PageHero
         title="Кафетерий"
         subtitle="Уютный кафетерий Термбурга — идеальное место для отдыха между процедурами. Натуральные напитки, лёгкие закуски и домашние десерты."
-        backgroundImage="/images/promo/coffee.jpg"
+        backgroundImage="/images/promo/coffee.webp"
       />
 
       {/* Menu sections */}

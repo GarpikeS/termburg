@@ -5,6 +5,8 @@ const navCol1 = [
   { to: '/about', label: 'О Термбурге' },
   { to: '/termliny', label: 'Термлины' },
   { to: '/services', label: 'Услуги' },
+  { to: '/swimming-school', label: 'Школа плавания' },
+  { to: '/steam-school', label: 'Школа парения' },
   { to: '/schedule', label: 'Расписание' },
   { to: '/pricing', label: 'Прайс-лист' },
 ];
@@ -13,7 +15,6 @@ const navCol2 = [
   { to: '/promotions', label: 'Акции' },
   { to: '/news', label: 'Новости' },
   { to: '/cafe', label: 'Кафетерий' },
-  { to: '/buy', label: 'Купить онлайн' },
   { to: '/contacts', label: 'Контакты' },
 ];
 
@@ -27,7 +28,7 @@ export default function Footer() {
     <footer className="relative bg-dark-surface ornament-pattern">
       <div className="gold-separator" />
 
-      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <div className="relative mx-auto max-w-7xl 2xl:max-w-[1400px] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Column 1: Logo + Social */}
           <div>

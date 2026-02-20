@@ -11,7 +11,7 @@ export default function Container({ children, className }: ContainerProps) {
   return (
     <div
       className={twMerge(
-        clsx('max-w-7xl mx-auto px-4 sm:px-6 lg:px-8', className),
+        clsx('max-w-7xl 2xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8', className),
       )}
     >
       {children}

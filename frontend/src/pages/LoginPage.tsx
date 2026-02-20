@@ -16,7 +16,7 @@ export default function LoginPage() {
         {/* Background */}
         <div className="absolute inset-0">
           <img
-            src="/images/complex/gallery2.jpg"
+            src="/images/complex/gallery2.webp"
             alt=""
             className="w-full h-full object-cover"
           />
