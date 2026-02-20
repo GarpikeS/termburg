@@ -83,11 +83,11 @@ export default function PromotionsPage() {
               Воспользуйтесь предложениями
             </h2>
             <p className="mb-8 text-white/70">
-              Забронируйте посещение и сообщите администратору об акции при оплате. Акции не суммируются.
+              Купите билет и сообщите администратору об акции при оплате. Акции не суммируются.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <TicketButton onClick={openBooking}>
-                Забронировать
+                Купить билет
                 <ArrowRight className="ml-2 h-4 w-4" />
               </TicketButton>
             </div>

@@ -103,7 +103,7 @@ export default function BathDetailModal() {
             }}
             className="w-full rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-primary-light active:brightness-90"
           >
-            Забронировать посещение
+            Купить билет
           </button>
         </div>
       </div>

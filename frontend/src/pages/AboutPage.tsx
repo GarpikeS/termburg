@@ -74,23 +74,68 @@ export default function AboutPage() {
 
       {/* Intro */}
       <Section>
-        <div className="mx-auto max-w-4xl flex flex-col-reverse md:flex-row items-start gap-8">
-          <div className="space-y-4 flex-1">
-            <p className="text-sm font-medium text-primary italic">Рассказывает Банник-Яромир, хранитель бань Термбурга</p>
+        <div className="grid lg:grid-cols-5 gap-10 items-start">
+          {/* Text — 3 columns */}
+          <div className="lg:col-span-3 space-y-6">
+            <h2 className="text-2xl md:text-3xl font-heading font-bold text-text-primary">
+              Добро пожаловать в Термбург
+            </h2>
             <p className="text-lg leading-relaxed text-text-primary">
-              Термбург — место, где сплелись термальные традиции со всего мира: римские термы, японское офуро, турецкий хаммам
-              и скандинавские парения. Всё это — в одном пространстве в районе Печатники.
+              Представьте себе уголок, где время течет иначе. Где жар русской бани с ароматным веником сменяется нежной лаской хаммама, а целебный воздух соляной сауны наполняет легкие свежестью. Это не просто термальный комплекс. Термбург — это портал в мир истинного отдыха, созданный для вашей семьи.
             </p>
+
+            <div>
+              <h3 className="text-lg font-bold text-text-primary mb-3">Здесь каждый найдет свою историю:</h3>
+              <ul className="space-y-2 text-text-secondary leading-relaxed">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">&#8226;</span>
+                  <span>Почувствуйте силу предков в русской, сибирской или шаманской парной под руководством лучших пармастеров.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">&#8226;</span>
+                  <span>Позвольте коже дышать в травяной сауне, а ногам — мягко согреваться в песчаной, которая так нравится нашим самым маленьким гостям.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">&#8226;</span>
+                  <span>Окунитесь в прохладу уличной купели, в тепло большого бассейна или расслабьтесь в гидромассажной ванне, пока малыши плещутся в своем, безопасном уголке.</span>
+                </li>
+              </ul>
+            </div>
+
             <p className="text-lg leading-relaxed text-text-secondary">
-              15+ термальных зон, авторские парения, купели под открытым небом и тишина, в которую хочется возвращаться.
-              Здесь каждый визит — не процедура, а ритуал.
+              Но Термбург — это больше, чем вода и пар. Это место встречи с душой славянства. Пока вы будете пить травяной чай на уютной террасе (летом — ловить лучи загара, а зимой — париться в бане-бочке и наслаждаться в теплой купели с гидромассажем под открытым небом), вас окружат древние легенды. Здесь живут термлины — добрые духи, которые хранят уют и рассказывают истории о наших корнях.
+            </p>
+            <p className="text-lg leading-relaxed text-text-primary">
+              Мы приглашаем вас не просто поправить здоровье, а восстановить душевное равновесие, прикоснуться к культуре и увезти с собой тепло в сердце.
+            </p>
+            <p className="text-lg leading-relaxed text-text-primary font-medium">
+              Подарите себе этот день — яркий, теплый и немного волшебный. Термбург ждет вас, чтобы подарить человеческое счастье!
+            </p>
+            <p className="text-primary font-medium italic">
+              Тепло пожаловать в гости — за новыми силами и старыми традициями!
             </p>
           </div>
-          <img
-            src="/images/termliny/yaromir.webp?v=2"
-            alt="Банник-Яромир — хранитель Термбурга"
-            className="w-40 h-40 md:w-56 md:h-56 rounded-2xl object-cover flex-shrink-0 mx-auto md:mx-0"
-          />
+
+          {/* Image — 2 columns */}
+          <div className="lg:col-span-2 lg:sticky lg:top-24">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/10">
+              <img
+                src="/images/termliny/yaromir.webp"
+                alt="Яромир — главный термлин Термбурга"
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <p className="text-white font-heading font-bold text-lg">Яромир</p>
+                <p className="text-white/70 text-sm">Главный термлин Термбурга</p>
+              </div>
+            </div>
+            <div className="mt-4 rounded-xl bg-primary/5 border border-primary/15 p-4 text-center">
+              <p className="text-sm text-text-secondary italic leading-relaxed">
+                «Я храню тепло этого места и встречаю каждого гостя как родного»
+              </p>
+            </div>
+          </div>
         </div>
       </Section>
 

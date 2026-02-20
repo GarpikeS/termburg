@@ -109,7 +109,7 @@ export default function BookingModal() {
       >
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-white px-6 py-4 rounded-t-2xl">
-          <h2 id="booking-title" className="font-heading text-xl font-bold text-text-primary">Забронировать посещение</h2>
+          <h2 id="booking-title" className="font-heading text-xl font-bold text-text-primary">Купить билет</h2>
           <button onClick={handleClose} className="rounded-lg p-1.5 hover:bg-surface-warm transition-colors" aria-label="Закрыть">
             <X className="h-5 w-5 text-text-secondary" />
           </button>

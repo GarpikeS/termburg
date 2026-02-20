@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CheckCircle, Clock, Sparkles, Waves, Ticket, Gift, CalendarCheck, X, CheckCircle2 } from 'lucide-react';
+import { CheckCircle, Clock, Sparkles, Waves, Ticket, Gift, CalendarCheck, X, CheckCircle2, Info, AlertTriangle } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
 import Section from '@/components/ui/Section';
@@ -209,8 +209,52 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* Купить */}
+      {/* What to bring + Procedure time notice */}
       <Section warm>
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* What to bring */}
+          <div className="rounded-2xl bg-surface border border-border/50 p-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Info className="w-5 h-5 text-sky-500" />
+              <h3 className="font-heading text-lg font-bold text-text-primary">Не забудьте взять с собой</h3>
+            </div>
+            <ul className="space-y-2.5">
+              {[
+                'Полотенце',
+                'Купальник',
+                'Шлёпки или резиновые тапочки',
+                'Мочалка, шампунь, гель для душа',
+                'Расчёска',
+                'Полотенце для головы или банную шапочку',
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2.5 text-sm text-text-secondary">
+                  <CheckCircle2 className="w-4 h-4 text-sky-500 flex-shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs text-text-secondary/70 mt-4 pt-3 border-t border-border/50">
+              Если вы что-то забудете — не переживайте! Всё можно приобрести на ресепшен.
+            </p>
+          </div>
+
+          {/* Procedure time notice */}
+          <div className="flex flex-col gap-4">
+            <div className="rounded-2xl bg-amber-50 border border-amber-200/50 p-6 flex-1">
+              <div className="flex items-center gap-2 mb-3">
+                <AlertTriangle className="w-5 h-5 text-amber-600" />
+                <h3 className="font-heading text-lg font-bold text-amber-800">Важно знать</h3>
+              </div>
+              <p className="text-sm text-amber-800/80 leading-relaxed">
+                Время, проведённое на процедурах (SPA, массаж, парения), <strong>не входит</strong> в оплаченное время посещения комплекса. Рекомендуем учитывать это при выборе тарифа.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Купить */}
+      <Section>
         <div className="grid gap-5 sm:grid-cols-3">
           <button
             type="button"
@@ -253,32 +297,11 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* SPA services */}
-      <Section
-        title="SPA-процедуры"
-        subtitle="Профессиональные процедуры для глубокого расслабления и восстановления"
-        warm
-      >
-        <div className="mb-6 flex items-center gap-2 text-accent">
-          <Sparkles className="h-5 w-5" />
-          <span className="text-sm font-medium">Записывайтесь заранее — количество мест ограничено</span>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {spaServices.map((service) => (
-            <ServiceCard
-              key={service.id}
-              service={service}
-              image={spaImages[service.id]}
-              onClick={() => openModal(service)}
-            />
-          ))}
-        </div>
-      </Section>
-
       {/* Steam services */}
       <Section
         title="Парения"
         subtitle="Индивидуальные и групповые программы парения от наших мастеров"
+        warm
       >
         <div className="mb-6 flex items-center gap-2 text-primary">
           <Waves className="h-5 w-5" />
@@ -296,17 +319,38 @@ export default function ServicesPage() {
         </div>
       </Section>
 
+      {/* SPA services */}
+      <Section
+        title="SPA-процедуры"
+        subtitle="Профессиональные процедуры для глубокого расслабления и восстановления"
+      >
+        <div className="mb-6 flex items-center gap-2 text-accent">
+          <Sparkles className="h-5 w-5" />
+          <span className="text-sm font-medium">Записывайтесь заранее — количество мест ограничено</span>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {spaServices.map((service) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              image={spaImages[service.id]}
+              onClick={() => openModal(service)}
+            />
+          ))}
+        </div>
+      </Section>
+
       {/* CTA */}
       <section className="relative bg-dark-surface ornament-pattern py-16 text-center">
         <div className="gold-separator absolute top-0 left-0 right-0" />
         <Container>
           <h2 className="mb-4 font-heading text-2xl font-bold text-white md:text-3xl">
-            Хотите забронировать услугу?
+            Хотите купить услугу?
           </h2>
           <p className="mx-auto mb-8 max-w-xl text-white/70">
             Оставьте заявку онлайн или позвоните нам, и мы подберём для вас идеальную программу.
           </p>
-          <TicketButton onClick={openBooking}>Забронировать посещение</TicketButton>
+          <TicketButton onClick={openBooking}>Купить билет</TicketButton>
         </Container>
       </section>
 

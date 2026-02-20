@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   Phone, MapPin, Train, Car, Bus, Mail, Clock,
   Handshake, Building2, Megaphone, Camera, PackageOpen, Send,
-  Briefcase, Heart, Flame,
+  Briefcase, Heart, Flame, ExternalLink,
 } from 'lucide-react';
 import PageLayout from '@/components/layout/PageLayout';
 import PageHero from '@/components/shared/PageHero';
@@ -38,6 +38,12 @@ const routeIcons: Record<RouteDirection['icon'], typeof Train> = {
   bus: Bus,
 };
 
+const routeRtt: Record<RouteDirection['icon'], string> = {
+  metro: 'mt',
+  car: 'auto',
+  bus: 'mt',
+};
+
 const partnerDirections = [
   { icon: Building2, title: 'Корпоративные мероприятия', description: 'Тимбилдинги, корпоративы, праздники' },
   { icon: Megaphone, title: 'Партнёрские программы', description: 'Кросс-маркетинг, совместные акции' },
@@ -55,6 +61,8 @@ const vacancies = [
 export default function ContactsPage() {
   const [partnerForm, setPartnerForm] = useState({ company: '', name: '', email: '', message: '' });
   const [partnerSubmitted, setPartnerSubmitted] = useState(false);
+  const [selectedVacancy, setSelectedVacancy] = useState<string>(vacancies[0].title);
+  const [careerSubmitted, setCareerSubmitted] = useState(false);
 
   const handlePartnerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -208,6 +216,17 @@ export default function ContactsPage() {
                     </li>
                   ))}
                 </ol>
+
+                {/* Yandex Maps route button */}
+                <a
+                  href={`https://yandex.ru/maps/?rtext=~55.680707,37.715830&rtt=${routeRtt[route.icon]}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary/10 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-primary hover:text-white transition-all duration-300"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Построить маршрут
+                </a>
               </div>
             );
           })}
@@ -309,47 +328,100 @@ export default function ContactsPage() {
 
       {/* Вакансии */}
       <Section id="careers" title="Вакансии" subtitle="Присоединяйтесь к команде Термбурга" warm>
-        <div className="grid gap-5 sm:grid-cols-2 max-w-3xl mx-auto mb-8">
-          {vacancies.map((v) => (
-            <div
-              key={v.title}
-              className="group rounded-2xl bg-surface border border-border/50 overflow-hidden hover:border-primary/30 transition-all duration-300"
-            >
-              <div className="h-32 overflow-hidden">
-                <img src={v.image} alt={v.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-              </div>
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <h3 className="text-base font-bold text-text-primary">{v.title}</h3>
-                  {v.hot && (
-                    <Badge variant="gold" className="flex items-center gap-1 flex-shrink-0 text-xs">
-                      <Flame className="w-3 h-3" />
-                      Горящая
-                    </Badge>
-                  )}
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
+          {/* LEFT — Вакансии */}
+          <div className="lg:col-span-3 space-y-4">
+            {vacancies.map((v) => (
+              <div
+                key={v.title}
+                className="group rounded-2xl bg-surface border border-border/50 overflow-hidden hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 flex"
+              >
+                <div className="w-28 sm:w-36 flex-shrink-0 overflow-hidden">
+                  <img src={v.image} alt={v.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs text-text-secondary">{v.type}</span>
-                  <span className="text-sm font-semibold text-primary">{v.salary}</span>
+                <div className="p-4 sm:p-5 flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <h3 className="text-base sm:text-lg font-bold text-text-primary group-hover:text-primary transition-colors truncate">{v.title}</h3>
+                    {v.hot && (
+                      <Badge variant="gold" className="flex items-center gap-0.5 flex-shrink-0 text-xs">
+                        <Flame className="w-3 h-3" />
+                      </Badge>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-3 mt-2">
+                    <Badge variant="default" className="text-xs">{v.type}</Badge>
+                    <span className="text-sm font-semibold text-primary">{v.salary}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <div className="text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="mailto:hr@termburg.ru"
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-light transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-              Отправить резюме
-            </a>
-            <span className="text-sm text-text-secondary">hr@termburg.ru</span>
+            ))}
+            <p className="text-xs text-text-secondary text-center pt-2">
+              Бесплатное посещение комплекса для сотрудников &bull; ДМС &bull; Обучение &bull; Карьерный рост
+            </p>
           </div>
-          <p className="mt-3 text-xs text-text-secondary">
-            Бесплатное посещение комплекса для сотрудников &bull; ДМС &bull; Обучение &bull; Карьерный рост
-          </p>
+
+          {/* RIGHT — Форма отклика */}
+          <div className="lg:col-span-2">
+            <div className="lg:sticky lg:top-24">
+              {careerSubmitted ? (
+                <div className="rounded-2xl bg-surface border border-primary/30 p-8 text-center">
+                  <Heart className="mx-auto mb-4 h-12 w-12 text-primary" />
+                  <h3 className="text-xl font-bold text-text-primary mb-2">Отклик отправлен!</h3>
+                  <p className="text-text-secondary text-sm">Мы рассмотрим заявку и свяжемся с вами в течение 5 рабочих дней.</p>
+                  <button type="button" onClick={() => setCareerSubmitted(false)} className="mt-4 text-sm text-primary font-medium hover:text-primary-light transition-colors">
+                    Отправить ещё
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={(e) => { e.preventDefault(); setCareerSubmitted(true); }} className="rounded-2xl bg-surface border border-border/50 p-6 space-y-4">
+                  <h3 className="text-lg font-bold text-text-primary">Откликнуться</h3>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text-primary mb-1.5">Вакансия</label>
+                    <select
+                      value={selectedVacancy}
+                      onChange={(e) => setSelectedVacancy(e.target.value)}
+                      className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary focus:border-primary focus:outline-none transition-colors appearance-none"
+                    >
+                      {vacancies.map((v) => (
+                        <option key={v.title} value={v.title}>{v.title} — {v.salary}</option>
+                      ))}
+                      <option value="other">Другая / Открытый отклик</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text-primary mb-1.5">Ваше имя</label>
+                    <input type="text" required placeholder="Иван Иванов" className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors" />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text-primary mb-1.5">Телефон</label>
+                    <input type="tel" required placeholder="+7 (999) 123-45-67" className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors" />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text-primary mb-1.5">Email</label>
+                    <input type="email" required placeholder="ivan@email.ru" className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors" />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text-primary mb-1.5">О себе</label>
+                    <textarea rows={3} placeholder="Кратко о вашем опыте..." className="w-full rounded-xl bg-background border border-border/50 px-4 py-3 text-sm text-text-primary placeholder:text-text-secondary/50 focus:border-primary focus:outline-none transition-colors resize-none" />
+                  </div>
+
+                  <button type="submit" className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-semibold text-white hover:bg-primary-light transition-colors">
+                    <Send className="w-4 h-4" />
+                    Отправить отклик
+                  </button>
+
+                  <p className="text-xs text-text-secondary text-center">
+                    Или напишите на <a href="mailto:hr@termburg.ru" className="text-primary hover:underline">hr@termburg.ru</a>
+                  </p>
+                </form>
+              )}
+            </div>
+          </div>
         </div>
       </Section>
     </PageLayout>

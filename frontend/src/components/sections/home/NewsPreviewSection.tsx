@@ -1,10 +1,19 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink, BookOpen, Calendar } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import Badge from '@/components/ui/Badge';
-import { dzenArticles } from '@/data/dzen';
+import { dzenArticles, DZEN_CHANNEL } from '@/data/dzen';
 
-const previewNews = [
+interface NewsItem {
+  id: number | string;
+  text: string;
+  date: string;
+  image?: string;
+  link?: string;
+}
+
+const fallbackNews = [
   {
     id: 1,
     title: 'Открытие новой травяной парной',
@@ -19,7 +28,7 @@ const previewNews = [
   },
   {
     id: 3,
-    title: 'Новые SPA-программы',
+    title: 'Новые программы парений',
     date: '2026-01-20',
     image: '/images/complex/gallery3.webp',
   },
@@ -33,8 +42,38 @@ function formatDate(dateStr: string): string {
   });
 }
 
+function getTitle(text: string): string {
+  return text.split('\n')[0].slice(0, 100);
+}
+
 export default function NewsPreviewSection() {
   const dzenPreview = dzenArticles.slice(0, 3);
+  const [news, setNews] = useState<{ id: number | string; title: string; date: string; image?: string }[]>(fallbackNews);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchNews() {
+      try {
+        const res = await fetch('/api/news.json');
+        if (!res.ok) throw new Error('fetch failed');
+        const data: NewsItem[] = await res.json();
+        if (!cancelled && data.length > 0) {
+          setNews(
+            data.slice(0, 3).map((item) => ({
+              id: item.id,
+              title: getTitle(item.text),
+              date: item.date,
+              image: item.image,
+            }))
+          );
+        }
+      } catch {
+        // keep fallback
+      }
+    }
+    fetchNews();
+    return () => { cancelled = true; };
+  }, []);
 
   return (
     <Section title="Новости и статьи" subtitle="Будьте в курсе событий Термбурга">
@@ -43,19 +82,25 @@ export default function NewsPreviewSection() {
         <div>
           <h3 className="text-sm font-bold text-text-secondary uppercase tracking-wider mb-4">Последние новости</h3>
           <div className="space-y-3">
-            {previewNews.map((item) => (
+            {news.map((item) => (
               <Link
                 key={item.id}
                 to="/news"
                 className="flex items-center gap-4 rounded-xl bg-surface border border-border/50 p-3 hover:border-primary/20 transition-all group"
               >
                 <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src={item.image}
-                    alt=""
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    loading="lazy"
-                  />
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-surface-warm flex items-center justify-center">
+                      <Calendar className="w-5 h-5 text-text-secondary/30" />
+                    </div>
+                  )}
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium text-text-primary truncate group-hover:text-primary transition-colors">
@@ -116,7 +161,7 @@ export default function NewsPreviewSection() {
             ))}
           </div>
           <a
-            href="https://dzen.ru/termburg"
+            href={DZEN_CHANNEL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-2 text-sm text-primary font-medium hover:text-primary-light transition-colors"

@@ -23,6 +23,7 @@ const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const AccountPage = lazy(() => import('@/pages/AccountPage'));
 const SwimmingSchoolPage = lazy(() => import('@/pages/SwimmingSchoolPage'));
 const SteamSchoolPage = lazy(() => import('@/pages/SteamSchoolPage'));
+const RulesPage = lazy(() => import('@/pages/RulesPage'));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'));
 
 function LoadingFallback() {
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/offer" element={<OfferPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/rules" element={<RulesPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="*" element={<NotFoundPage />} />

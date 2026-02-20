@@ -1,8 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
-import { X, CheckCircle, Phone, Users, Baby } from 'lucide-react';
+import { X, CheckCircle, Phone, Users, Baby, Ticket } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 
 type TicketType = 'adult' | 'child';
+
+const SERVICE_KEYWORDS = ['парение', 'парения', 'spa', 'массаж', 'процедур', 'скраб', 'пилинг', 'обёртыван', 'пихтовый'];
+const TICKET_KEYWORDS = ['будни', 'выходные', 'час', 'безлимит'];
+
+function isServicePurchase(itemName: string): boolean {
+  const lower = itemName.toLowerCase();
+  if (TICKET_KEYWORDS.some((k) => lower.includes(k))) return false;
+  if (lower.includes('абонемент') || lower.includes('сертификат') || lower.includes('бокс') || lower.includes('мерч')) return false;
+  return SERVICE_KEYWORDS.some((k) => lower.includes(k));
+}
 
 export default function PurchaseModal() {
   const { purchaseOpen, purchaseItem, closeModal } = useBooking();
@@ -12,8 +22,10 @@ export default function PurchaseModal() {
   const [email, setEmail] = useState('');
   const [recipientName, setRecipientName] = useState('');
   const [ticketType, setTicketType] = useState<TicketType>('adult');
+  const [addTicket, setAddTicket] = useState(false);
 
   const isCertificate = purchaseItem?.name.toLowerCase().includes('сертификат') ?? false;
+  const isService = purchaseItem ? isServicePurchase(purchaseItem.name) : false;
   const hasChildPrice = !!purchaseItem?.childPrice;
   const displayPrice = ticketType === 'child' && hasChildPrice ? purchaseItem!.childPrice! : purchaseItem?.price ?? '';
 
@@ -31,6 +43,7 @@ export default function PurchaseModal() {
       setEmail('');
       setRecipientName('');
       setTicketType('adult');
+      setAddTicket(false);
     }, 300);
   }, [closeModal]);
 
@@ -75,6 +88,27 @@ export default function PurchaseModal() {
               <p className="font-medium text-text-primary">{purchaseItem.name}</p>
               <p className="mt-1 text-xl font-bold text-primary">{displayPrice}</p>
             </div>
+
+            {/* Upsell: entry ticket for services */}
+            {isService && (
+              <label className="flex items-start gap-3 rounded-xl bg-amber-50 border border-amber-200/60 px-5 py-4 cursor-pointer transition-colors hover:bg-amber-50/80">
+                <input
+                  type="checkbox"
+                  checked={addTicket}
+                  onChange={(e) => setAddTicket(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-amber-300 text-primary focus:ring-primary/30"
+                />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <Ticket className="w-4 h-4 text-amber-600" />
+                    <span className="text-sm font-semibold text-amber-800">Добавить входной билет</span>
+                  </div>
+                  <p className="text-xs text-amber-700/70 mt-1">
+                    Время на процедурах не входит в оплаченное время посещения комплекса. Рекомендуем приобрести входной билет на ту же дату.
+                  </p>
+                </div>
+              </label>
+            )}
 
             {/* Взрослый / Детский toggle */}
             {hasChildPrice && (

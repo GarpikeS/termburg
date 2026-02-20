@@ -40,7 +40,7 @@ export default function HeroSection() {
 
             <div className="mt-10 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
               <Button variant="primary" size="lg" onClick={openBooking}>
-                Забронировать посещение
+                Купить билет
               </Button>
               <Button
                 variant="outline"
@@ -52,7 +52,7 @@ export default function HeroSection() {
             </div>
 
             <p className="mt-12 text-sm text-white/60">
-              Ежедневно с 9:00 до 23:00 &middot; м. Печатники
+              Ежедневно с 9:00 до 23:00 &middot; ул. Гурьянова, д. 30 (ТЦ Плаза, 2 этаж) &middot; м. Печатники
             </p>
           </div>
 

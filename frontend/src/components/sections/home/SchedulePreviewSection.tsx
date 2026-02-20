@@ -3,10 +3,16 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 import { useBooking } from '@/context/BookingContext';
 import { scheduleEvents, type ScheduleEvent } from '@/data/schedule';
 
+function getCurrentDayName(): string {
+  const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+  return days[new Date().getDay()];
+}
+
 export default function SchedulePreviewSection() {
   const { openPurchase } = useBooking();
   const navigate = useNavigate();
-  const previewEvents = scheduleEvents.slice(0, 5);
+  const todayName = getCurrentDayName();
+  const previewEvents = scheduleEvents.filter((e) => e.day.includes(todayName));
 
   return (
     <div>

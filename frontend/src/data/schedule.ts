@@ -4,11 +4,12 @@ export interface ScheduleEvent {
   time: string;
   duration: string;
   day: string[];
-  type: 'free' | 'paid' | 'senior';
+  type: 'free' | 'paid' | 'special';
   description: string;
   instructor?: string;
   price?: number;
   purchaseUrl?: string;
+  highlight?: boolean;
 }
 
 export const daysOfWeek: string[] = [
@@ -41,6 +42,17 @@ export const scheduleEvents: ScheduleEvent[] = [
     day: ['Четверг'],
     type: 'free',
     description: 'Бережная гимнастика для подвижности суставов и укрепления связок',
+  },
+  // Пихтовый настил — Четверг
+  {
+    id: 13,
+    name: 'Пихтовый настил в Сибирской парной',
+    time: '13:00',
+    duration: '60 мин',
+    day: ['Четверг'],
+    type: 'special',
+    description: 'Ароматная процедура с пихтовым настилом в Сибирской парной. Эфирные масла пихты очищают дыхательные пути и дарят глубокое расслабление.',
+    highlight: true,
   },
   // Бесплатное парение — 11:00
   {

@@ -21,6 +21,7 @@ const navCol2 = [
 const bottomLinks = [
   { to: '/offer', label: 'Публичная оферта' },
   { to: '/privacy', label: 'Политика конфиденциальности' },
+  { to: '/rules', label: 'Правила комплекса' },
 ];
 
 export default function Footer() {
@@ -33,7 +34,7 @@ export default function Footer() {
           {/* Column 1: Logo + Social */}
           <div>
             <Link to="/" className="inline-flex items-center gap-2.5">
-              <img src="/images/termliny-symbol.svg" alt="" className="h-8 w-8 opacity-70" />
+              <img src="/images/termburg-logo.svg" alt="" className="h-10 w-auto" />
               <span className="font-heading text-xl font-bold tracking-[0.2em] text-primary">
                 ТЕРМБУРГ
               </span>

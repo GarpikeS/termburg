@@ -15,16 +15,16 @@ const navItems: NavItem[] = [
     children: [
       { to: '/about', label: 'О Термбурге' },
       { to: '/termliny', label: 'Термлины' },
-      { to: '/cafe', label: 'Кафетерий' },
     ],
   },
   {
     label: 'Услуги',
     children: [
-      { to: '/services', label: 'SPA и парение' },
+      { to: '/pricing', label: 'Прайс-лист' },
+      { to: '/services', label: 'Парения и SPA' },
       { to: '/swimming-school', label: 'Школа плавания' },
       { to: '/steam-school', label: 'Школа парения' },
-      { to: '/pricing', label: 'Прайс-лист' },
+      { to: '/cafe', label: 'Кафетерий' },
     ],
   },
   { label: 'Расписание', to: '/schedule' },
@@ -41,16 +41,16 @@ const mobileGroups = [
       { to: '/', label: 'Главная' },
       { to: '/about', label: 'О Термбурге' },
       { to: '/termliny', label: 'Термлины' },
-      { to: '/cafe', label: 'Кафетерий' },
     ],
   },
   {
     title: 'Услуги и цены',
     links: [
-      { to: '/services', label: 'SPA и парение' },
+      { to: '/pricing', label: 'Прайс-лист' },
+      { to: '/services', label: 'Парения и SPA' },
       { to: '/swimming-school', label: 'Школа плавания' },
       { to: '/steam-school', label: 'Школа парения' },
-      { to: '/pricing', label: 'Прайс-лист' },
+      { to: '/cafe', label: 'Кафетерий' },
       { to: '/schedule', label: 'Расписание' },
     ],
   },
@@ -249,7 +249,7 @@ export default function Header() {
               onClick={openBooking}
               className="inline-flex items-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-primary-light"
             >
-              Забронировать
+              Купить билет
             </button>
           </div>
 
@@ -365,7 +365,7 @@ export default function Header() {
               onClick={() => { closeMobileMenu(); openBooking(); }}
               className="block w-full rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-primary-light"
             >
-              Забронировать
+              Купить билет
             </button>
           </div>
         </div>

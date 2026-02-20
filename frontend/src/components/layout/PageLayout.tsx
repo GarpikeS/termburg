@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import UrgentNewsBanner from '@/components/shared/UrgentNewsBanner';
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -52,6 +53,10 @@ export default function PageLayout({ children, title, description, ogImage }: Pa
       </Helmet>
       <div className="flex min-h-screen flex-col">
         <Header />
+        <UrgentNewsBanner
+          message="Внимание! Сегодня комплекс работает до 21:00"
+          active={true}
+        />
         <main className="flex-1">{children}</main>
         <Footer />
       </div>
