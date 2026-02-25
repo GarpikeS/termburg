@@ -209,9 +209,9 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* What to bring + Procedure time notice */}
+      {/* What to bring + Procedure time notice + Steam services */}
       <Section warm>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
           {/* What to bring */}
           <div className="rounded-2xl bg-surface border border-border/50 p-6">
             <div className="flex items-center gap-2 mb-4">
@@ -240,69 +240,23 @@ export default function ServicesPage() {
 
           {/* Procedure time notice */}
           <div className="flex flex-col gap-4">
-            <div className="rounded-2xl bg-amber-50 border border-amber-200/50 p-6 flex-1">
+            <div className="rounded-2xl bg-emerald-50 border border-emerald-200/50 p-6 flex-1">
               <div className="flex items-center gap-2 mb-3">
-                <AlertTriangle className="w-5 h-5 text-amber-600" />
-                <h3 className="font-heading text-lg font-bold text-amber-800">Важно знать</h3>
+                <CheckCircle className="w-5 h-5 text-emerald-600" />
+                <h3 className="font-heading text-lg font-bold text-emerald-800">Важно знать</h3>
               </div>
-              <p className="text-sm text-amber-800/80 leading-relaxed">
-                Время, проведённое на процедурах (SPA, массаж, парения), <strong>не входит</strong> в оплаченное время посещения комплекса. Рекомендуем учитывать это при выборе тарифа.
+              <p className="text-sm text-emerald-800/80 leading-relaxed">
+                В других местах час на процедуры сокращает ваше оплаченное время. У нас — наоборот: мы <strong>дарим вам этот час сверх</strong> основного пребывания. Просто потому что ваше здоровье — лучшая награда.
               </p>
             </div>
           </div>
         </div>
-      </Section>
 
-      {/* Купить */}
-      <Section>
-        <div className="grid gap-5 sm:grid-cols-3">
-          <button
-            type="button"
-            onClick={openBooking}
-            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
-          >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-              <Ticket className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="text-lg font-bold text-text-primary mb-1">Купить посещение</h3>
-            <p className="text-sm text-text-secondary mb-3">Разовый билет для взрослых и детей</p>
-            <Badge variant="default">от 540 ₽</Badge>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => openPurchase({ name: 'Абонемент', price: 'от 4 500 ₽' })}
-            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
-          >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-              <CalendarCheck className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="text-lg font-bold text-text-primary mb-1">Купить абонемент</h3>
-            <p className="text-sm text-text-secondary mb-3">5 или 10 посещений со скидкой</p>
-            <Badge variant="gold">выгодно</Badge>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => openPurchase({ name: 'Подарочный сертификат', price: 'от 3 000 ₽' })}
-            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
-          >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-              <Gift className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="text-lg font-bold text-text-primary mb-1">Сертификат в подарок</h3>
-            <p className="text-sm text-text-secondary mb-3">Подарочные сертификаты и боксы</p>
-            <Badge variant="default">от 3 000 ₽</Badge>
-          </button>
+        {/* Steam services - сразу после важно знать */}
+        <div className="mb-4">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-text-primary mb-2">Парения</h2>
+          <p className="text-text-secondary">Индивидуальные и групповые программы парения от наших мастеров</p>
         </div>
-      </Section>
-
-      {/* Steam services */}
-      <Section
-        title="Парения"
-        subtitle="Индивидуальные и групповые программы парения от наших мастеров"
-        warm
-      >
         <div className="mb-6 flex items-center gap-2 text-primary">
           <Waves className="h-5 w-5" />
           <span className="text-sm font-medium">Авторские методики от опытных банщиков</span>
@@ -337,6 +291,50 @@ export default function ServicesPage() {
               onClick={() => openModal(service)}
             />
           ))}
+        </div>
+      </Section>
+
+      {/* Купить */}
+      <Section warm>
+        <div className="grid gap-5 sm:grid-cols-3">
+          <button
+            type="button"
+            onClick={openBooking}
+            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
+          >
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <Ticket className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-1">Купить посещение</h3>
+            <p className="text-sm text-text-secondary mb-3">Разовый билет для взрослых и детей</p>
+            <Badge variant="default">от 540 ₽</Badge>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => openPurchase({ name: 'Абонемент', price: 'от 4 500 ₽' })}
+            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
+          >
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <CalendarCheck className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-1">Купить абонемент</h3>
+            <p className="text-sm text-text-secondary mb-3">5 или 10 посещений со скидкой</p>
+            <Badge variant="gold">выгодно</Badge>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => openPurchase({ name: 'Подарочный сертификат', price: 'от 1 000 ₽' })}
+            className="group rounded-2xl bg-surface border border-border/50 p-6 text-left hover:border-primary/30 transition-all duration-300"
+          >
+            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+              <Gift className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-1">Сертификат в подарок</h3>
+            <p className="text-sm text-text-secondary mb-3">Подарочные сертификаты и боксы</p>
+            <Badge variant="default">от 1 000 ₽</Badge>
+          </button>
         </div>
       </Section>
 

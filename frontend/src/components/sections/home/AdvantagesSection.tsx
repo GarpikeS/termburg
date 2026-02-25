@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Flame, Heart, Clock, Sparkles } from 'lucide-react';
+import { Flame, Heart, Clock, Sparkles, Users } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 
@@ -10,13 +10,6 @@ const advantages = [
     description:
       'Русская, сибирская, травяная, хаммам, шаманская, деревенская, бани-бочки, песчаная, соляная и другие',
     to: '/termliny',
-  },
-  {
-    icon: Heart,
-    title: 'Забота о здоровье',
-    description:
-      '7 видов косметических глин: белая, голубая, зелёная, красная, жёлтая, чёрная и розовая',
-    to: '/services',
   },
   {
     icon: Clock,
@@ -32,28 +25,41 @@ const advantages = [
       'Авторские парения от мастеров, SPA-процедуры, массажи и пилинги',
     to: '/services',
   },
+  {
+    icon: Heart,
+    title: 'Забота о здоровье',
+    description:
+      '7 видов косметических глин: белая, голубая, зелёная, красная, жёлтая, чёрная и розовая',
+    to: '/services',
+  },
+  {
+    icon: Users,
+    title: 'Семейный отдых',
+    description:
+      'Детский бассейн, школа плавания, анимация и мягкие парения для всей семьи',
+    to: '/swimming-school',
+  },
 ];
 
 export default function AdvantagesSection() {
   return (
     <Section
-      dark
-      ornament
+      warm
       separator
       title="Почему Термбург"
       subtitle="Всё для вашего здоровья и отдыха в одном месте"
     >
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5">
         {advantages.map((item) => (
           <Link key={item.title} to={item.to} className="group">
-            <Card dark className="text-center flex flex-col items-center h-full group-hover:border-primary/40 transition-colors">
-              <div className="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/30 transition-colors">
-                <item.icon className="w-7 h-7 text-primary" />
+            <Card className="text-center flex flex-col items-center h-full group-hover:border-primary/40 hover:shadow-lg transition-all">
+              <div className="w-14 h-14 rounded-full bg-accent/15 flex items-center justify-center mb-4 group-hover:bg-accent/25 transition-colors">
+                <item.icon className="w-7 h-7 text-accent" />
               </div>
-              <h3 className="font-heading text-lg font-semibold text-white mb-2 group-hover:text-primary transition-colors">
+              <h3 className="font-heading text-lg font-semibold text-text-primary mb-2 group-hover:text-primary transition-colors">
                 {item.title}
               </h3>
-              <p className="text-sm text-white/70 leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed">
                 {item.description}
               </p>
             </Card>

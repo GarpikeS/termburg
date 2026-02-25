@@ -21,8 +21,8 @@ export default function HomePage() {
       <div className="gold-separator" />
       <PhotoStrip />
       <div className="gold-separator" />
-      <Section dark ornament separator>
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+      <Section dark separator>
+        <div className="grid md:grid-cols-2 gap-8 items-stretch">
           <TermlinyTeaser />
           <SchedulePreviewSection />
         </div>

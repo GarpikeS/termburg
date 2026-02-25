@@ -55,7 +55,7 @@ export default function PageLayout({ children, title, description, ogImage }: Pa
         <Header />
         <UrgentNewsBanner
           message="Внимание! Сегодня комплекс работает до 21:00"
-          active={true}
+          active={false}
         />
         <main className="flex-1">{children}</main>
         <Footer />

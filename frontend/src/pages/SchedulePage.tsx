@@ -250,7 +250,6 @@ function FullMonthCalendar({
   onPrevMonth: () => void;
   onNextMonth: () => void;
 }) {
-  const { openPurchase } = useBooking();
   const { daysInMonth, startOffset } = getMonthDays(year, month);
   const today = new Date();
   const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
@@ -266,121 +265,193 @@ function FullMonthCalendar({
     : [];
 
   return (
-    <div>
-      {/* Month nav */}
-      <div className="flex items-center justify-between mb-6">
-        <button type="button" onClick={onPrevMonth} className="rounded-xl p-2.5 hover:bg-surface-warm text-text-secondary hover:text-text-primary transition-colors">
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <h3 className="font-heading text-2xl font-bold text-text-primary">
-          {monthNames[month]} {year}
-        </h3>
-        <button type="button" onClick={onNextMonth} className="rounded-xl p-2.5 hover:bg-surface-warm text-text-secondary hover:text-text-primary transition-colors">
-          <ChevronRight className="w-5 h-5" />
-        </button>
-      </div>
+    <div className="relative">
+      {/* Decorative background elements */}
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Day headers */}
-      <div className="grid grid-cols-7 border-b border-border mb-0">
-        {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((d) => (
-          <div key={d} className="text-center text-sm font-semibold text-text-secondary py-3">{d}</div>
-        ))}
-      </div>
+      <div className="relative bg-gradient-to-br from-white via-surface to-surface-warm rounded-3xl p-6 md:p-10 shadow-2xl shadow-primary/10 border border-primary/20 overflow-hidden">
+        {/* Top decorative line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
 
-      {/* Cells grid */}
-      <div className="grid grid-cols-7 border-l border-border">
-        {cells.map((day, i) => {
-          if (day === null) {
-            return <div key={`e-${i}`} className="min-h-[100px] sm:min-h-[120px] border-r border-b border-border bg-surface-warm/30" />;
-          }
-          const date = new Date(year, month, day);
-          const isToday = isCurrentMonth && today.getDate() === day;
-          const dayName = getDayNameByDate(date);
-          const dayEvts = eventsForDay(dayName);
-          const isExpanded = expandedDay === day;
+        {/* Month nav */}
+        <div className="flex items-center justify-between mb-10">
+          <button
+            type="button"
+            onClick={onPrevMonth}
+            className="group relative rounded-2xl p-4 bg-gradient-to-br from-surface to-white hover:from-primary/10 hover:to-primary/5 text-text-secondary hover:text-primary transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-primary/20 hover:scale-105"
+          >
+            <ChevronLeft className="w-6 h-6 transition-transform group-hover:-translate-x-0.5" />
+          </button>
+          <div className="text-center">
+            <div className="inline-block px-8 py-3 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl mb-2">
+              <h3 className="font-heading text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary via-primary-dark to-primary bg-clip-text text-transparent">
+                {monthNames[month]}
+              </h3>
+            </div>
+            <p className="text-lg text-text-secondary font-medium">{year} год</p>
+          </div>
+          <button
+            type="button"
+            onClick={onNextMonth}
+            className="group relative rounded-2xl p-4 bg-gradient-to-br from-surface to-white hover:from-primary/10 hover:to-primary/5 text-text-secondary hover:text-primary transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-primary/20 hover:scale-105"
+          >
+            <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-0.5" />
+          </button>
+        </div>
 
-          return (
-            <button
-              key={day}
-              type="button"
-              onClick={() => setExpandedDay(isExpanded ? null : day)}
-              className={`min-h-[100px] sm:min-h-[120px] border-r border-b border-border p-1.5 sm:p-2 text-left flex flex-col transition-colors ${
-                isExpanded
-                  ? 'bg-primary/5 ring-2 ring-primary/30 ring-inset'
-                  : 'hover:bg-surface-warm/60'
+        {/* Day headers */}
+        <div className="grid grid-cols-7 mb-3 gap-1.5">
+          {['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'].map((d, i) => (
+            <div
+              key={d}
+              className={`text-center py-4 rounded-xl font-bold text-sm ${
+                i >= 5
+                  ? 'bg-gradient-to-b from-primary/15 to-primary/5 text-primary'
+                  : 'bg-gradient-to-b from-surface-warm to-transparent text-text-secondary'
               }`}
             >
-              <span className={`text-sm font-medium mb-1 w-7 h-7 flex items-center justify-center rounded-full ${
-                isToday
-                  ? 'bg-primary text-white font-bold'
-                  : 'text-text-primary'
-              }`}>
-                {day}
-              </span>
-              <div className="flex flex-col gap-0.5 flex-1 w-full overflow-hidden">
-                {dayEvts.slice(0, 4).map((evt) => {
-                  const colorClass =
-                    evt.type === 'special'
-                      ? 'bg-amber-100 text-amber-700 border-amber-200'
-                      : evt.type === 'paid'
-                        ? 'bg-primary/10 text-primary border-primary/20'
-                        : 'bg-emerald-50 text-emerald-700 border-emerald-200';
-                  return (
-                    <div
-                      key={evt.id}
-                      className={`text-[10px] sm:text-xs leading-tight px-1 sm:px-1.5 py-0.5 rounded border truncate ${colorClass}`}
-                    >
-                      <span className="font-semibold">{evt.time}</span>{' '}
-                      <span className="hidden sm:inline">{evt.name.length > 18 ? evt.name.slice(0, 18) + '…' : evt.name}</span>
-                    </div>
-                  );
-                })}
-                {dayEvts.length > 4 && (
-                  <span className="text-[10px] text-text-secondary">+{dayEvts.length - 4} ещё</span>
-                )}
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Expanded day detail */}
-      {expandedDay && expandedEvents.length > 0 && (
-        <div className="mt-6 rounded-2xl bg-surface border border-border p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="font-heading text-lg font-bold text-text-primary">
-              {new Date(year, month, expandedDay).toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })}
-            </h4>
-            <button
-              type="button"
-              onClick={() => setExpandedDay(null)}
-              className="rounded-lg p-1.5 hover:bg-surface-warm text-text-secondary hover:text-text-primary transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-          <div className="space-y-2">
-            {expandedEvents.map((event) => (
-              <EventRow key={event.id} event={event} />
-            ))}
-          </div>
+              <span className="hidden md:inline">{d}</span>
+              <span className="md:hidden">{dayShortNames[d]}</span>
+            </div>
+          ))}
         </div>
-      )}
 
-      {/* Legend */}
-      <div className="flex flex-wrap items-center justify-center gap-6 mt-6 text-sm text-text-secondary">
-        <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded border border-emerald-200 bg-emerald-50" />
-          Бесплатно
-        </span>
-        <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded border border-primary/20 bg-primary/10" />
-          Платно
-        </span>
-        <span className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded border border-amber-200 bg-amber-100" />
-          Особое
-        </span>
+        {/* Cells grid */}
+        <div className="grid grid-cols-7 gap-2">
+          {cells.map((day, i) => {
+            if (day === null) {
+              return (
+                <div
+                  key={`e-${i}`}
+                  className="min-h-[110px] sm:min-h-[140px] rounded-2xl bg-gradient-to-br from-border/10 to-transparent border border-dashed border-border/20"
+                />
+              );
+            }
+            const date = new Date(year, month, day);
+            const isToday = isCurrentMonth && today.getDate() === day;
+            const dayName = getDayNameByDate(date);
+            const dayEvts = eventsForDay(dayName);
+            const isExpanded = expandedDay === day;
+            const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+            const hasEvents = dayEvts.length > 0;
+
+            return (
+              <button
+                key={day}
+                type="button"
+                onClick={() => setExpandedDay(isExpanded ? null : day)}
+                className={`group relative min-h-[110px] sm:min-h-[140px] rounded-2xl p-2.5 sm:p-3 text-left flex flex-col transition-all duration-300 ${
+                  isExpanded
+                    ? 'bg-gradient-to-br from-primary/20 to-primary/10 ring-2 ring-primary shadow-xl shadow-primary/20 scale-[1.03] z-10'
+                    : isToday
+                      ? 'bg-gradient-to-br from-primary/20 via-primary/10 to-amber-500/10 ring-2 ring-primary/50 shadow-lg shadow-primary/10'
+                      : isWeekend
+                        ? 'bg-gradient-to-br from-primary/10 to-amber-500/5 hover:from-primary/15 hover:to-amber-500/10 hover:shadow-lg hover:scale-[1.02]'
+                        : 'bg-gradient-to-br from-white to-surface hover:from-surface hover:to-surface-warm hover:shadow-lg hover:scale-[1.02]'
+                } border border-border/30 hover:border-primary/30`}
+              >
+                {/* Day number badge */}
+                <div className={`relative z-10 w-9 h-9 flex items-center justify-center rounded-xl mb-2 transition-all duration-300 ${
+                  isToday
+                    ? 'bg-gradient-to-br from-primary to-primary-dark text-white font-bold shadow-lg shadow-primary/40 animate-pulse'
+                    : isExpanded
+                      ? 'bg-primary/30 text-primary font-bold'
+                      : hasEvents
+                        ? 'bg-surface-warm group-hover:bg-primary/10 text-text-primary font-bold'
+                        : 'text-text-secondary'
+                }`}>
+                  {day}
+                </div>
+
+                {/* Events preview */}
+                <div className="flex flex-col gap-1.5 flex-1 w-full overflow-hidden">
+                  {dayEvts.slice(0, 3).map((evt, idx) => {
+                    const colorClass =
+                      evt.type === 'special'
+                        ? 'bg-gradient-to-r from-amber-200/80 to-amber-100/60 text-amber-800 border-l-[3px] border-amber-500 shadow-sm'
+                        : evt.type === 'paid'
+                          ? 'bg-gradient-to-r from-primary/25 to-primary/10 text-primary-dark border-l-[3px] border-primary shadow-sm'
+                          : 'bg-gradient-to-r from-emerald-200/80 to-emerald-100/60 text-emerald-800 border-l-[3px] border-emerald-500 shadow-sm';
+                    return (
+                      <div
+                        key={evt.id}
+                        className={`text-[9px] sm:text-[11px] leading-tight px-2 py-1.5 rounded-lg truncate font-semibold transform transition-all duration-200 group-hover:translate-x-0.5 ${colorClass}`}
+                        style={{ animationDelay: `${idx * 50}ms` }}
+                      >
+                        <span className="font-black">{evt.time}</span>
+                        <span className="hidden sm:inline ml-1.5 font-medium opacity-90">
+                          {evt.type === 'special' && '🌲 '}
+                          {evt.name.length > 12 ? evt.name.slice(0, 12) + '…' : evt.name}
+                        </span>
+                      </div>
+                    );
+                  })}
+                  {dayEvts.length > 3 && (
+                    <span className="text-[11px] text-primary font-bold mt-auto flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                      +{dayEvts.length - 3} ещё
+                    </span>
+                  )}
+                </div>
+
+                {/* Hover indicator */}
+                {hasEvents && !isExpanded && (
+                  <div className="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ChevronRight className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Expanded day detail */}
+        {expandedDay && expandedEvents.length > 0 && (
+          <div className="mt-10 rounded-3xl bg-gradient-to-br from-white via-surface to-surface-warm border-2 border-primary/30 p-6 md:p-10 shadow-2xl shadow-primary/10 animate-fade-in">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/10 rounded-full mb-3">
+                  <Calendar className="w-4 h-4 text-primary" />
+                  <span className="text-xs text-primary font-bold uppercase tracking-wider">Расписание на</span>
+                </div>
+                <h4 className="font-heading text-3xl font-bold text-text-primary capitalize">
+                  {new Date(year, month, expandedDay).toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' })}
+                </h4>
+              </div>
+              <button
+                type="button"
+                onClick={() => setExpandedDay(null)}
+                className="rounded-2xl p-3 bg-gradient-to-br from-surface to-white hover:from-rose-50 hover:to-rose-100 text-text-secondary hover:text-rose-500 transition-all duration-300 shadow-lg hover:shadow-rose-500/20"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="space-y-4">
+              {expandedEvents.map((event, idx) => (
+                <div key={event.id} className="animate-slide-up" style={{ animationDelay: `${idx * 100}ms` }}>
+                  <EventRow event={event} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Legend */}
+        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-10 pt-8 border-t-2 border-gradient-to-r from-transparent via-border to-transparent">
+          <span className="flex items-center gap-3 px-4 py-2 bg-emerald-50 rounded-xl">
+            <span className="w-5 h-5 rounded-lg border-l-[3px] border-emerald-500 bg-gradient-to-r from-emerald-200/80 to-emerald-100/60" />
+            <span className="text-sm font-semibold text-emerald-700">Бесплатно</span>
+          </span>
+          <span className="flex items-center gap-3 px-4 py-2 bg-primary/5 rounded-xl">
+            <span className="w-5 h-5 rounded-lg border-l-[3px] border-primary bg-gradient-to-r from-primary/25 to-primary/10" />
+            <span className="text-sm font-semibold text-primary-dark">Платно</span>
+          </span>
+          <span className="flex items-center gap-3 px-4 py-2 bg-amber-50 rounded-xl">
+            <span className="w-5 h-5 rounded-lg border-l-[3px] border-amber-500 bg-gradient-to-r from-amber-200/80 to-amber-100/60" />
+            <span className="text-sm font-semibold text-amber-700">Особое</span>
+          </span>
+        </div>
       </div>
     </div>
   );

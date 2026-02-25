@@ -23,25 +23,19 @@ html {
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  color: #2D2B3D;
-  background-color: #FAF6E8;
+  color: #3D3530;
+  background-color: #FBF9F4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* Hide scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  display: none;
 }
-::-webkit-scrollbar-track {
-  background: #FAF6E8;
-}
-::-webkit-scrollbar-thumb {
-  background: #E0D9C8;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #D0C9B8;
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -64,14 +58,14 @@ h1, h2, h3, h4, h5, h6 {
   inset: 0;
   opacity: 0.03;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 15 L45 15 L37 22 L40 32 L30 26 L20 32 L23 22 L15 15 L25 15 Z' fill='%23BA9B4F' fill-opacity='0.5'/%3E%3Ccircle cx='30' cy='45' r='6' fill='none' stroke='%23BA9B4F' stroke-opacity='0.3' stroke-width='1'/%3E%3Ccircle cx='30' cy='45' r='2' fill='%23BA9B4F' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 15 L45 15 L37 22 L40 32 L30 26 L20 32 L23 22 L15 15 L25 15 Z' fill='%23C4944E' fill-opacity='0.5'/%3E%3Ccircle cx='30' cy='45' r='6' fill='none' stroke='%23C4944E' stroke-opacity='0.3' stroke-width='1'/%3E%3Ccircle cx='30' cy='45' r='2' fill='%23C4944E' fill-opacity='0.3'/%3E%3C/svg%3E");
   background-size: 80px 80px;
 }
 
 /* Gold separator line */
 .gold-separator {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, #BA9B4F 30%, #D9CBA1 50%, #BA9B4F 70%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, #ba9b4f 30%, #d4b366 50%, #ba9b4f 70%, transparent 100%);
 }
 
 /* Infinite scroll animation for photo strip */
@@ -96,6 +90,15 @@ h1, h2, h3, h4, h5, h6 {
   animation: fadeIn 0.5s ease-out;
 }
 
+/* Slide-up animation */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
 /* Hide horizontal scrollbar */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -114,6 +117,9 @@ h1, h2, h3, h4, h5, h6 {
     animation: none;
   }
   .animate-fade-in {
+    animation: none;
+  }
+  .animate-slide-up {
     animation: none;
   }
 }

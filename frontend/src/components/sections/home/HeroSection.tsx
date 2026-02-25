@@ -15,8 +15,8 @@ export default function HeroSection() {
           alt=""
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/40" />
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-amber-950/50 via-black/15 to-black/25" />
       </div>
 
       {/* Decorative gold line */}
@@ -26,16 +26,18 @@ export default function HeroSection() {
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Left: text content */}
           <div className="flex-1 text-center lg:text-left">
-            <p className="font-heading text-sm md:text-base tracking-[0.3em] text-primary mb-6 uppercase">
+            <p className="font-heading text-sm md:text-base tracking-[0.3em] text-primary mb-4 uppercase">
               Термальный комплекс
             </p>
 
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-4xl">
-              Пространство тепла и&nbsp;гармонии
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-4xl">
+              <span className="text-primary">Добро пожаловать</span>
+              <br />
+              <span className="text-warm-white">в Термбург</span>
             </h1>
 
-            <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl leading-relaxed">
-              Откройте мир термальных источников, парений и глубокого расслабления
+            <p className="mt-6 text-lg md:text-xl text-warm-white/90 max-w-2xl leading-relaxed">
+              Пространство тепла, гармонии и заботы о вашем здоровье
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
@@ -51,7 +53,7 @@ export default function HeroSection() {
               </Button>
             </div>
 
-            <p className="mt-12 text-sm text-white/60">
+            <p className="mt-12 text-sm text-warm-white/70">
               Ежедневно с 9:00 до 23:00 &middot; ул. Гурьянова, д. 30 (ТЦ Плаза, 2 этаж) &middot; м. Печатники
             </p>
           </div>
